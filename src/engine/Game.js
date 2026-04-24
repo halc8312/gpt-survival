@@ -5,6 +5,7 @@ import { IsometricCamera } from "./IsometricCamera.js";
 import { MapRenderer } from "./MapRenderer.js";
 import { PlacementValidator } from "./PlacementValidator.js";
 import { WorldGenerator } from "./WorldGenerator.js";
+import { BuildToolbar } from "../ui/BuildToolbar.js";
 import { DebugOverlay } from "../ui/DebugOverlay.js";
 
 const DATA_FILES = [
@@ -65,10 +66,17 @@ const STARTER_INVENTORY = {
 };
 
 export class Game {
-  constructor({ canvas, debugElement, errorPanel }) {
+  constructor({ canvas, debugElement, buildControlsElement, errorPanel }) {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
     this.debugOverlay = new DebugOverlay(debugElement);
+    this.buildToolbar = buildControlsElement
+      ? new BuildToolbar(buildControlsElement, {
+          onSelectBuilding: (buildingId) => this.activateBuildMode(buildingId),
+          onCancelBuild: () => this.cancelBuildMode(),
+          onConfirmBuild: () => this.confirmPlacement(),
+        })
+      : null;
     this.errorPanel = errorPanel;
     this.registry = new DataRegistry();
     this.assetLoader = new AssetLoader();
@@ -143,6 +151,13 @@ export class Game {
     this.world.buildingGrid = this.createGrid(this.world.width, this.world.height);
     this.world.inventory = { ...STARTER_INVENTORY };
     this.placeInitialBuilding("building_crash_core", crashCoreOrigin);
+    this.buildToolbar?.setOptions(
+      Array.from(BUILDING_HOTKEYS.entries(), ([shortcut, buildingId]) => ({
+        shortcut,
+        buildingId,
+        building: this.registry.getBuilding(buildingId),
+      })),
+    );
 
     this.mapRenderer = new MapRenderer({
       ctx: this.ctx,
@@ -156,7 +171,7 @@ export class Game {
     const centerPoint = this.mapRenderer.tileToWorld(centerX, centerY);
     this.camera.centerOn(centerPoint.x, centerPoint.y - tileHeight * 2);
     this.errorPanel.classList.add("hidden");
-    this.updateDebugOverlay();
+    this.updateUi();
   }
 
   start() {
@@ -203,18 +218,16 @@ export class Game {
 
     const buildingShortcut = this.input.consumeBuildingShortcut();
     if (buildingShortcut && BUILDING_HOTKEYS.has(buildingShortcut)) {
-      this.selection.activeBuildingId = BUILDING_HOTKEYS.get(buildingShortcut);
-      this.selection.buildMode = true;
+      this.activateBuildMode(BUILDING_HOTKEYS.get(buildingShortcut));
     }
 
     if (this.input.consumeCancelBuild()) {
-      this.selection.buildMode = false;
+      this.cancelBuildMode();
     }
 
     this.selection.placement = this.getPlacementPreview();
 
-    if (this.input.consumePlacementConfirm() && this.tryPlaceActiveBuilding()) {
-      this.updateDebugOverlay();
+    if (this.input.consumePlacementConfirm() && this.confirmPlacement()) {
       return;
     }
 
@@ -231,7 +244,7 @@ export class Game {
       }
     }
 
-    this.updateDebugOverlay();
+    this.updateUi();
   }
 
   render() {
@@ -253,6 +266,15 @@ export class Game {
     this.canvas.style.width = `${width}px`;
     this.canvas.style.height = `${height}px`;
     this.camera.setViewport(width, height);
+  }
+
+  updateUi() {
+    this.buildToolbar?.render({
+      activeBuildingId: this.selection.activeBuildingId,
+      buildMode: this.selection.buildMode,
+      placementValid: Boolean(this.selection.placement?.valid),
+    });
+    this.updateDebugOverlay();
   }
 
   updateDebugOverlay() {
@@ -386,6 +408,29 @@ export class Game {
     this.selection.hoveredBuilding = instance;
     this.selection.placement = this.getPlacementPreview();
     return true;
+  }
+
+  activateBuildMode(buildingId) {
+    if (!this.registry.getBuilding(buildingId)) {
+      return;
+    }
+
+    this.selection.activeBuildingId = buildingId;
+    this.selection.buildMode = true;
+    this.selection.placement = this.getPlacementPreview();
+    this.updateUi();
+  }
+
+  cancelBuildMode() {
+    this.selection.buildMode = false;
+    this.selection.placement = null;
+    this.updateUi();
+  }
+
+  confirmPlacement() {
+    const placed = this.tryPlaceActiveBuilding();
+    this.updateUi();
+    return placed;
   }
 
   placeBuildingInstance({ building, origin, consumeInventory }) {

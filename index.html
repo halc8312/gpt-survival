@@ -2,20 +2,33 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>星屑コロニー / Stardust Colony</title>
     <link rel="icon" href="data:,">
-    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/main.css?v=phase4-5">
   </head>
   <body>
     <div class="app-shell">
       <canvas id="game-canvas" aria-label="Stardust Colony game canvas"></canvas>
-      <pre id="debug-overlay" class="debug-overlay" aria-live="polite"></pre>
+      <section id="debug-overlay" class="debug-overlay" aria-live="polite">
+        <button
+          id="debug-overlay-toggle"
+          class="debug-overlay__toggle"
+          type="button"
+          data-debug-toggle
+          aria-expanded="true"
+          aria-controls="debug-overlay-content"
+        >
+          Debug
+        </button>
+        <pre id="debug-overlay-content" class="debug-overlay__content" data-debug-content></pre>
+      </section>
+      <section id="build-controls" class="build-controls" aria-label="Build controls"></section>
       <section id="error-panel" class="error-panel hidden" role="alert" aria-live="assertive">
         <h1>Initialization failed</h1>
         <pre id="error-message"></pre>
       </section>
     </div>
-    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/main.js?v=phase4-5"></script>
   </body>
 </html>

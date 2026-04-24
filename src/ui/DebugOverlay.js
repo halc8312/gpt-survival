@@ -48,6 +48,47 @@ const formatPlacementReason = (reason) => {
 export class DebugOverlay {
   constructor(element) {
     this.element = element;
+    this.contentElement = element.querySelector("[data-debug-content]") ?? element;
+    this.toggleButton = element.querySelector("[data-debug-toggle]") ?? null;
+    this.compactQuery = window.matchMedia("(max-width: 960px), (max-height: 720px), (pointer: coarse)");
+    this.userCollapsed = null;
+
+    if (this.toggleButton) {
+      this.toggleButton.addEventListener("click", () => {
+        this.userCollapsed = !this.isCollapsed();
+        this.updateCollapsedState();
+      });
+    }
+
+    const mediaHandler = () => {
+      if (!this.compactQuery.matches) {
+        this.userCollapsed = null;
+      }
+      this.updateCollapsedState();
+    };
+
+    if (typeof this.compactQuery.addEventListener === "function") {
+      this.compactQuery.addEventListener("change", mediaHandler);
+    } else if (typeof this.compactQuery.addListener === "function") {
+      this.compactQuery.addListener(mediaHandler);
+    }
+
+    this.updateCollapsedState();
+  }
+
+  isCollapsed() {
+    return this.compactQuery.matches ? (this.userCollapsed ?? true) : false;
+  }
+
+  updateCollapsedState() {
+    const collapsed = this.isCollapsed();
+    this.element.classList.toggle("debug-overlay--compact", this.compactQuery.matches);
+    this.element.classList.toggle("is-collapsed", collapsed);
+
+    if (this.toggleButton) {
+      this.toggleButton.textContent = collapsed ? "Debug" : "Hide debug";
+      this.toggleButton.setAttribute("aria-expanded", String(!collapsed));
+    }
   }
 
   render(state) {
@@ -58,7 +99,7 @@ export class DebugOverlay {
       state.selectedTile?.buildable ?? state.hoveredTile?.buildable ?? false;
     const placementValid = state.placement ? (state.placement.valid ? "valid" : "invalid") : "—";
 
-    this.element.textContent = [
+    this.contentElement.textContent = [
       `FPS: ${state.fps}`,
       `Loaded data files: ${state.loadedFiles}`,
       `Loaded images: ${state.loadedImages}`,
