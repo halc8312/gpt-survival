@@ -82,7 +82,7 @@ const DEFAULT_INNER_TARGET_RADIUS = 8;
 const DEFAULT_RING_SPAN = 1;
 
 export class WorldGenerator {
-  generate({ registry, seed, width, height, center }) {
+  generate({ registry, seed, width, height, center, reservedFootprints = [] }) {
     const tiles = Array.from({ length: height }, (_, y) =>
       Array.from({ length: width }, (_, x) => this.createTile({ registry, seed, x, y, center })),
     );
@@ -93,6 +93,7 @@ export class WorldGenerator {
       height,
       center,
       tiles,
+      reservedFootprints,
     });
 
     return { width, height, center, tiles, resourceNodes, resourceNodeGrid };
@@ -148,10 +149,11 @@ export class WorldGenerator {
     return rules.find((rule) => noise <= rule.threshold)?.tileId ?? rules.at(-1).tileId;
   }
 
-  generateResourceNodes({ registry, seed, width, height, center, tiles }) {
+  generateResourceNodes({ registry, seed, width, height, center, tiles, reservedFootprints = [] }) {
     const guarantees = registry.getMeta("mapGeneration")?.mvp?.resourceGuarantees ?? [];
     const resourceNodeGrid = Array.from({ length: height }, () => Array.from({ length: width }, () => null));
     const resourceNodes = [];
+    const reservedTileSet = this.createReservedTileSet(reservedFootprints, width, height);
     const radii = [...new Set(guarantees.map((guarantee) => guarantee.withinRadius))].sort((a, b) => a - b);
     const minRadiusByTier = new Map(radii.map((radius, index) => [radius, index === 0 ? 0 : radii[index - 1] + 1]));
 
@@ -179,7 +181,7 @@ export class WorldGenerator {
           break;
         }
 
-        if (!this.canPlaceResource(resourceNodeGrid, candidate.tiles)) {
+        if (!this.canPlaceResource(resourceNodeGrid, candidate.tiles, reservedTileSet)) {
           continue;
         }
 
@@ -261,8 +263,37 @@ export class WorldGenerator {
     return footprintTiles;
   }
 
-  canPlaceResource(resourceNodeGrid, tiles) {
-    return tiles.every((tile) => !resourceNodeGrid[tile.y][tile.x]);
+  canPlaceResource(resourceNodeGrid, tiles, reservedTileSet = new Set()) {
+    return tiles.every((tile) => {
+      const key = `${tile.x},${tile.y}`;
+      return !resourceNodeGrid[tile.y][tile.x] && !reservedTileSet.has(key);
+    });
+  }
+
+  createReservedTileSet(reservedFootprints, width, height) {
+    const reservedTileSet = new Set();
+
+    for (const entry of reservedFootprints) {
+      const footprint = entry?.footprint;
+      const origin = entry?.origin;
+      if (!footprint || !origin) {
+        continue;
+      }
+
+      for (let offsetY = 0; offsetY < footprint.height; offsetY += 1) {
+        for (let offsetX = 0; offsetX < footprint.width; offsetX += 1) {
+          const x = origin.x + offsetX;
+          const y = origin.y + offsetY;
+          if (x < 0 || y < 0 || x >= width || y >= height) {
+            continue;
+          }
+
+          reservedTileSet.add(`${x},${y}`);
+        }
+      }
+    }
+
+    return reservedTileSet;
   }
 
   getResourceFootprint(resource) {

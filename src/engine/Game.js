@@ -39,8 +39,30 @@ const BUILDING_HOTKEYS = new Map([
   ["2", "building_storage_yard"],
   ["3", "building_manual_workbench"],
   ["4", "building_small_generator"],
+  ["5", "building_basic_miner"],
+  ["6", "building_smelter_mk1"],
+  ["7", "building_assembler_mk1"],
+  ["8", "building_research_station"],
 ]);
 const DEFAULT_BUILDING_ID = BUILDING_HOTKEYS.values().next().value;
+const STARTER_INVENTORY = {
+  scrap_metal: 120,
+  stone: 80,
+  plant_fiber: 60,
+  raw_food: 12,
+  dirty_water: 12,
+  basic_circuit: 8,
+  battery_cell: 4,
+  recovered_wire: 12,
+  iron_plate: 20,
+  iron_rod: 12,
+  composite_panel: 8,
+  gear: 8,
+  machine_parts: 4,
+  fuel_cell: 4,
+  data_chip: 1,
+  research_data: 20,
+};
 
 export class Game {
   constructor({ canvas, debugElement, errorPanel }) {
@@ -56,7 +78,10 @@ export class Game {
     this.world = null;
     this.mapRenderer = null;
     this.placementValidator = new PlacementValidator({
-      occupancyProviders: [PlacementValidator.createResourceNodeBlocker()],
+      occupancyProviders: [
+        PlacementValidator.createResourceNodeBlocker(),
+        PlacementValidator.createPlacedBuildingBlocker(),
+      ],
     });
     this.frameCount = 0;
     this.accumulator = 0;
@@ -69,7 +94,10 @@ export class Game {
       selectedTile: null,
       hoveredResource: null,
       selectedResource: null,
+      hoveredBuilding: null,
+      selectedBuilding: null,
       activeBuildingId: DEFAULT_BUILDING_ID,
+      buildMode: false,
       placement: null,
     };
 
@@ -88,6 +116,7 @@ export class Game {
     await Promise.all([
       this.assetLoader.loadTileImages(this.registry.getAll("tiles")),
       this.assetLoader.loadResourceImages(this.registry.getAll("resources")),
+      this.assetLoader.loadBuildingImages(this.registry.getAll("buildings")),
     ]);
 
     const gameConfig = this.registry.getMeta("gameConfig");
@@ -98,6 +127,8 @@ export class Game {
     const mapHeight = mapGeneration?.height ?? gameConfig.rendering.defaultMapSize.height;
     const [centerX, centerY] = mapGeneration?.startingCenter ?? [Math.floor(mapWidth / 2), Math.floor(mapHeight / 2)];
     const seed = this.hashSeed(`${this.registry.getMeta("mapGeneration")?.defaultSeedPrefix ?? "STARDUST"}:${mapWidth}:${mapHeight}`);
+    const crashCore = this.registry.getBuilding("building_crash_core");
+    const crashCoreOrigin = crashCore ? this.getCenteredBuildingOrigin(crashCore, { x: centerX, y: centerY }) : null;
 
     this.world = this.worldGenerator.generate({
       registry: this.registry,
@@ -105,7 +136,13 @@ export class Game {
       width: mapWidth,
       height: mapHeight,
       center: { x: centerX, y: centerY },
+      reservedFootprints: crashCore && crashCoreOrigin ? [{ origin: crashCoreOrigin, footprint: crashCore.footprint }] : [],
     });
+    this.world.buildings = [];
+    this.world.buildingCounts = {};
+    this.world.buildingGrid = this.createGrid(this.world.width, this.world.height);
+    this.world.inventory = { ...STARTER_INVENTORY };
+    this.placeInitialBuilding("building_crash_core", crashCoreOrigin);
 
     this.mapRenderer = new MapRenderer({
       ctx: this.ctx,
@@ -160,20 +197,37 @@ export class Game {
     this.selection.hoveredResource = this.selection.hoveredTile
       ? this.world.resourceNodeGrid[this.selection.hoveredTile.y][this.selection.hoveredTile.x]
       : null;
+    this.selection.hoveredBuilding = this.selection.hoveredTile
+      ? this.world.buildingGrid[this.selection.hoveredTile.y][this.selection.hoveredTile.x]
+      : null;
 
     const buildingShortcut = this.input.consumeBuildingShortcut();
     if (buildingShortcut && BUILDING_HOTKEYS.has(buildingShortcut)) {
       this.selection.activeBuildingId = BUILDING_HOTKEYS.get(buildingShortcut);
+      this.selection.buildMode = true;
+    }
+
+    if (this.input.consumeCancelBuild()) {
+      this.selection.buildMode = false;
     }
 
     this.selection.placement = this.getPlacementPreview();
 
+    if (this.input.consumePlacementConfirm() && this.tryPlaceActiveBuilding()) {
+      this.updateDebugOverlay();
+      return;
+    }
+
     if (this.input.consumeClick()) {
       if (this.selection.hoveredResource) {
         this.selection.selectedResource = this.selection.hoveredResource;
+        this.selection.selectedBuilding = null;
+      } else if (this.selection.buildMode && this.tryPlaceActiveBuilding()) {
+        this.selection.selectedResource = null;
       } else if (this.selection.hoveredTile) {
         this.selection.selectedTile = this.selection.hoveredTile;
         this.selection.selectedResource = null;
+        this.selection.selectedBuilding = this.selection.hoveredBuilding;
       }
     }
 
@@ -206,6 +260,8 @@ export class Game {
     const selected = this.selection.selectedTile;
     const hoveredResource = this.selection.hoveredResource;
     const selectedResource = this.selection.selectedResource;
+    const hoveredBuilding = this.selection.hoveredBuilding;
+    const selectedBuilding = this.selection.selectedBuilding;
     const activeBuilding = this.registry.getBuilding(this.selection.activeBuildingId);
     const warnings = [...this.registry.validation.warnings, ...this.assetLoader.warnings];
 
@@ -220,13 +276,21 @@ export class Game {
       selectedTile: selected,
       hoveredResource,
       selectedResource,
-      activeBuilding,
+      hoveredBuilding,
+      selectedBuilding,
+      activeBuilding: this.selection.buildMode ? activeBuilding : null,
       placement: this.selection.placement,
+      buildingsCount: this.world?.buildings?.length ?? 0,
+      inventorySummary: this.formatInventorySummary(),
       warningCount: warnings.length,
     });
   }
 
   getPlacementPreview() {
+    if (!this.selection.buildMode) {
+      return null;
+    }
+
     const building = this.registry.getBuilding(this.selection.activeBuildingId);
     if (!building) {
       return null;
@@ -235,9 +299,10 @@ export class Game {
     const origin = this.selection.hoveredTile
       ? { x: this.selection.hoveredTile.x, y: this.selection.hoveredTile.y }
       : null;
-    return {
+    const placement = {
       buildingId: building.id,
       footprint: building.footprint,
+      buildCost: building.buildCost ?? {},
       origin,
       ...this.placementValidator.validate({
         world: this.world,
@@ -245,6 +310,14 @@ export class Game {
         footprint: building.footprint,
       }),
     };
+
+    const affordability = this.validateInventory(building.buildCost);
+    if (placement.valid && !affordability.ok) {
+      placement.valid = false;
+      placement.reason = `insufficient_resources:${affordability.missing.join(",")}`;
+    }
+
+    return placement;
   }
 
   hashSeed(input) {
@@ -256,5 +329,147 @@ export class Game {
     }
 
     return hash >>> 0;
+  }
+
+  createGrid(width, height) {
+    return Array.from({ length: height }, () => Array.from({ length: width }, () => null));
+  }
+
+  placeInitialBuilding(buildingId, origin = null) {
+    const building = this.registry.getBuilding(buildingId);
+    if (!building) {
+      return null;
+    }
+
+    const centeredOrigin = origin ?? this.getCenteredBuildingOrigin(building, this.world.center);
+    const placement = this.placementValidator.validate({
+      world: this.world,
+      origin: centeredOrigin,
+      footprint: building.footprint,
+    });
+    if (!placement.valid) {
+      throw new Error(
+        `Failed to place initial building at reserved centered origin: ${buildingId} (${placement.reason ?? "unknown"})`,
+      );
+    }
+
+    return this.placeBuildingInstance({ building, origin: centeredOrigin, consumeInventory: false });
+  }
+
+  getCenteredBuildingOrigin(building, center) {
+    return {
+      x: center.x - Math.floor(building.footprint.width / 2),
+      y: center.y - Math.floor(building.footprint.height / 2),
+    };
+  }
+
+  tryPlaceActiveBuilding() {
+    const placement = this.selection.placement;
+    if (!placement?.valid || !placement.origin) {
+      return false;
+    }
+
+    const building = this.registry.getBuilding(placement.buildingId);
+    if (!building) {
+      return false;
+    }
+
+    const instance = this.placeBuildingInstance({
+      building,
+      origin: placement.origin,
+      consumeInventory: true,
+    });
+
+    this.selection.selectedTile = this.world.tiles[placement.origin.y][placement.origin.x];
+    this.selection.selectedBuilding = instance;
+    this.selection.selectedResource = null;
+    this.selection.hoveredBuilding = instance;
+    this.selection.placement = this.getPlacementPreview();
+    return true;
+  }
+
+  placeBuildingInstance({ building, origin, consumeInventory }) {
+    if (consumeInventory) {
+      this.consumeInventory(building.buildCost);
+    }
+
+    const occupiedTiles = this.collectOccupiedTiles(origin, building.footprint);
+    const lastOccupiedTile = occupiedTiles[occupiedTiles.length - 1] ?? origin;
+    const instanceIndex = (this.world.buildingCounts[building.id] ?? 0) + 1;
+    const instance = {
+      instanceId: `${building.id}_${String(instanceIndex).padStart(3, "0")}`,
+      buildingId: building.id,
+      x: origin.x,
+      y: origin.y,
+      footprint: { ...building.footprint },
+      durability: building.durability ?? 0,
+      powered: building.id === "building_crash_core",
+      sprite: building.sprite,
+      occupiedTiles,
+      sortKey: lastOccupiedTile.x + lastOccupiedTile.y,
+    };
+
+    this.world.buildings.push(instance);
+    this.world.buildingCounts[building.id] = instanceIndex;
+    this.world.buildings.sort((left, right) => {
+      if (left.sortKey !== right.sortKey) {
+        return left.sortKey - right.sortKey;
+      }
+      if (left.y !== right.y) {
+        return left.y - right.y;
+      }
+      if (left.x !== right.x) {
+        return left.x - right.x;
+      }
+      return left.instanceId.localeCompare(right.instanceId);
+    });
+
+    for (const tile of occupiedTiles) {
+      this.world.buildingGrid[tile.y][tile.x] = instance;
+    }
+
+    return instance;
+  }
+
+  collectOccupiedTiles(origin, footprint) {
+    const tiles = [];
+
+    for (let offsetY = 0; offsetY < footprint.height; offsetY += 1) {
+      for (let offsetX = 0; offsetX < footprint.width; offsetX += 1) {
+        tiles.push({ x: origin.x + offsetX, y: origin.y + offsetY });
+      }
+    }
+
+    return tiles;
+  }
+
+  validateInventory(buildCost = {}) {
+    const missing = Object.entries(buildCost)
+      .filter(([itemId, amount]) => (this.world?.inventory?.[itemId] ?? 0) < amount)
+      .map(([itemId]) => itemId);
+
+    return {
+      ok: missing.length === 0,
+      missing,
+    };
+  }
+
+  consumeInventory(buildCost = {}) {
+    for (const [itemId, amount] of Object.entries(buildCost)) {
+      this.world.inventory[itemId] = Math.max(0, (this.world.inventory[itemId] ?? 0) - amount);
+    }
+  }
+
+  formatInventorySummary() {
+    const inventory = this.world?.inventory;
+    if (!inventory) {
+      return "—";
+    }
+
+    return Object.entries(inventory)
+      .filter(([, amount]) => amount > 0)
+      .sort(([leftId], [rightId]) => leftId.localeCompare(rightId))
+      .map(([itemId, amount]) => `${itemId}:${amount}`)
+      .join(", ");
   }
 }

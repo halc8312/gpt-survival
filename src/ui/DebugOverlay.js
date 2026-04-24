@@ -10,6 +10,8 @@ const formatResource = (resourceNode) => {
   return `${label} (${resourceNode.resourceId})`;
 };
 
+const formatBuilding = (building) => building?.buildingId ?? "—";
+
 const formatPlacementReason = (reason) => {
   if (!reason) {
     return "—";
@@ -29,6 +31,15 @@ const formatPlacementReason = (reason) => {
 
   if (reason.startsWith("resource_overlap:")) {
     return `resource overlap (${reason.split(":")[1]})`;
+  }
+
+  if (reason.startsWith("building_overlap:")) {
+    return `building overlap (${reason.split(":")[1]})`;
+  }
+
+  if (reason.startsWith("insufficient_resources:")) {
+    const missing = reason.split(":")[1];
+    return missing ? `insufficient resources (${missing})` : "insufficient resources";
   }
 
   return reason;
@@ -64,9 +75,13 @@ export class DebugOverlay {
       `Hovered resource: ${formatResource(state.hoveredResource)}`,
       `Selected resource ID: ${state.selectedResource?.resourceId ?? "—"}`,
       `Selected resource: ${formatResource(state.selectedResource)}`,
+      `Hovered building ID: ${formatBuilding(state.hoveredBuilding)}`,
+      `Selected building ID: ${formatBuilding(state.selectedBuilding)}`,
       `Active building ghost ID: ${state.activeBuilding?.id ?? "—"}`,
       `Placement: ${placementValid}`,
       `Invalid reason: ${state.placement?.valid ? "—" : formatPlacementReason(state.placement?.reason)}`,
+      `Buildings count: ${state.buildingsCount}`,
+      `Inventory summary: ${state.inventorySummary}`,
       `Warnings: ${state.warningCount}`,
     ].join("\n");
   }

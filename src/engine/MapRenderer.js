@@ -21,11 +21,16 @@ export class MapRenderer {
       }
     }
 
-    for (const resourceNode of world.resourceNodes) {
-      this.drawResourceNode(resourceNode);
-      if (resourceNode.footprint.width > 1 || resourceNode.footprint.height > 1) {
-        this.drawFootprint(resourceNode.occupiedTiles, "rgba(190, 214, 233, 0.18)", "rgba(190, 214, 233, 0.06)");
+    for (const entity of this.collectRenderableEntities(world)) {
+      if (entity.type === "resource") {
+        this.drawResourceNode(entity.record);
+        if (entity.record.footprint.width > 1 || entity.record.footprint.height > 1) {
+          this.drawFootprint(entity.record.occupiedTiles, "rgba(190, 214, 233, 0.18)", "rgba(190, 214, 233, 0.06)");
+        }
+        continue;
       }
+
+      this.drawBuilding(entity.record);
     }
 
     if (selectionState.hoveredResource) {
@@ -41,6 +46,22 @@ export class MapRenderer {
         selectionState.selectedResource.occupiedTiles,
         "rgba(255, 213, 74, 0.95)",
         "rgba(255, 213, 74, 0.14)",
+      );
+    }
+
+    if (selectionState.hoveredBuilding) {
+      this.drawFootprint(
+        selectionState.hoveredBuilding.occupiedTiles,
+        "rgba(127, 246, 255, 0.95)",
+        "rgba(127, 246, 255, 0.08)",
+      );
+    }
+
+    if (selectionState.selectedBuilding) {
+      this.drawFootprint(
+        selectionState.selectedBuilding.occupiedTiles,
+        "rgba(255, 213, 74, 0.95)",
+        "rgba(255, 213, 74, 0.12)",
       );
     }
 
@@ -76,7 +97,22 @@ export class MapRenderer {
 
   drawResourceNode(resourceNode) {
     const sprite = this.assetLoader.getImage(resourceNode.sprite);
-    const anchor = this.getResourceAnchor(resourceNode.occupiedTiles);
+    const anchor = this.getEntityAnchor(resourceNode.occupiedTiles);
+    const width = (sprite.naturalWidth || sprite.width) * this.camera.zoom;
+    const height = (sprite.naturalHeight || sprite.height) * this.camera.zoom;
+
+    this.ctx.drawImage(
+      sprite,
+      Math.round(anchor.x - width / 2),
+      Math.round(anchor.y - height),
+      width,
+      height,
+    );
+  }
+
+  drawBuilding(building) {
+    const sprite = this.assetLoader.getImage(building.sprite);
+    const anchor = this.getEntityAnchor(building.occupiedTiles);
     const width = (sprite.naturalWidth || sprite.width) * this.camera.zoom;
     const height = (sprite.naturalHeight || sprite.height) * this.camera.zoom;
 
@@ -142,7 +178,7 @@ export class MapRenderer {
     return tiles;
   }
 
-  getResourceAnchor(occupiedTiles) {
+  getEntityAnchor(occupiedTiles) {
     const anchor = occupiedTiles.reduce(
       (total, tile) => {
         const projected = this.tileToWorld(tile.x, tile.y);
@@ -158,6 +194,35 @@ export class MapRenderer {
       x: anchor.x / occupiedTiles.length,
       y: anchor.y / occupiedTiles.length,
     };
+  }
+
+  collectRenderableEntities(world) {
+    return [
+      ...world.resourceNodes.map((resourceNode) => ({ type: "resource", record: resourceNode })),
+      ...(world.buildings ?? []).map((building) => ({ type: "building", record: building })),
+    ].sort((left, right) => {
+      if (left.record.sortKey !== right.record.sortKey) {
+        return left.record.sortKey - right.record.sortKey;
+      }
+
+      if (left.record.y !== right.record.y) {
+        return left.record.y - right.record.y;
+      }
+
+      if (left.record.x !== right.record.x) {
+        return left.record.x - right.record.x;
+      }
+
+      if (left.type !== right.type) {
+        return left.type.localeCompare(right.type);
+      }
+
+      return this.getRenderableEntityId(left.record).localeCompare(this.getRenderableEntityId(right.record));
+    });
+  }
+
+  getRenderableEntityId(record) {
+    return record.instanceId ?? record.resourceId ?? record.buildingId ?? "";
   }
 
   // The forward isometric transform turns tile coordinates into the top vertex
