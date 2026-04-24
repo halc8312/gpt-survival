@@ -1,10 +1,12 @@
 const formatTile = (tile) => (tile ? `${tile.x}, ${tile.y}` : "—");
+const LABEL_PRIORITY = ["ja", "en"];
+
 const formatResource = (resourceNode) => {
   if (!resourceNode) {
     return "—";
   }
 
-  const label = resourceNode.name?.ja ?? resourceNode.name?.en ?? resourceNode.resourceId;
+  const label = LABEL_PRIORITY.map((locale) => resourceNode.name?.[locale]).find(Boolean) ?? resourceNode.resourceId;
   return `${label} (${resourceNode.resourceId})`;
 };
 

@@ -23,9 +23,6 @@ export class MapRenderer {
 
     for (const resourceNode of world.resourceNodes) {
       this.drawResourceNode(resourceNode);
-    }
-
-    for (const resourceNode of world.resourceNodes) {
       if (resourceNode.footprint.width > 1 || resourceNode.footprint.height > 1) {
         this.drawFootprint(resourceNode.occupiedTiles, "rgba(190, 214, 233, 0.18)", "rgba(190, 214, 233, 0.06)");
       }

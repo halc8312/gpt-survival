@@ -79,6 +79,7 @@ const RESOURCE_PLACEMENT_WEIGHTS = {
 };
 
 const DEFAULT_INNER_TARGET_RADIUS = 8;
+const DEFAULT_RING_SPAN = 1;
 
 export class WorldGenerator {
   generate({ registry, seed, width, height, center }) {
@@ -204,7 +205,13 @@ export class WorldGenerator {
       }
     });
 
-    resourceNodes.sort((left, right) => left.sortKey - right.sortKey || left.y - right.y || left.x - right.x);
+    resourceNodes.sort((left, right) => {
+      if (left.sortKey !== right.sortKey) {
+        return left.sortKey - right.sortKey;
+      }
+
+      return left.instanceId.localeCompare(right.instanceId);
+    });
     return { resourceNodes, resourceNodeGrid };
   }
 
@@ -226,7 +233,8 @@ export class WorldGenerator {
 
         const biomeScore = this.scoreBiomeFit(resource, footprintTiles);
         const terrainScore = this.scoreTerrainFit(resource, footprintTiles);
-        const ringScore = 1 - Math.min(1, Math.abs(distance - targetRadius) / Math.max(1, maxRadius - minRadius || maxRadius));
+        const ringSpan = Math.max(DEFAULT_RING_SPAN, maxRadius - minRadius || maxRadius);
+        const ringScore = 1 - Math.min(1, Math.abs(distance - targetRadius) / ringSpan);
         const noise = this.sample(seed * 31 + guaranteeIndex * 97, x * 5 + footprint.width, y * 5 + footprint.height);
         const score =
           biomeScore * RESOURCE_PLACEMENT_WEIGHTS.biome +
