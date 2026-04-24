@@ -217,10 +217,12 @@ export class MapRenderer {
         return left.type.localeCompare(right.type);
       }
 
-      const leftId = left.record.instanceId ?? left.record.resourceId ?? left.record.buildingId ?? "";
-      const rightId = right.record.instanceId ?? right.record.resourceId ?? right.record.buildingId ?? "";
-      return leftId.localeCompare(rightId);
+      return this.getRenderableEntityId(left.record).localeCompare(this.getRenderableEntityId(right.record));
     });
+  }
+
+  getRenderableEntityId(record) {
+    return record.instanceId ?? record.resourceId ?? record.buildingId ?? "";
   }
 
   // The forward isometric transform turns tile coordinates into the top vertex

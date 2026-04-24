@@ -136,6 +136,7 @@ export class Game {
       center: { x: centerX, y: centerY },
     });
     this.world.buildings = [];
+    this.world.buildingCounts = {};
     this.world.buildingGrid = this.createGrid(this.world.width, this.world.height);
     this.world.inventory = { ...STARTER_INVENTORY };
     this.placeInitialBuilding("building_crash_core");
@@ -411,7 +412,7 @@ export class Game {
 
     const occupiedTiles = this.collectOccupiedTiles(origin, building.footprint);
     const lastOccupiedTile = occupiedTiles[occupiedTiles.length - 1] ?? origin;
-    const instanceIndex = this.world.buildings.filter((entry) => entry.buildingId === building.id).length + 1;
+    const instanceIndex = (this.world.buildingCounts[building.id] ?? 0) + 1;
     const instance = {
       instanceId: `${building.id}_${String(instanceIndex).padStart(3, "0")}`,
       buildingId: building.id,
@@ -419,13 +420,14 @@ export class Game {
       y: origin.y,
       footprint: { ...building.footprint },
       durability: building.durability ?? 0,
-      powered: Boolean(building.power?.produces ?? building.power?.producesDay),
+      powered: building.id === "building_crash_core",
       sprite: building.sprite,
       occupiedTiles,
       sortKey: lastOccupiedTile.x + lastOccupiedTile.y,
     };
 
     this.world.buildings.push(instance);
+    this.world.buildingCounts[building.id] = instanceIndex;
     this.world.buildings.sort((left, right) => {
       if (left.sortKey !== right.sortKey) {
         return left.sortKey - right.sortKey;
