@@ -1,4 +1,5 @@
 const LABEL_PRIORITY = ["ja", "en"];
+const PASSIVE_EVENT_NAMES = new Set(["wheel"]);
 
 const getBuildingLabel = (building) =>
   LABEL_PRIORITY.map((locale) => building?.name?.[locale]).find(Boolean) ?? building?.id ?? "—";
@@ -170,25 +171,25 @@ export class BuildToolbar {
   }
 
   decorateInteractiveElement(element) {
-    for (const eventName of ["pointerdown", "pointerup", "pointercancel", "touchstart", "touchend", "touchmove", "wheel"]) {
+    for (const eventName of ["pointerdown", "pointerup", "pointercancel", "wheel"]) {
       element.addEventListener(
         eventName,
         (event) => {
           event.stopPropagation();
         },
-        { passive: eventName === "touchmove" || eventName === "wheel" },
+        { passive: PASSIVE_EVENT_NAMES.has(eventName) },
       );
     }
   }
 
   bindPaletteInteractions(palette) {
-    for (const eventName of ["pointerdown", "pointermove", "pointerup", "pointercancel", "touchstart", "touchmove", "touchend", "wheel"]) {
+    for (const eventName of ["pointerdown", "pointermove", "pointerup", "pointercancel", "wheel"]) {
       palette.addEventListener(
         eventName,
         (event) => {
           event.stopPropagation();
         },
-        { passive: eventName === "touchmove" || eventName === "wheel" },
+        { passive: PASSIVE_EVENT_NAMES.has(eventName) },
       );
     }
 

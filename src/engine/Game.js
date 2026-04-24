@@ -50,6 +50,7 @@ const BUILDING_HOTKEYS = new Map([
 const DEFAULT_BUILDING_ID = BUILDING_HOTKEYS.values().next().value;
 const LABEL_PRIORITY = ["ja", "en"];
 const DEFAULT_POWER_RECALCULATION_SECONDS = 0.25;
+const FLOAT_EPSILON = 1e-9;
 const STARTER_INVENTORY = {
   scrap_metal: 120,
   stone: 80,
@@ -968,7 +969,7 @@ export class Game {
 
     for (const instance of consumers) {
       const requiredEnergy = instance.powerRequired * effectiveDeltaMinutes;
-      if (requiredEnergy <= remainingEnergy + 1e-9) {
+      if (requiredEnergy <= remainingEnergy + FLOAT_EPSILON) {
         instance.powered = true;
         instance.powerReason = instance.powerReason === "awaiting power allocation" ? "powered" : instance.powerReason;
         remainingEnergy -= requiredEnergy;
