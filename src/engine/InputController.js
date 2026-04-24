@@ -25,6 +25,8 @@ export class InputController {
     };
     this.pendingClick = false;
     this.pendingBuildingShortcut = null;
+    this.pendingCancelBuild = false;
+    this.pendingPlacementConfirm = false;
 
     this.bindEvents();
   }
@@ -37,9 +39,21 @@ export class InputController {
         return;
       }
 
-      if (/^[1-4]$/.test(event.key)) {
+      if (/^[1-8]$/.test(event.key)) {
         event.preventDefault();
         this.pendingBuildingShortcut = event.key;
+        return;
+      }
+
+      if (event.key === "Escape") {
+        event.preventDefault();
+        this.pendingCancelBuild = true;
+        return;
+      }
+
+      if (event.key === "Enter") {
+        event.preventDefault();
+        this.pendingPlacementConfirm = true;
       }
     });
 
@@ -48,6 +62,15 @@ export class InputController {
     });
 
     this.canvas.addEventListener("mousedown", (event) => {
+      if (event.button === 2) {
+        event.preventDefault();
+        const rect = this.canvas.getBoundingClientRect();
+        this.mouse.x = event.clientX - rect.left;
+        this.mouse.y = event.clientY - rect.top;
+        this.pendingCancelBuild = true;
+        return;
+      }
+
       if (event.button !== 0 && event.button !== 1) {
         return;
       }
@@ -111,6 +134,10 @@ export class InputController {
       },
       { passive: false },
     );
+
+    this.canvas.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
+    });
   }
 
   update(deltaSeconds) {
@@ -142,5 +169,17 @@ export class InputController {
     const shortcut = this.pendingBuildingShortcut;
     this.pendingBuildingShortcut = null;
     return shortcut;
+  }
+
+  consumeCancelBuild() {
+    const cancelled = this.pendingCancelBuild;
+    this.pendingCancelBuild = false;
+    return cancelled;
+  }
+
+  consumePlacementConfirm() {
+    const confirmed = this.pendingPlacementConfirm;
+    this.pendingPlacementConfirm = false;
+    return confirmed;
   }
 }

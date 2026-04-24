@@ -52,4 +52,19 @@ export class PlacementValidator {
       };
     };
   }
+
+  static createPlacedBuildingBlocker() {
+    return ({ world, tiles }) => {
+      const blockedTile = tiles.find((tile) => world.buildingGrid?.[tile.y]?.[tile.x]);
+      if (!blockedTile) {
+        return null;
+      }
+
+      const building = world.buildingGrid[blockedTile.y][blockedTile.x];
+      return {
+        blocked: true,
+        reason: `building_overlap:${building.buildingId}`,
+      };
+    };
+  }
 }

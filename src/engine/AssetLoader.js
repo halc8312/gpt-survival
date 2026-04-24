@@ -13,6 +13,10 @@ export class AssetLoader {
     await this.loadImages(resources.map((resource) => resource.sprite).filter(Boolean));
   }
 
+  async loadBuildingImages(buildings) {
+    await this.loadImages(buildings.map((building) => building.sprite).filter(Boolean));
+  }
+
   async loadImages(paths) {
     const spritePaths = [...new Set(paths)];
     const missingPaths = spritePaths.filter((path) => !this.images.has(path));
