@@ -187,6 +187,7 @@ export class WorldGenerator {
 
         const index = resourceNodes.filter((node) => node.resourceId === resource.id).length + 1;
         const amount = this.rollAmount(resource.amountRange, seed, candidate.x, candidate.y, guaranteeIndex + index);
+        const harvestSeed = this.hashResourceSeed(seed, candidate.x, candidate.y, guaranteeIndex + index);
         const node = {
           instanceId: `${resource.id}_${String(index).padStart(2, "0")}`,
           resourceId: resource.id,
@@ -194,7 +195,11 @@ export class WorldGenerator {
           sprite: resource.sprite,
           x: candidate.x,
           y: candidate.y,
-          amount,
+          maxAmount: amount,
+          remaining: amount,
+          depleted: false,
+          harvestCount: 0,
+          harvestSeed,
           footprint,
           occupiedTiles: candidate.tiles.map((tile) => ({ x: tile.x, y: tile.y })),
           sortKey: candidate.tiles.at(-1).x + candidate.tiles.at(-1).y,
@@ -332,6 +337,10 @@ export class WorldGenerator {
     const [min = 1, max = min] = amountRange ?? [1, 1];
     const noise = this.sample(seed * 17 + salt * 101, x * 7, y * 7);
     return Math.min(max, min + Math.floor(noise * (max - min + 1)));
+  }
+
+  hashResourceSeed(seed, x, y, salt) {
+    return (seed ^ Math.imul(x + 1, 73856093) ^ Math.imul(y + 1, 19349663) ^ Math.imul(salt + 1, 83492791)) >>> 0;
   }
 
   sample(seed, x, y) {

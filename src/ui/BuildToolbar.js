@@ -4,14 +4,17 @@ const getBuildingLabel = (building) =>
   LABEL_PRIORITY.map((locale) => building?.name?.[locale]).find(Boolean) ?? building?.id ?? "—";
 
 export class BuildToolbar {
-  constructor(element, { onSelectBuilding, onCancelBuild, onConfirmBuild }) {
+  constructor(element, { onSelectBuilding, onCancelBuild, onConfirmBuild, onHarvest }) {
     this.element = element;
     this.onSelectBuilding = onSelectBuilding;
     this.onCancelBuild = onCancelBuild;
     this.onConfirmBuild = onConfirmBuild;
+    this.onHarvest = onHarvest;
     this.buildButtons = new Map();
     this.confirmButton = null;
     this.cancelButton = null;
+    this.harvestButton = null;
+    this.statusElement = null;
   }
 
   setOptions(options) {
@@ -58,11 +61,20 @@ export class BuildToolbar {
     this.cancelButton.textContent = "解除";
     this.cancelButton.addEventListener("click", () => this.onCancelBuild());
 
-    actions.append(this.confirmButton, this.cancelButton);
-    this.element.append(palette, actions);
+    this.harvestButton = document.createElement("button");
+    this.harvestButton.type = "button";
+    this.harvestButton.className = "build-controls__action build-controls__action--harvest";
+    this.harvestButton.textContent = "採取";
+    this.harvestButton.addEventListener("click", () => this.onHarvest());
+
+    this.statusElement = document.createElement("div");
+    this.statusElement.className = "build-controls__status";
+
+    actions.append(this.harvestButton, this.confirmButton, this.cancelButton);
+    this.element.append(palette, actions, this.statusElement);
   }
 
-  render({ activeBuildingId, buildMode, placementValid }) {
+  render({ activeBuildingId, buildMode, placementValid, canHarvest, statusMessage }) {
     for (const [buildingId, button] of this.buildButtons) {
       const active = buildMode && buildingId === activeBuildingId;
       button.classList.toggle("is-active", active);
@@ -75,6 +87,15 @@ export class BuildToolbar {
 
     if (this.cancelButton) {
       this.cancelButton.disabled = !buildMode;
+    }
+
+    if (this.harvestButton) {
+      this.harvestButton.disabled = !canHarvest;
+    }
+
+    if (this.statusElement) {
+      this.statusElement.textContent = statusMessage ?? "";
+      this.statusElement.classList.toggle("is-hidden", !statusMessage);
     }
   }
 }

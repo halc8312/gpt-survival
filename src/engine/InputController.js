@@ -45,6 +45,7 @@ export class InputController {
     this.pendingBuildingShortcut = null;
     this.pendingCancelBuild = false;
     this.pendingPlacementConfirm = false;
+    this.pendingHarvest = false;
 
     this.bindEvents();
   }
@@ -60,6 +61,12 @@ export class InputController {
       if (/^[1-8]$/.test(event.key)) {
         event.preventDefault();
         this.pendingBuildingShortcut = event.key;
+        return;
+      }
+
+      if (event.key === "h" || event.key === "H") {
+        event.preventDefault();
+        this.pendingHarvest = true;
         return;
       }
 
@@ -356,5 +363,11 @@ export class InputController {
     const confirmed = this.pendingPlacementConfirm;
     this.pendingPlacementConfirm = false;
     return confirmed;
+  }
+
+  consumeHarvest() {
+    const harvesting = this.pendingHarvest;
+    this.pendingHarvest = false;
+    return harvesting;
   }
 }

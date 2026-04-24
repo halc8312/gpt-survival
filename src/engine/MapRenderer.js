@@ -101,6 +101,10 @@ export class MapRenderer {
     const width = (sprite.naturalWidth || sprite.width) * this.camera.zoom;
     const height = (sprite.naturalHeight || sprite.height) * this.camera.zoom;
 
+    this.ctx.save();
+    if (resourceNode.depleted) {
+      this.ctx.globalAlpha = 0.42;
+    }
     this.ctx.drawImage(
       sprite,
       Math.round(anchor.x - width / 2),
@@ -108,6 +112,11 @@ export class MapRenderer {
       width,
       height,
     );
+    this.ctx.restore();
+
+    if (resourceNode.depleted) {
+      this.drawFootprint(resourceNode.occupiedTiles, "rgba(152, 163, 177, 0.7)", "rgba(56, 64, 76, 0.16)");
+    }
   }
 
   drawBuilding(building) {

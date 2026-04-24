@@ -46,6 +46,7 @@ const BUILDING_HOTKEYS = new Map([
   ["8", "building_research_station"],
 ]);
 const DEFAULT_BUILDING_ID = BUILDING_HOTKEYS.values().next().value;
+const LABEL_PRIORITY = ["ja", "en"];
 const STARTER_INVENTORY = {
   scrap_metal: 120,
   stone: 80,
@@ -75,6 +76,7 @@ export class Game {
           onSelectBuilding: (buildingId) => this.activateBuildMode(buildingId),
           onCancelBuild: () => this.cancelBuildMode(),
           onConfirmBuild: () => this.confirmPlacement(),
+          onHarvest: () => this.harvestSelectedResource(),
         })
       : null;
     this.errorPanel = errorPanel;
@@ -108,6 +110,7 @@ export class Game {
       buildMode: false,
       placement: null,
     };
+    this.statusMessage = "";
 
     window.addEventListener("resize", () => this.resize());
   }
@@ -150,6 +153,7 @@ export class Game {
     this.world.buildingCounts = {};
     this.world.buildingGrid = this.createGrid(this.world.width, this.world.height);
     this.world.inventory = { ...STARTER_INVENTORY };
+    this.world.lastHarvestResult = null;
     this.placeInitialBuilding("building_crash_core", crashCoreOrigin);
     this.buildToolbar?.setOptions(
       Array.from(BUILDING_HOTKEYS.entries(), ([shortcut, buildingId]) => ({
@@ -231,15 +235,24 @@ export class Game {
       return;
     }
 
+    if (this.input.consumeHarvest()) {
+      this.harvestSelectedResource();
+    }
+
     if (this.input.consumeClick()) {
-      if (this.selection.hoveredResource) {
-        this.selection.selectedResource = this.selection.hoveredResource;
-        this.selection.selectedBuilding = null;
-      } else if (this.selection.buildMode && this.tryPlaceActiveBuilding()) {
+      if (this.selection.buildMode && this.tryPlaceActiveBuilding()) {
         this.selection.selectedResource = null;
+      } else if (!this.selection.buildMode && this.selection.hoveredResource) {
+        this.selection.selectedResource = this.selection.hoveredResource;
+        this.selection.selectedTile = this.selection.hoveredTile;
+        this.selection.selectedBuilding = null;
       } else if (this.selection.hoveredTile) {
         this.selection.selectedTile = this.selection.hoveredTile;
-        this.selection.selectedResource = null;
+        if (this.selection.buildMode) {
+          this.selection.selectedResource = null;
+        } else if (!this.selection.hoveredResource) {
+          this.selection.selectedResource = null;
+        }
         this.selection.selectedBuilding = this.selection.hoveredBuilding;
       }
     }
@@ -273,6 +286,8 @@ export class Game {
       activeBuildingId: this.selection.activeBuildingId,
       buildMode: this.selection.buildMode,
       placementValid: Boolean(this.selection.placement?.valid),
+      canHarvest: this.canHarvestSelectedResource(),
+      statusMessage: this.statusMessage,
     });
     this.updateDebugOverlay();
   }
@@ -285,6 +300,7 @@ export class Game {
     const hoveredBuilding = this.selection.hoveredBuilding;
     const selectedBuilding = this.selection.selectedBuilding;
     const activeBuilding = this.registry.getBuilding(this.selection.activeBuildingId);
+    const selectedResourceDefinition = selectedResource ? this.registry.getResource(selectedResource.resourceId) : null;
     const warnings = [...this.registry.validation.warnings, ...this.assetLoader.warnings];
 
     this.debugOverlay.render({
@@ -298,6 +314,12 @@ export class Game {
       selectedTile: selected,
       hoveredResource,
       selectedResource,
+      selectedResourceName: this.getLabel(selectedResourceDefinition?.name, selectedResource?.resourceId),
+      selectedResourceRemaining: selectedResource?.remaining ?? "—",
+      selectedResourceMax: selectedResource?.maxAmount ?? "—",
+      selectedResourceDepleted: selectedResource ? (selectedResource.depleted ? "yes" : "no") : "—",
+      selectedResourcePossibleDrops: this.formatPossibleDrops(selectedResourceDefinition),
+      lastHarvestResult: this.world?.lastHarvestResult?.message ?? "—",
       hoveredBuilding,
       selectedBuilding,
       activeBuilding: this.selection.buildMode ? activeBuilding : null,
@@ -340,6 +362,149 @@ export class Game {
     }
 
     return placement;
+  }
+
+  getLabel(localizedValue, fallback = "—") {
+    if (!localizedValue) {
+      return fallback;
+    }
+
+    if (typeof localizedValue === "string") {
+      return localizedValue;
+    }
+
+    return LABEL_PRIORITY.map((locale) => localizedValue?.[locale]).find(Boolean) ?? fallback;
+  }
+
+  formatPossibleDrops(resource) {
+    if (!resource) {
+      return "—";
+    }
+
+    return Object.entries(resource.primaryDrops ?? {})
+      .map(([itemId, range]) => `${this.getItemLabel(itemId)} ${this.formatRange(range)}`)
+      .join(", ") || "—";
+  }
+
+  formatRange(range = []) {
+    const [min = 0, max = min] = range;
+    return min === max ? String(min) : `${min}-${max}`;
+  }
+
+  getItemLabel(itemId) {
+    const item = this.registry.getItem(itemId);
+    return this.getLabel(item?.name, itemId);
+  }
+
+  getResourceLabel(resourceNode) {
+    return this.getLabel(resourceNode?.name, resourceNode?.resourceId ?? "resource");
+  }
+
+  setStatusMessage(message) {
+    this.statusMessage = message ?? "";
+  }
+
+  canHarvestSelectedResource() {
+    return (
+      Boolean(this.selection.selectedResource) &&
+      !this.selection.buildMode &&
+      !this.selection.selectedResource.depleted &&
+      (this.selection.selectedResource.remaining ?? 0) > 0
+    );
+  }
+
+  harvestSelectedResource() {
+    const resourceNode = this.selection.selectedResource;
+    if (!resourceNode) {
+      this.setStatusMessage("採取対象の資源を選択してください");
+      this.updateUi();
+      return false;
+    }
+
+    if (this.selection.buildMode) {
+      this.setStatusMessage("建築モード中は採取できません");
+      this.updateUi();
+      return false;
+    }
+
+    if (resourceNode.depleted || resourceNode.remaining <= 0) {
+      resourceNode.remaining = 0;
+      resourceNode.depleted = true;
+      this.setStatusMessage(`${this.getResourceLabel(resourceNode)} は枯渇しています`);
+      this.updateUi();
+      return false;
+    }
+
+    const harvestResult = this.resolveHarvest(resourceNode);
+    this.addToInventory(harvestResult.drops);
+    resourceNode.remaining = Math.max(0, resourceNode.remaining - harvestResult.consumedAmount);
+    resourceNode.harvestCount = (resourceNode.harvestCount ?? 0) + 1;
+    resourceNode.depleted = resourceNode.remaining <= 0;
+
+    const message = `${this.getResourceLabel(resourceNode)} 採取: ${this.formatItemDeltaSummary(harvestResult.drops)}${
+      resourceNode.depleted ? " / 枯渇" : ""
+    }`;
+    this.world.lastHarvestResult = {
+      resourceId: resourceNode.resourceId,
+      resourceInstanceId: resourceNode.instanceId,
+      drops: harvestResult.drops,
+      consumedAmount: harvestResult.consumedAmount,
+      remaining: resourceNode.remaining,
+      maxAmount: resourceNode.maxAmount,
+      depleted: resourceNode.depleted,
+      message,
+    };
+    this.setStatusMessage(message);
+    this.updateUi();
+    return true;
+  }
+
+  resolveHarvest(resourceNode) {
+    const resource = this.registry.getResource(resourceNode.resourceId);
+    const entries = Object.entries(resource?.primaryDrops ?? {});
+    const harvestStep = this.getHarvestStep(resourceNode);
+    const consumedAmount = Math.min(resourceNode.remaining, harvestStep);
+    const efficiency = harvestStep > 0 ? consumedAmount / harvestStep : 0;
+    const drops = {};
+
+    entries.forEach(([itemId, range], index) => {
+      const rolledAmount = this.rollDeterministicRange(range, resourceNode.harvestSeed, resourceNode.harvestCount ?? 0, index + 1);
+      if (rolledAmount <= 0 || efficiency <= 0) {
+        return;
+      }
+
+      const scaledAmount = Math.max(1, Math.round(rolledAmount * efficiency));
+      drops[itemId] = scaledAmount;
+    });
+
+    return { consumedAmount, drops };
+  }
+
+  getHarvestStep(resourceNode) {
+    const targetActions = Math.min(40, Math.max(3, Math.round(Math.sqrt(resourceNode.maxAmount ?? 1))));
+    return Math.max(1, Math.ceil((resourceNode.maxAmount ?? 1) / targetActions));
+  }
+
+  rollDeterministicRange(range, seed, harvestCount, salt) {
+    const [min = 0, max = min] = range ?? [0, 0];
+    if (min === max) {
+      return min;
+    }
+
+    const noise = this.sample(seed * 17 + (harvestCount + 1) * 101 + salt * 271, harvestCount + salt, salt * 7);
+    return Math.min(max, min + Math.floor(noise * (max - min + 1)));
+  }
+
+  sample(seed, x, y) {
+    const value = Math.sin((x + seed * 0.001) * 12.9898 + (y - seed * 0.001) * 78.233) * 43758.5453;
+    return value - Math.floor(value);
+  }
+
+  formatItemDeltaSummary(items = {}) {
+    const parts = Object.entries(items)
+      .filter(([, amount]) => amount > 0)
+      .map(([itemId, amount]) => `${this.getItemLabel(itemId)} +${amount}`);
+    return parts.join(", ") || "なし";
   }
 
   hashSeed(input) {
@@ -502,6 +667,16 @@ export class Game {
   consumeInventory(buildCost = {}) {
     for (const [itemId, amount] of Object.entries(buildCost)) {
       this.world.inventory[itemId] = Math.max(0, (this.world.inventory[itemId] ?? 0) - amount);
+    }
+  }
+
+  addToInventory(items = {}) {
+    for (const [itemId, amount] of Object.entries(items)) {
+      if (amount <= 0) {
+        continue;
+      }
+
+      this.world.inventory[itemId] = (this.world.inventory[itemId] ?? 0) + amount;
     }
   }
 
