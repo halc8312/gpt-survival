@@ -127,6 +127,8 @@ export class Game {
     const mapHeight = mapGeneration?.height ?? gameConfig.rendering.defaultMapSize.height;
     const [centerX, centerY] = mapGeneration?.startingCenter ?? [Math.floor(mapWidth / 2), Math.floor(mapHeight / 2)];
     const seed = this.hashSeed(`${this.registry.getMeta("mapGeneration")?.defaultSeedPrefix ?? "STARDUST"}:${mapWidth}:${mapHeight}`);
+    const crashCore = this.registry.getBuilding("building_crash_core");
+    const crashCoreOrigin = crashCore ? this.getCenteredBuildingOrigin(crashCore, { x: centerX, y: centerY }) : null;
 
     this.world = this.worldGenerator.generate({
       registry: this.registry,
@@ -134,12 +136,13 @@ export class Game {
       width: mapWidth,
       height: mapHeight,
       center: { x: centerX, y: centerY },
+      reservedFootprints: crashCore && crashCoreOrigin ? [{ origin: crashCoreOrigin, footprint: crashCore.footprint }] : [],
     });
     this.world.buildings = [];
     this.world.buildingCounts = {};
     this.world.buildingGrid = this.createGrid(this.world.width, this.world.height);
     this.world.inventory = { ...STARTER_INVENTORY };
-    this.placeInitialBuilding("building_crash_core");
+    this.placeInitialBuilding("building_crash_core", crashCoreOrigin);
 
     this.mapRenderer = new MapRenderer({
       ctx: this.ctx,
@@ -332,52 +335,30 @@ export class Game {
     return Array.from({ length: height }, () => Array.from({ length: width }, () => null));
   }
 
-  placeInitialBuilding(buildingId) {
+  placeInitialBuilding(buildingId, originOverride = null) {
     const building = this.registry.getBuilding(buildingId);
     if (!building) {
       return null;
     }
 
-    const desiredOrigin = {
-      x: this.world.center.x - Math.floor(building.footprint.width / 2),
-      y: this.world.center.y - Math.floor(building.footprint.height / 2),
-    };
-    const origin = this.findPlacementOrigin(building.footprint, desiredOrigin);
-    if (!origin) {
+    const origin = originOverride ?? this.getCenteredBuildingOrigin(building, this.world.center);
+    const placement = this.placementValidator.validate({
+      world: this.world,
+      origin,
+      footprint: building.footprint,
+    });
+    if (!placement.valid) {
       throw new Error(`Failed to place initial building: ${buildingId}`);
     }
 
     return this.placeBuildingInstance({ building, origin, consumeInventory: false });
   }
 
-  findPlacementOrigin(footprint, desiredOrigin) {
-    const maxRadius = Math.max(this.world.width, this.world.height);
-
-    for (let radius = 0; radius <= maxRadius; radius += 1) {
-      for (let offsetY = -radius; offsetY <= radius; offsetY += 1) {
-        for (let offsetX = -radius; offsetX <= radius; offsetX += 1) {
-          if (Math.max(Math.abs(offsetX), Math.abs(offsetY)) !== radius) {
-            continue;
-          }
-
-          const origin = {
-            x: desiredOrigin.x + offsetX,
-            y: desiredOrigin.y + offsetY,
-          };
-          const placement = this.placementValidator.validate({
-            world: this.world,
-            origin,
-            footprint,
-          });
-
-          if (placement.valid) {
-            return origin;
-          }
-        }
-      }
-    }
-
-    return null;
+  getCenteredBuildingOrigin(building, center) {
+    return {
+      x: center.x - Math.floor(building.footprint.width / 2),
+      y: center.y - Math.floor(building.footprint.height / 2),
+    };
   }
 
   tryPlaceActiveBuilding() {
