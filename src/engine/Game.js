@@ -244,7 +244,7 @@ export class Game {
         this.selection.selectedResource = null;
       } else if (!this.selection.buildMode && this.selection.hoveredResource) {
         this.selection.selectedResource = this.selection.hoveredResource;
-        this.selection.selectedTile = this.world.tiles[this.selection.hoveredResource.y][this.selection.hoveredResource.x];
+        this.selection.selectedTile = this.selection.hoveredTile;
         this.selection.selectedBuilding = null;
       } else if (this.selection.hoveredTile) {
         this.selection.selectedTile = this.selection.hoveredTile;
