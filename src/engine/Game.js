@@ -381,8 +381,8 @@ export class Game {
       return null;
     }
 
-    const targetTile = this.selection.buildTargetTile ?? this.selection.hoveredTile;
-    const origin = targetTile ? { x: targetTile.x, y: targetTile.y } : null;
+    const placementTargetTile = this.selection.buildTargetTile ?? this.selection.hoveredTile;
+    const origin = placementTargetTile ? { x: placementTargetTile.x, y: placementTargetTile.y } : null;
     const placement = {
       buildingId: building.id,
       footprint: building.footprint,

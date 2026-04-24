@@ -103,7 +103,8 @@ export class DebugOverlay {
     const hoveredTileId = state.hoveredTile?.tileId ?? "—";
     const selectedTileId = state.selectedTile?.tileId ?? "—";
     const selectedBiomeId = state.selectedTile?.biomeId ?? state.hoveredTile?.biomeId ?? "—";
-    const selectedBuildable = state.selectedTile?.buildable ?? state.hoveredTile?.buildable ?? false;
+    const selectedBuildable =
+      state.selectedTile?.buildable ?? state.hoveredTile?.buildable ?? false;
     const placementValid = state.placement ? (state.placement.valid ? "valid" : "invalid") : "—";
 
     this.contentElement.textContent = [
