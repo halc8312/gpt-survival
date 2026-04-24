@@ -172,6 +172,10 @@ export class DataRegistry {
     return this.get("recipes", id);
   }
 
+  getRecipesByBuildingId(buildingId) {
+    return this.getAll("recipes").filter((recipe) => recipe.buildingId === buildingId);
+  }
+
   getResearch(id) {
     return this.get("research", id);
   }

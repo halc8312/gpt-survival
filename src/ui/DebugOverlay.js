@@ -45,6 +45,14 @@ const formatPlacementReason = (reason) => {
   return reason;
 };
 
+const formatProductionProgress = (progressSeconds, durationSeconds) => {
+  if (!durationSeconds) {
+    return "—";
+  }
+
+  return `${progressSeconds.toFixed(1)} / ${durationSeconds.toFixed(1)} sec`;
+};
+
 export class DebugOverlay {
   constructor(element) {
     this.element = element;
@@ -106,6 +114,8 @@ export class DebugOverlay {
       `Validation: ${state.validation}`,
       `Camera: ${state.camera.x.toFixed(1)}, ${state.camera.y.toFixed(1)} @ ${state.camera.zoom.toFixed(2)}x`,
       `Mouse: ${Math.round(state.mouse.x)}, ${Math.round(state.mouse.y)}`,
+      `Last pointer type: ${state.lastPointerType ?? "—"}`,
+      `Touch placement confirm: ${state.explicitTouchPlacement ? "required" : "off"}`,
       `Hovered tile: ${formatTile(state.hoveredTile)}`,
       `Selected tile: ${formatTile(state.selectedTile)}`,
       `Selected tile ID: ${selectedTileId}`,
@@ -123,9 +133,17 @@ export class DebugOverlay {
       `Last harvest result: ${state.lastHarvestResult ?? "—"}`,
       `Hovered building ID: ${formatBuilding(state.hoveredBuilding)}`,
       `Selected building ID: ${formatBuilding(state.selectedBuilding)}`,
+      `Selected building name: ${state.selectedBuildingName ?? "—"}`,
       `Active building ghost ID: ${state.activeBuilding?.id ?? "—"}`,
       `Placement: ${placementValid}`,
       `Invalid reason: ${state.placement?.valid ? "—" : formatPlacementReason(state.placement?.reason)}`,
+      `Placement hint: ${state.placementHint ?? "—"}`,
+      `Available recipes: ${state.availableRecipes ?? "—"}`,
+      `Selected recipe ID: ${state.selectedRecipeId ?? "—"}`,
+      `Active recipe ID: ${state.activeRecipeId ?? "—"}`,
+      `Production state: ${state.productionState ?? "—"}`,
+      `Production progress: ${formatProductionProgress(state.productionProgress ?? 0, state.productionDuration ?? 0)}`,
+      `Last production result: ${state.lastProductionResult ?? "—"}`,
       `Buildings count: ${state.buildingsCount}`,
       `Inventory summary: ${state.inventorySummary}`,
       `Warnings: ${state.warningCount}`,

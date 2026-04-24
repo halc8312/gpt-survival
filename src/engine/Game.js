@@ -77,6 +77,7 @@ export class Game {
           onCancelBuild: () => this.cancelBuildMode(),
           onConfirmBuild: () => this.confirmPlacement(),
           onHarvest: () => this.harvestSelectedResource(),
+          onStartProduction: () => this.startSelectedBuildingProduction(),
         })
       : null;
     this.errorPanel = errorPanel;
@@ -108,6 +109,7 @@ export class Game {
       selectedBuilding: null,
       activeBuildingId: DEFAULT_BUILDING_ID,
       buildMode: false,
+      buildTargetTile: null,
       placement: null,
     };
     this.statusMessage = "";
@@ -154,6 +156,7 @@ export class Game {
     this.world.buildingGrid = this.createGrid(this.world.width, this.world.height);
     this.world.inventory = { ...STARTER_INVENTORY };
     this.world.lastHarvestResult = null;
+    this.world.lastProductionResult = null;
     this.placeInitialBuilding("building_crash_core", crashCoreOrigin);
     this.buildToolbar?.setOptions(
       Array.from(BUILDING_HOTKEYS.entries(), ([shortcut, buildingId]) => ({
@@ -229,6 +232,10 @@ export class Game {
       this.cancelBuildMode();
     }
 
+    if (this.selection.buildMode && !this.input.requiresExplicitPlacementForCurrentInteraction()) {
+      this.selection.buildTargetTile = this.selection.hoveredTile;
+    }
+
     this.selection.placement = this.getPlacementPreview();
 
     if (this.input.consumePlacementConfirm() && this.confirmPlacement()) {
@@ -239,23 +246,40 @@ export class Game {
       this.harvestSelectedResource();
     }
 
-    if (this.input.consumeClick()) {
-      if (this.selection.buildMode && this.tryPlaceActiveBuilding()) {
-        this.selection.selectedResource = null;
-      } else if (!this.selection.buildMode && this.selection.hoveredResource) {
+    const recipeCycleDirection = this.input.consumeRecipeCycle();
+    if (recipeCycleDirection !== 0) {
+      this.cycleSelectedBuildingRecipe(recipeCycleDirection);
+    }
+
+    if (this.input.consumeProductionStart()) {
+      this.startSelectedBuildingProduction();
+    }
+
+    const click = this.input.consumeClick();
+    if (click) {
+      if (this.selection.buildMode) {
+        if (!this.input.requiresExplicitTouchPlacement(click.pointerType) && this.tryPlaceActiveBuilding()) {
+          this.selection.selectedResource = null;
+        } else if (this.selection.hoveredTile) {
+          this.selection.selectedTile = this.selection.hoveredTile;
+          this.selection.buildTargetTile = this.selection.hoveredTile;
+          this.selection.selectedResource = null;
+          this.selection.selectedBuilding = null;
+        }
+      } else if (this.selection.hoveredResource) {
         this.selection.selectedResource = this.selection.hoveredResource;
         this.selection.selectedTile = this.selection.hoveredTile;
         this.selection.selectedBuilding = null;
       } else if (this.selection.hoveredTile) {
         this.selection.selectedTile = this.selection.hoveredTile;
-        if (this.selection.buildMode) {
-          this.selection.selectedResource = null;
-        } else if (!this.selection.hoveredResource) {
+        if (!this.selection.hoveredResource) {
           this.selection.selectedResource = null;
         }
         this.selection.selectedBuilding = this.selection.hoveredBuilding;
       }
     }
+
+    this.updateProduction(deltaSeconds);
 
     this.updateUi();
   }
@@ -282,12 +306,16 @@ export class Game {
   }
 
   updateUi() {
+    const selectedProductionInfo = this.getSelectedProductionInfo();
     this.buildToolbar?.render({
       activeBuildingId: this.selection.activeBuildingId,
       buildMode: this.selection.buildMode,
       placementValid: Boolean(this.selection.placement?.valid),
       canHarvest: this.canHarvestSelectedResource(),
-      statusMessage: this.statusMessage,
+      canStartProduction: this.canStartSelectedBuildingProduction(),
+      statusMessage: this.getContextualStatusMessage(selectedProductionInfo),
+      selectionSummary: this.getToolbarSelectionSummary(selectedProductionInfo),
+      recipeSummary: this.getToolbarRecipeSummary(selectedProductionInfo),
     });
     this.updateDebugOverlay();
   }
@@ -301,6 +329,8 @@ export class Game {
     const selectedBuilding = this.selection.selectedBuilding;
     const activeBuilding = this.registry.getBuilding(this.selection.activeBuildingId);
     const selectedResourceDefinition = selectedResource ? this.registry.getResource(selectedResource.resourceId) : null;
+    const selectedBuildingDefinition = selectedBuilding ? this.registry.getBuilding(selectedBuilding.buildingId) : null;
+    const selectedProductionInfo = this.getSelectedProductionInfo();
     const warnings = [...this.registry.validation.warnings, ...this.assetLoader.warnings];
 
     this.debugOverlay.render({
@@ -310,6 +340,8 @@ export class Game {
       validation: this.registry.validation.ok ? "ok" : "failed",
       camera: this.camera,
       mouse: this.input.mouse,
+      lastPointerType: this.input.lastClickPointerType,
+      explicitTouchPlacement: this.input.requiresExplicitTouchPlacement(),
       hoveredTile: hovered,
       selectedTile: selected,
       hoveredResource,
@@ -322,8 +354,17 @@ export class Game {
       lastHarvestResult: this.world?.lastHarvestResult?.message ?? "—",
       hoveredBuilding,
       selectedBuilding,
+      selectedBuildingName: this.getLabel(selectedBuildingDefinition?.name, selectedBuilding?.buildingId),
       activeBuilding: this.selection.buildMode ? activeBuilding : null,
       placement: this.selection.placement,
+      placementHint: this.getPlacementHint(),
+      availableRecipes: this.formatAvailableRecipes(selectedProductionInfo?.recipes ?? []),
+      selectedRecipeId: selectedProductionInfo?.selectedRecipeId ?? "—",
+      activeRecipeId: selectedProductionInfo?.instance?.activeRecipeId ?? "—",
+      productionState: selectedProductionInfo?.instance?.productionState ?? "—",
+      productionProgress: selectedProductionInfo?.instance?.productionProgress ?? 0,
+      productionDuration: selectedProductionInfo?.instance?.productionDuration ?? 0,
+      lastProductionResult: selectedProductionInfo?.instance?.lastProductionResult?.message ?? this.world?.lastProductionResult?.message ?? "—",
       buildingsCount: this.world?.buildings?.length ?? 0,
       inventorySummary: this.formatInventorySummary(),
       warningCount: warnings.length,
@@ -340,9 +381,8 @@ export class Game {
       return null;
     }
 
-    const origin = this.selection.hoveredTile
-      ? { x: this.selection.hoveredTile.x, y: this.selection.hoveredTile.y }
-      : null;
+    const placementTargetTile = this.selection.buildTargetTile ?? this.selection.hoveredTile;
+    const origin = placementTargetTile ? { x: placementTargetTile.x, y: placementTargetTile.y } : null;
     const placement = {
       buildingId: building.id,
       footprint: building.footprint,
@@ -362,6 +402,263 @@ export class Game {
     }
 
     return placement;
+  }
+
+  getRecipesForBuilding(buildingId) {
+    return this.registry.getRecipesByBuildingId(buildingId);
+  }
+
+  isProductionBuilding(buildingId) {
+    return this.getRecipesForBuilding(buildingId).length > 0;
+  }
+
+  getSelectedProductionInfo() {
+    const instance = this.selection.selectedBuilding;
+    if (!instance || !this.isProductionBuilding(instance.buildingId)) {
+      return null;
+    }
+
+    const recipes = this.getRecipesForBuilding(instance.buildingId);
+    const selectedRecipe = this.ensureBuildingRecipeSelection(instance, recipes);
+    return {
+      instance,
+      recipes,
+      selectedRecipe,
+      selectedRecipeId: selectedRecipe?.id ?? null,
+    };
+  }
+
+  ensureBuildingRecipeSelection(instance, recipes = this.getRecipesForBuilding(instance.buildingId)) {
+    if (recipes.length === 0) {
+      instance.selectedRecipeId = null;
+      return null;
+    }
+
+    const selectedRecipe = recipes.find((recipe) => recipe.id === instance.selectedRecipeId) ?? recipes[0];
+    instance.selectedRecipeId = selectedRecipe.id;
+    return selectedRecipe;
+  }
+
+  canStartSelectedBuildingProduction() {
+    if (this.selection.buildMode) {
+      return false;
+    }
+
+    const info = this.getSelectedProductionInfo();
+    return Boolean(info?.selectedRecipe);
+  }
+
+  cycleSelectedBuildingRecipe(direction) {
+    if (this.selection.buildMode || direction === 0) {
+      return false;
+    }
+
+    const info = this.getSelectedProductionInfo();
+    if (!info || info.recipes.length <= 1) {
+      return false;
+    }
+
+    const currentIndex = Math.max(
+      0,
+      info.recipes.findIndex((recipe) => recipe.id === info.selectedRecipeId),
+    );
+    const nextIndex = (currentIndex + direction + info.recipes.length) % info.recipes.length;
+    const nextRecipe = info.recipes[nextIndex];
+    info.instance.selectedRecipeId = nextRecipe.id;
+    this.setStatusMessage(`レシピ選択: ${this.getRecipeLabel(nextRecipe)}`);
+    this.updateUi();
+    return true;
+  }
+
+  startSelectedBuildingProduction() {
+    if (this.selection.buildMode) {
+      this.setStatusMessage("建築モード中は生産を開始できません");
+      this.updateUi();
+      return false;
+    }
+
+    const info = this.getSelectedProductionInfo();
+    if (!info) {
+      this.setStatusMessage("生産施設を選択してください");
+      this.updateUi();
+      return false;
+    }
+
+    const recipeToStart =
+      info.recipes.find((recipe) => this.validateInventory(recipe.inputs).ok) ?? info.selectedRecipe;
+
+    return this.startProduction(info.instance, recipeToStart?.id);
+  }
+
+  startProduction(instance, recipeId) {
+    if (!instance || !recipeId) {
+      return false;
+    }
+
+    if (instance.productionState === "running") {
+      this.setStatusMessage(`${this.getBuildingInstanceLabel(instance)} は稼働中です`);
+      this.updateUi();
+      return false;
+    }
+
+    const recipe = this.registry.getRecipe(recipeId);
+    if (!recipe || recipe.buildingId !== instance.buildingId) {
+      this.setStatusMessage("この施設ではそのレシピを実行できません");
+      this.updateUi();
+      return false;
+    }
+
+    const affordability = this.validateInventory(recipe.inputs);
+    if (!affordability.ok) {
+      this.setStatusMessage(`資材不足: ${affordability.missing.map((itemId) => this.getItemLabel(itemId)).join(", ")}`);
+      this.updateUi();
+      return false;
+    }
+
+    this.consumeInventory(recipe.inputs);
+    instance.selectedRecipeId = recipe.id;
+    instance.activeRecipeId = recipe.id;
+    instance.productionProgress = 0;
+    instance.productionDuration = Number(recipe.durationSeconds) || 0;
+    instance.productionState = "running";
+    instance.queuedRecipeId = null;
+    instance.lastProductionResult = null;
+    this.setStatusMessage(`${this.getBuildingInstanceLabel(instance)}: ${this.getRecipeLabel(recipe)} を開始しました`);
+    this.updateUi();
+    return true;
+  }
+
+  updateProduction(deltaSeconds) {
+    for (const instance of this.world?.buildings ?? []) {
+      if (instance.productionState !== "running" || !instance.activeRecipeId) {
+        continue;
+      }
+
+      instance.productionProgress = Math.min(
+        instance.productionDuration,
+        (instance.productionProgress ?? 0) + deltaSeconds,
+      );
+
+      if (instance.productionProgress < instance.productionDuration) {
+        continue;
+      }
+
+      this.completeProduction(instance);
+    }
+  }
+
+  completeProduction(instance) {
+    const recipe = this.registry.getRecipe(instance.activeRecipeId);
+    if (!recipe) {
+      instance.productionState = "idle";
+      instance.activeRecipeId = null;
+      instance.productionProgress = 0;
+      instance.productionDuration = 0;
+      return;
+    }
+
+    this.addToInventory(recipe.outputs);
+    const message = `${this.getBuildingInstanceLabel(instance)}: ${this.formatItemDeltaSummary(recipe.outputs)} を生産しました`;
+    const result = {
+      recipeId: recipe.id,
+      outputs: { ...recipe.outputs },
+      message,
+    };
+
+    instance.productionState = "idle";
+    instance.activeRecipeId = null;
+    instance.productionProgress = 0;
+    instance.productionDuration = 0;
+    instance.lastProductionResult = result;
+    this.world.lastProductionResult = result;
+    this.setStatusMessage(message);
+  }
+
+  getRecipeLabel(recipe) {
+    return this.getLabel(recipe?.name, recipe?.id ?? "recipe");
+  }
+
+  getBuildingInstanceLabel(instance) {
+    const definition = this.registry.getBuilding(instance?.buildingId);
+    return this.getLabel(definition?.name, instance?.buildingId ?? "building");
+  }
+
+  formatAvailableRecipes(recipes) {
+    if (!recipes?.length) {
+      return "—";
+    }
+
+    return recipes
+      .map((recipe) => {
+        const availability = this.validateInventory(recipe.inputs);
+        return `${recipe.id}${availability.ok ? " [ready]" : " [missing]"}`;
+      })
+      .join(", ");
+  }
+
+  getToolbarSelectionSummary(selectedProductionInfo) {
+    if (this.selection.buildMode) {
+      const building = this.registry.getBuilding(this.selection.activeBuildingId);
+      return `建築: ${this.getLabel(building?.name, this.selection.activeBuildingId)}`;
+    }
+
+    if (selectedProductionInfo) {
+      return `選択: ${this.getBuildingInstanceLabel(selectedProductionInfo.instance)}`;
+    }
+
+    if (this.selection.selectedResource) {
+      return `選択: ${this.getResourceLabel(this.selection.selectedResource)}`;
+    }
+
+    if (this.selection.selectedBuilding) {
+      return `選択: ${this.getBuildingInstanceLabel(this.selection.selectedBuilding)}`;
+    }
+
+    return "";
+  }
+
+  getToolbarRecipeSummary(selectedProductionInfo) {
+    if (this.selection.buildMode) {
+      return this.getPlacementHint();
+    }
+
+    if (!selectedProductionInfo) {
+      return "";
+    }
+
+    const instance = selectedProductionInfo.instance;
+    if (instance.productionState === "running") {
+      let ratio = 0;
+      if (instance.productionDuration > 0) {
+        ratio = Math.round((instance.productionProgress / instance.productionDuration) * 100);
+      }
+      return `稼働中: ${this.getRecipeLabel(this.registry.getRecipe(instance.activeRecipeId))} ${ratio}%`;
+    }
+
+    if (selectedProductionInfo.selectedRecipe) {
+      return `待機: ${this.getRecipeLabel(selectedProductionInfo.selectedRecipe)} / P または 生産で開始`;
+    }
+
+    return "この施設にレシピはありません";
+  }
+
+  getPlacementHint() {
+    if (!this.selection.buildMode) {
+      return "";
+    }
+
+    if (this.input.requiresExplicitTouchPlacement()) {
+      return "配置予定地を選択中 / 配置ボタンで確定";
+    }
+
+    return "クリックまたは Enter で配置";
+  }
+
+  getContextualStatusMessage(selectedProductionInfo) {
+    const contextual = this.selection.buildMode
+      ? this.getPlacementHint()
+      : this.getToolbarRecipeSummary(selectedProductionInfo);
+    return [...new Set([contextual, this.statusMessage].filter(Boolean))].join("\n");
   }
 
   getLabel(localizedValue, fallback = "—") {
@@ -571,7 +868,9 @@ export class Game {
     this.selection.selectedBuilding = instance;
     this.selection.selectedResource = null;
     this.selection.hoveredBuilding = instance;
+    this.selection.buildTargetTile = placement.origin;
     this.selection.placement = this.getPlacementPreview();
+    this.setStatusMessage(`${this.getBuildingInstanceLabel(instance)} を配置しました`);
     return true;
   }
 
@@ -582,12 +881,18 @@ export class Game {
 
     this.selection.activeBuildingId = buildingId;
     this.selection.buildMode = true;
+    this.selection.selectedResource = null;
+    this.selection.selectedBuilding = null;
+    this.selection.buildTargetTile = this.input.requiresExplicitPlacementForCurrentInteraction()
+      ? this.selection.selectedTile
+      : this.selection.hoveredTile;
     this.selection.placement = this.getPlacementPreview();
     this.updateUi();
   }
 
   cancelBuildMode() {
     this.selection.buildMode = false;
+    this.selection.buildTargetTile = null;
     this.selection.placement = null;
     this.updateUi();
   }
@@ -617,6 +922,13 @@ export class Game {
       sprite: building.sprite,
       occupiedTiles,
       sortKey: lastOccupiedTile.x + lastOccupiedTile.y,
+      selectedRecipeId: this.getRecipesForBuilding(building.id)[0]?.id ?? null,
+      activeRecipeId: null,
+      productionProgress: 0,
+      productionDuration: 0,
+      productionState: "idle",
+      queuedRecipeId: null,
+      lastProductionResult: null,
     };
 
     this.world.buildings.push(instance);
