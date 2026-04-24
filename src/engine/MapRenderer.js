@@ -125,6 +125,12 @@ export class MapRenderer {
     const width = (sprite.naturalWidth || sprite.width) * this.camera.zoom;
     const height = (sprite.naturalHeight || sprite.height) * this.camera.zoom;
 
+    this.ctx.save();
+    if (building.powered === false && (building.powerRequired ?? 0) > 0) {
+      this.ctx.globalAlpha = 0.58;
+      this.ctx.filter = "brightness(0.62) saturate(0.8)";
+    }
+
     this.ctx.drawImage(
       sprite,
       Math.round(anchor.x - width / 2),
@@ -132,6 +138,15 @@ export class MapRenderer {
       width,
       height,
     );
+    this.ctx.restore();
+
+    if (building.powered === false && (building.powerRequired ?? 0) > 0) {
+      this.drawFootprint(
+        building.occupiedTiles,
+        "rgba(255, 152, 96, 0.95)",
+        "rgba(34, 11, 16, 0.24)",
+      );
+    }
   }
 
   drawOutline(tile, strokeStyle, fillStyle) {

@@ -53,6 +53,14 @@ const formatProductionProgress = (progressSeconds, durationSeconds) => {
   return `${progressSeconds.toFixed(1)} / ${durationSeconds.toFixed(1)} sec`;
 };
 
+const formatPowerValue = (value) => {
+  if (typeof value !== "number" || Number.isNaN(value)) {
+    return "—";
+  }
+
+  return Number.isInteger(value) ? String(value) : value.toFixed(1);
+};
+
 export class DebugOverlay {
   constructor(element) {
     this.element = element;
@@ -144,6 +152,19 @@ export class DebugOverlay {
       `Production state: ${state.productionState ?? "—"}`,
       `Production progress: ${formatProductionProgress(state.productionProgress ?? 0, state.productionDuration ?? 0)}`,
       `Last production result: ${state.lastProductionResult ?? "—"}`,
+      `Day/night: ${state.dayPhase ?? "—"} (${state.clock ?? "—"})`,
+      `Power generation: ${formatPowerValue(state.powerGeneration)}`,
+      `Power consumption: ${formatPowerValue(state.powerConsumption)}`,
+      `Power balance: ${formatPowerValue(state.powerBalance)}`,
+      `Stored power: ${formatPowerValue(state.powerStored)} / ${formatPowerValue(state.powerCapacity)}`,
+      `Power shortage: ${formatPowerValue(state.powerShortage)}`,
+      `Powered buildings: ${state.poweredBuildingCount ?? "—"}`,
+      `Unpowered buildings: ${state.unpoweredBuildingCount ?? "—"}`,
+      `Selected building powered: ${state.selectedBuildingPowered ?? "—"}`,
+      `Selected building power required: ${formatPowerValue(state.selectedBuildingPowerRequired)}`,
+      `Selected building power produced: ${formatPowerValue(state.selectedBuildingPowerProduced)}`,
+      `Selected building power reason: ${state.selectedBuildingPowerReason ?? "—"}`,
+      `Generator fuel status: ${state.generatorFuelStatus ?? "—"}`,
       `Buildings count: ${state.buildingsCount}`,
       `Inventory summary: ${state.inventorySummary}`,
       `Warnings: ${state.warningCount}`,

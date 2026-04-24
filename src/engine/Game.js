@@ -44,9 +44,15 @@ const BUILDING_HOTKEYS = new Map([
   ["6", "building_smelter_mk1"],
   ["7", "building_assembler_mk1"],
   ["8", "building_research_station"],
+  ["9", "building_solar_panel_mk1"],
+  ["0", "building_battery_bank_mk1"],
 ]);
 const DEFAULT_BUILDING_ID = BUILDING_HOTKEYS.values().next().value;
 const LABEL_PRIORITY = ["ja", "en"];
+const DEFAULT_POWER_RECALCULATION_SECONDS = 0.25;
+// Allows a tiny absolute tolerance when comparing per-tick energy budgets to avoid
+// floating-point jitter from flipping buildings between powered/unpowered states.
+const ENERGY_COMPARISON_EPSILON = 1e-9;
 const STARTER_INVENTORY = {
   scrap_metal: 120,
   stone: 80,
@@ -97,6 +103,7 @@ export class Game {
     this.frameCount = 0;
     this.accumulator = 0;
     this.fps = 0;
+    this.powerAccumulator = 0;
     this.lastFrameAt = 0;
     this.started = false;
     this.viewport = { width: 1, height: 1, dpr: 1 };
@@ -157,7 +164,10 @@ export class Game {
     this.world.inventory = { ...STARTER_INVENTORY };
     this.world.lastHarvestResult = null;
     this.world.lastProductionResult = null;
+    this.world.time = this.createInitialTimeState();
+    this.world.power = this.createInitialPowerState();
     this.placeInitialBuilding("building_crash_core", crashCoreOrigin);
+    this.recalculatePowerState(0);
     this.buildToolbar?.setOptions(
       Array.from(BUILDING_HOTKEYS.entries(), ([shortcut, buildingId]) => ({
         shortcut,
@@ -279,6 +289,8 @@ export class Game {
       }
     }
 
+    this.advanceWorldTime(deltaSeconds);
+    this.updatePowerSimulation(deltaSeconds);
     this.updateProduction(deltaSeconds);
 
     this.updateUi();
@@ -316,6 +328,7 @@ export class Game {
       statusMessage: this.getContextualStatusMessage(selectedProductionInfo),
       selectionSummary: this.getToolbarSelectionSummary(selectedProductionInfo),
       recipeSummary: this.getToolbarRecipeSummary(selectedProductionInfo),
+      powerSummary: this.getToolbarPowerSummary(),
     });
     this.updateDebugOverlay();
   }
@@ -332,6 +345,7 @@ export class Game {
     const selectedBuildingDefinition = selectedBuilding ? this.registry.getBuilding(selectedBuilding.buildingId) : null;
     const selectedProductionInfo = this.getSelectedProductionInfo();
     const warnings = [...this.registry.validation.warnings, ...this.assetLoader.warnings];
+    const powerState = this.world?.power ?? this.createInitialPowerState();
 
     this.debugOverlay.render({
       fps: this.fps,
@@ -365,6 +379,21 @@ export class Game {
       productionProgress: selectedProductionInfo?.instance?.productionProgress ?? 0,
       productionDuration: selectedProductionInfo?.instance?.productionDuration ?? 0,
       lastProductionResult: selectedProductionInfo?.instance?.lastProductionResult?.message ?? this.world?.lastProductionResult?.message ?? "—",
+      dayPhase: this.isDaytime() ? "day" : "night",
+      clock: this.formatWorldClock(),
+      powerGeneration: powerState.generation,
+      powerConsumption: powerState.consumption,
+      powerBalance: powerState.balance,
+      powerStored: powerState.stored,
+      powerCapacity: powerState.storageCapacity,
+      powerShortage: powerState.shortage,
+      poweredBuildingCount: powerState.poweredBuildingCount,
+      unpoweredBuildingCount: powerState.unpoweredBuildingCount,
+      selectedBuildingPowered: selectedBuilding ? (selectedBuilding.powered ? "yes" : "no") : "—",
+      selectedBuildingPowerRequired: selectedBuilding?.powerRequired ?? 0,
+      selectedBuildingPowerProduced: selectedBuilding?.powerProduced ?? 0,
+      selectedBuildingPowerReason: selectedBuilding?.powerReason ?? "—",
+      generatorFuelStatus: powerState.generatorFuelStatus ?? "—",
       buildingsCount: this.world?.buildings?.length ?? 0,
       inventorySummary: this.formatInventorySummary(),
       warningCount: warnings.length,
@@ -445,7 +474,15 @@ export class Game {
     }
 
     const info = this.getSelectedProductionInfo();
-    return Boolean(info?.selectedRecipe);
+    if (!info?.selectedRecipe || info.instance?.activeRecipeId) {
+      return false;
+    }
+
+    if (this.getBuildingPowerDemandRate(info.instance) > 0 && !info.instance.powered) {
+      return false;
+    }
+
+    return true;
   }
 
   cycleSelectedBuildingRecipe(direction) {
@@ -495,8 +532,13 @@ export class Game {
       return false;
     }
 
-    if (instance.productionState === "running") {
-      this.setStatusMessage(`${this.getBuildingInstanceLabel(instance)} は稼働中です`);
+    if (instance.activeRecipeId) {
+      const powerBlocked = instance.productionState === "paused_unpowered";
+      this.setStatusMessage(
+        powerBlocked
+          ? this.getPowerBlockedMessage(instance)
+          : `${this.getBuildingInstanceLabel(instance)} は稼働中です`,
+      );
       this.updateUi();
       return false;
     }
@@ -511,6 +553,12 @@ export class Game {
     const affordability = this.validateInventory(recipe.inputs);
     if (!affordability.ok) {
       this.setStatusMessage(`資材不足: ${affordability.missing.map((itemId) => this.getItemLabel(itemId)).join(", ")}`);
+      this.updateUi();
+      return false;
+    }
+
+    if (this.getBuildingPowerDemandRate(instance) > 0 && !instance.powered) {
+      this.setStatusMessage(this.getPowerBlockedMessage(instance));
       this.updateUi();
       return false;
     }
@@ -530,7 +578,21 @@ export class Game {
 
   updateProduction(deltaSeconds) {
     for (const instance of this.world?.buildings ?? []) {
-      if (instance.productionState !== "running" || !instance.activeRecipeId) {
+      if (!instance.activeRecipeId) {
+        continue;
+      }
+
+      const powerDemand = this.getBuildingPowerDemandRate(instance);
+      if (powerDemand > 0 && !instance.powered) {
+        instance.productionState = "paused_unpowered";
+        continue;
+      }
+
+      if (instance.productionState === "paused_unpowered") {
+        instance.productionState = "running";
+      }
+
+      if (instance.productionState !== "running") {
         continue;
       }
 
@@ -635,11 +697,29 @@ export class Game {
       return `稼働中: ${this.getRecipeLabel(this.registry.getRecipe(instance.activeRecipeId))} ${ratio}%`;
     }
 
+    if (instance.productionState === "paused_unpowered" && instance.activeRecipeId) {
+      let ratio = 0;
+      if (instance.productionDuration > 0) {
+        ratio = Math.round((instance.productionProgress / instance.productionDuration) * 100);
+      }
+      return `停電停止: ${this.getRecipeLabel(this.registry.getRecipe(instance.activeRecipeId))} ${ratio}%`;
+    }
+
     if (selectedProductionInfo.selectedRecipe) {
       return `待機: ${this.getRecipeLabel(selectedProductionInfo.selectedRecipe)} / P または 生産で開始`;
     }
 
     return "この施設にレシピはありません";
+  }
+
+  getToolbarPowerSummary() {
+    const power = this.world?.power;
+    if (!power) {
+      return "";
+    }
+
+    const balancePrefix = power.balance >= 0 ? "+" : "";
+    return `電力 ${balancePrefix}${power.balance.toFixed(1)} / 消費 ${power.consumption.toFixed(1)} / 蓄電 ${power.stored.toFixed(1)}/${power.storageCapacity.toFixed(1)}`;
   }
 
   getPlacementHint() {
@@ -659,6 +739,309 @@ export class Game {
       ? this.getPlacementHint()
       : this.getToolbarRecipeSummary(selectedProductionInfo);
     return [...new Set([contextual, this.statusMessage].filter(Boolean))].join("\n");
+  }
+
+  getPowerBlockedMessage(instance) {
+    return `${this.getBuildingInstanceLabel(instance)} は停電中です (${instance.powerReason ?? "power shortage"})`;
+  }
+
+  createInitialTimeState() {
+    const timeConfig = this.getTimeConfig();
+    return {
+      minutesPerDay: timeConfig.minutesPerDay,
+      dayStartHour: timeConfig.dayStartHour,
+      nightStartHour: timeConfig.nightStartHour,
+      timeScale: timeConfig.defaultTimeScale,
+      elapsedMinutes: timeConfig.dayStartHour * 60,
+    };
+  }
+
+  createInitialPowerState() {
+    return {
+      generation: 0,
+      consumption: 0,
+      balance: 0,
+      storageCapacity: 0,
+      stored: 0,
+      shortage: 0,
+      poweredBuildingCount: 0,
+      unpoweredBuildingCount: 0,
+      generatorFuelStatus: "—",
+      initialized: false,
+    };
+  }
+
+  getTimeConfig() {
+    const time = this.registry.getMeta("constants")?.time ?? {};
+    return {
+      minutesPerDay: Number(time.minutesPerDay) || 1440,
+      defaultTimeScale: Number(time.defaultTimeScale) || 1,
+      dayStartHour: Number(time.dayStartHour) || 6,
+      nightStartHour: Number(time.nightStartHour) || 18,
+    };
+  }
+
+  advanceWorldTime(deltaSeconds) {
+    if (!this.world?.time) {
+      this.world.time = this.createInitialTimeState();
+    }
+
+    const minutesPerDay = this.world.time.minutesPerDay || 1440;
+    const deltaMinutes = deltaSeconds * (this.world.time.timeScale || 1);
+    this.world.time.elapsedMinutes = ((this.world.time.elapsedMinutes ?? 0) + deltaMinutes) % minutesPerDay;
+    this.world.time.deltaMinutes = deltaMinutes;
+  }
+
+  getCurrentHour() {
+    if (!this.world?.time) {
+      return 0;
+    }
+
+    return ((this.world.time.elapsedMinutes ?? 0) / 60) % 24;
+  }
+
+  isDaytime() {
+    const worldTime = this.world?.time;
+    if (!worldTime) {
+      return true;
+    }
+
+    const hour = this.getCurrentHour();
+    return hour >= worldTime.dayStartHour && hour < worldTime.nightStartHour;
+  }
+
+  formatWorldClock() {
+    if (!this.world?.time) {
+      return "—";
+    }
+
+    const totalMinutes = Math.floor(this.world.time.elapsedMinutes ?? 0);
+    const hour = Math.floor((totalMinutes / 60) % 24);
+    const minute = totalMinutes % 60;
+    return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
+  }
+
+  getPowerConfig() {
+    const powerConfig = this.registry.getMeta("constants")?.power ?? {};
+    return {
+      recalculationIntervalSeconds:
+        Number(powerConfig.recalculationIntervalSeconds) || DEFAULT_POWER_RECALCULATION_SECONDS,
+      defaultOutagePriority: Array.isArray(powerConfig.defaultOutagePriority)
+        ? powerConfig.defaultOutagePriority
+        : ["core", "survival", "power", "production", "extraction", "research", "defense", "sensors", "maintenance"],
+    };
+  }
+
+  getPowerSimulationStepMinutes() {
+    const timeScale = this.world?.time?.timeScale || this.getTimeConfig().defaultTimeScale;
+    return timeScale * this.getPowerConfig().recalculationIntervalSeconds;
+  }
+
+  getBuildingPowerConfig(buildingOrId) {
+    const building = typeof buildingOrId === "string" ? this.registry.getBuilding(buildingOrId) : buildingOrId;
+    return building?.power ?? {};
+  }
+
+  getBuildingPowerPriority(instance) {
+    const building = this.registry.getBuilding(instance?.buildingId);
+    const category = building?.category ?? "misc";
+    const priorities = this.getPowerConfig().defaultOutagePriority;
+    const index = priorities.indexOf(category);
+    return index === -1 ? priorities.length + 1 : index;
+  }
+
+  getBuildingPowerDemandRate(instance) {
+    return Number(instance?.powerRequired ?? this.getBuildingPowerConfig(instance?.buildingId).consumes) || 0;
+  }
+
+  getBuildingPowerGenerationRate(instance) {
+    const powerConfig = this.getBuildingPowerConfig(instance?.buildingId);
+    if (!powerConfig) {
+      return 0;
+    }
+
+    if (typeof powerConfig.producesDay === "number" || typeof powerConfig.producesNight === "number") {
+      return this.isDaytime() ? Number(powerConfig.producesDay) || 0 : Number(powerConfig.producesNight) || 0;
+    }
+
+    return Number(powerConfig.produces) || 0;
+  }
+
+  updatePowerSimulation(deltaSeconds) {
+    if (!this.world) {
+      return;
+    }
+
+    this.powerAccumulator += deltaSeconds;
+    if (this.powerAccumulator < this.getPowerConfig().recalculationIntervalSeconds) {
+      return;
+    }
+
+    const elapsedSeconds = this.powerAccumulator;
+    this.powerAccumulator = 0;
+    this.recalculatePowerState(elapsedSeconds);
+  }
+
+  recalculatePowerState(deltaSeconds) {
+    if (!this.world) {
+      return;
+    }
+
+    const deltaMinutes = Math.max(
+      0,
+      this.world.time?.deltaMinutes ??
+        (deltaSeconds * (this.world.time?.timeScale || this.getTimeConfig().defaultTimeScale)),
+    );
+    const effectiveDeltaMinutes = Math.max(deltaMinutes, this.getPowerSimulationStepMinutes());
+    const isDay = this.isDaytime();
+    let storageCapacity = 0;
+    let generation = 0;
+    let requestedConsumption = 0;
+
+    for (const instance of this.world.buildings ?? []) {
+      const powerConfig = this.getBuildingPowerConfig(instance.buildingId);
+      instance.powerPriority = this.getBuildingPowerPriority(instance);
+      instance.powerRequired = Number(powerConfig.consumes) || 0;
+      instance.powerProduced = 0;
+      instance.powerStorage = Number(powerConfig.storage) || 0;
+      instance.powerReason = instance.powerRequired > 0 ? "awaiting power allocation" : "no power required";
+      storageCapacity += instance.powerStorage;
+    }
+
+    if (!this.world.power) {
+      this.world.power = this.createInitialPowerState();
+    }
+
+    if (!this.world.power.initialized) {
+      this.world.power.stored = storageCapacity;
+      this.world.power.initialized = true;
+    }
+
+    if (!Number.isFinite(this.world.power.stored)) {
+      this.world.power.stored = storageCapacity;
+    }
+    this.world.power.storageCapacity = storageCapacity;
+    this.world.power.stored = Math.min(storageCapacity, Math.max(0, this.world.power.stored ?? storageCapacity));
+
+    const generatorStatuses = [];
+    for (const instance of this.world.buildings ?? []) {
+      const powerConfig = this.getBuildingPowerConfig(instance.buildingId);
+      let produced = this.getBuildingPowerGenerationRate(instance);
+      const usesFuel = Boolean(powerConfig.fuelItem);
+
+      if (usesFuel) {
+        const fuelStatus = this.refreshGeneratorFuel(instance, deltaMinutes);
+        produced = fuelStatus.active ? produced : 0;
+        instance.powerReason = fuelStatus.reason;
+        generatorStatuses.push(
+          `${this.getBuildingInstanceLabel(instance)} ${fuelStatus.active ? `${fuelStatus.remainingMinutes.toFixed(1)}m` : "fuel empty"}`,
+        );
+      } else if (typeof powerConfig.producesDay === "number" || typeof powerConfig.producesNight === "number") {
+        instance.powerReason = produced > 0 ? "solar generating" : isDay ? "low daylight output" : "night output 0";
+      } else if (produced > 0) {
+        instance.powerReason = "generating power";
+      }
+
+      instance.powerProduced = produced;
+      generation += produced;
+      if (produced > 0 || instance.buildingId === "building_crash_core") {
+        instance.powered = true;
+        if (instance.buildingId === "building_crash_core") {
+          instance.powerReason = "core online";
+        }
+      }
+      requestedConsumption += instance.powerRequired;
+    }
+
+    const availableEnergy = generation * effectiveDeltaMinutes + (this.world.power.stored ?? 0);
+    let remainingEnergy = availableEnergy;
+    let actualConsumption = 0;
+    let poweredBuildingCount = 0;
+    let unpoweredBuildingCount = 0;
+
+    const consumers = [...(this.world.buildings ?? [])]
+      .filter((instance) => instance.powerRequired > 0 && instance.buildingId !== "building_crash_core")
+      .sort((left, right) => {
+        if (left.powerPriority !== right.powerPriority) {
+          return left.powerPriority - right.powerPriority;
+        }
+        return left.instanceId.localeCompare(right.instanceId);
+      });
+
+    for (const instance of this.world.buildings ?? []) {
+      if (instance.buildingId === "building_crash_core" || instance.powerRequired <= 0) {
+        instance.powered = true;
+        poweredBuildingCount += 1;
+      }
+    }
+
+    for (const instance of consumers) {
+      const requiredEnergy = instance.powerRequired * effectiveDeltaMinutes;
+      // Allow a tiny positive tolerance on the remaining pool so per-tick rounding
+      // does not incorrectly flicker a building between powered and unpowered.
+      if (requiredEnergy <= remainingEnergy + ENERGY_COMPARISON_EPSILON) {
+        instance.powered = true;
+        instance.powerReason = instance.powerReason === "awaiting power allocation" ? "powered" : instance.powerReason;
+        remainingEnergy -= requiredEnergy;
+        actualConsumption += instance.powerRequired;
+        poweredBuildingCount += 1;
+        continue;
+      }
+
+      instance.powered = false;
+      instance.powerReason = "insufficient power";
+      unpoweredBuildingCount += 1;
+    }
+
+    for (const instance of this.world.buildings ?? []) {
+      if (instance.powerRequired > 0 && !consumers.includes(instance) && instance.buildingId !== "building_crash_core") {
+        if (instance.powered) {
+          poweredBuildingCount += 1;
+        } else {
+          unpoweredBuildingCount += 1;
+        }
+      }
+    }
+
+    this.world.power = {
+      generation,
+      consumption: requestedConsumption,
+      balance: generation - requestedConsumption,
+      storageCapacity,
+      stored: Math.min(storageCapacity, Math.max(0, remainingEnergy)),
+      shortage: Math.max(0, requestedConsumption - actualConsumption),
+      poweredBuildingCount,
+      unpoweredBuildingCount,
+      generatorFuelStatus: generatorStatuses.join(" / ") || "no fueled generators",
+      initialized: true,
+    };
+  }
+
+  refreshGeneratorFuel(instance, deltaMinutes) {
+    const powerConfig = this.getBuildingPowerConfig(instance.buildingId);
+    const fuelItem = powerConfig.fuelItem;
+    if (!fuelItem) {
+      return { active: true, remainingMinutes: 0, reason: "generating power" };
+    }
+
+    instance.generatorFuelRemainingMinutes = Math.max(0, Number(instance.generatorFuelRemainingMinutes) || 0);
+    if (instance.generatorFuelRemainingMinutes <= 0) {
+      if ((this.world.inventory?.[fuelItem] ?? 0) > 0) {
+        this.world.inventory[fuelItem] -= 1;
+        instance.generatorFuelRemainingMinutes = Number(powerConfig.fuelMinutesPerItem) || 0;
+      }
+    }
+
+    const active = instance.generatorFuelRemainingMinutes > 0;
+    if (active) {
+      instance.generatorFuelRemainingMinutes = Math.max(0, instance.generatorFuelRemainingMinutes - deltaMinutes);
+    }
+
+    return {
+      active,
+      remainingMinutes: Math.max(0, instance.generatorFuelRemainingMinutes),
+      reason: active ? `fuel ${instance.generatorFuelRemainingMinutes.toFixed(1)}m remaining` : "fuel unavailable",
+    };
   }
 
   getLabel(localizedValue, fallback = "—") {
@@ -911,6 +1294,7 @@ export class Game {
     const occupiedTiles = this.collectOccupiedTiles(origin, building.footprint);
     const lastOccupiedTile = occupiedTiles[occupiedTiles.length - 1] ?? origin;
     const instanceIndex = (this.world.buildingCounts[building.id] ?? 0) + 1;
+    const powerConfig = this.getBuildingPowerConfig(building);
     const instance = {
       instanceId: `${building.id}_${String(instanceIndex).padStart(3, "0")}`,
       buildingId: building.id,
@@ -922,6 +1306,12 @@ export class Game {
       sprite: building.sprite,
       occupiedTiles,
       sortKey: lastOccupiedTile.x + lastOccupiedTile.y,
+      powerPriority: this.getBuildingPowerPriority({ buildingId: building.id }),
+      powerRequired: Number(powerConfig.consumes) || 0,
+      powerProduced: 0,
+      powerStorage: Number(powerConfig.storage) || 0,
+      powerReason: building.id === "building_crash_core" ? "core online" : "no power required",
+      generatorFuelRemainingMinutes: 0,
       selectedRecipeId: this.getRecipesForBuilding(building.id)[0]?.id ?? null,
       activeRecipeId: null,
       productionProgress: 0,
@@ -950,6 +1340,7 @@ export class Game {
       this.world.buildingGrid[tile.y][tile.x] = instance;
     }
 
+    this.recalculatePowerState(0);
     return instance;
   }
 
