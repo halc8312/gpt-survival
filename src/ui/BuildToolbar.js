@@ -1,5 +1,7 @@
 const LABEL_PRIORITY = ["ja", "en"];
 const PASSIVE_EVENT_NAMES = new Set(["wheel"]);
+const SWIPE_THRESHOLD_PX = 12;
+const SWIPE_CLICK_SUPPRESSION_MS = 250;
 
 const getBuildingLabel = (building) =>
   LABEL_PRIORITY.map((locale) => building?.name?.[locale]).find(Boolean) ?? building?.id ?? "—";
@@ -213,9 +215,9 @@ export class BuildToolbar {
 
       const deltaX = event.clientX - this.palettePointer.startX;
       const deltaY = event.clientY - this.palettePointer.startY;
-      if (Math.abs(deltaX) >= 12 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (Math.abs(deltaX) >= SWIPE_THRESHOLD_PX && Math.abs(deltaX) > Math.abs(deltaY)) {
         this.palettePointer.moved = true;
-        this.suppressPaletteClickUntil = performance.now() + 250;
+        this.suppressPaletteClickUntil = performance.now() + SWIPE_CLICK_SUPPRESSION_MS;
       }
     });
 
@@ -225,7 +227,7 @@ export class BuildToolbar {
       }
 
       if (this.palettePointer.moved) {
-        this.suppressPaletteClickUntil = performance.now() + 250;
+        this.suppressPaletteClickUntil = performance.now() + SWIPE_CLICK_SUPPRESSION_MS;
       }
       this.palettePointer = null;
     };
