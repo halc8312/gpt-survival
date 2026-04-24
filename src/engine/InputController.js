@@ -24,6 +24,7 @@ export class InputController {
       distance: 0,
     };
     this.pendingClick = false;
+    this.pendingBuildingShortcut = null;
 
     this.bindEvents();
   }
@@ -33,6 +34,12 @@ export class InputController {
       if (KEY_BINDINGS.has(event.key)) {
         event.preventDefault();
         this.keys.add(event.key);
+        return;
+      }
+
+      if (/^[1-4]$/.test(event.key)) {
+        event.preventDefault();
+        this.pendingBuildingShortcut = event.key;
       }
     });
 
@@ -129,5 +136,11 @@ export class InputController {
     const clicked = this.pendingClick;
     this.pendingClick = false;
     return clicked;
+  }
+
+  consumeBuildingShortcut() {
+    const shortcut = this.pendingBuildingShortcut;
+    this.pendingBuildingShortcut = null;
+    return shortcut;
   }
 }

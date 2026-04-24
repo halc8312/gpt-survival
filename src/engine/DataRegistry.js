@@ -55,6 +55,7 @@ export class DataRegistry {
 
     this.validateUniqueIds("items", errors);
     this.validateUniqueIds("tiles", errors);
+    this.validateUniqueIds("resources", errors);
     this.validateUniqueIds("buildings", errors);
     this.validateUniqueIds("recipes", errors);
     this.validateUniqueIds("research", errors);

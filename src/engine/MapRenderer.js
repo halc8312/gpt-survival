@@ -21,6 +21,33 @@ export class MapRenderer {
       }
     }
 
+    for (const resourceNode of world.resourceNodes) {
+      this.drawResourceNode(resourceNode);
+      if (resourceNode.footprint.width > 1 || resourceNode.footprint.height > 1) {
+        this.drawFootprint(resourceNode.occupiedTiles, "rgba(190, 214, 233, 0.18)", "rgba(190, 214, 233, 0.06)");
+      }
+    }
+
+    if (selectionState.hoveredResource) {
+      this.drawFootprint(
+        selectionState.hoveredResource.occupiedTiles,
+        "rgba(127, 246, 255, 0.95)",
+        "rgba(127, 246, 255, 0.12)",
+      );
+    }
+
+    if (selectionState.selectedResource) {
+      this.drawFootprint(
+        selectionState.selectedResource.occupiedTiles,
+        "rgba(255, 213, 74, 0.95)",
+        "rgba(255, 213, 74, 0.14)",
+      );
+    }
+
+    if (selectionState.placement?.origin) {
+      this.drawPlacement(selectionState.placement);
+    }
+
     if (selectionState.hoveredTile) {
       this.drawOutline(selectionState.hoveredTile, "rgba(127, 246, 255, 0.95)", "rgba(127, 246, 255, 0.16)");
     }
@@ -47,6 +74,21 @@ export class MapRenderer {
     );
   }
 
+  drawResourceNode(resourceNode) {
+    const sprite = this.assetLoader.getImage(resourceNode.sprite);
+    const anchor = this.getResourceAnchor(resourceNode.occupiedTiles);
+    const width = (sprite.naturalWidth || sprite.width) * this.camera.zoom;
+    const height = (sprite.naturalHeight || sprite.height) * this.camera.zoom;
+
+    this.ctx.drawImage(
+      sprite,
+      Math.round(anchor.x - width / 2),
+      Math.round(anchor.y - height),
+      width,
+      height,
+    );
+  }
+
   drawOutline(tile, strokeStyle, fillStyle) {
     const projected = this.tileToWorld(tile.x, tile.y);
     const screen = this.camera.worldToScreen(projected.x, projected.y);
@@ -64,6 +106,58 @@ export class MapRenderer {
     this.ctx.lineWidth = Math.max(1.5, this.camera.zoom * 1.5);
     this.ctx.strokeStyle = strokeStyle;
     this.ctx.stroke();
+  }
+
+  drawFootprint(tiles, strokeStyle, fillStyle) {
+    for (const tile of tiles) {
+      this.drawOutline(tile, strokeStyle, fillStyle);
+    }
+  }
+
+  drawPlacement(placement) {
+    const strokeStyle = placement.valid ? "rgba(88, 216, 160, 0.96)" : "rgba(255, 142, 82, 0.96)";
+    const fillStyle = placement.valid ? "rgba(88, 216, 160, 0.16)" : "rgba(255, 142, 82, 0.18)";
+    const tiles = placement.tiles.length > 0 ? placement.tiles : this.expandPlacementOutline(placement);
+    this.drawFootprint(tiles, strokeStyle, fillStyle);
+  }
+
+  expandPlacementOutline(placement) {
+    const tiles = [];
+    const width = placement.footprint?.width ?? 0;
+    const height = placement.footprint?.height ?? 0;
+
+    if (!placement.origin) {
+      return tiles;
+    }
+
+    for (let offsetY = 0; offsetY < height; offsetY += 1) {
+      for (let offsetX = 0; offsetX < width; offsetX += 1) {
+        tiles.push({
+          x: placement.origin.x + offsetX,
+          y: placement.origin.y + offsetY,
+        });
+      }
+    }
+
+    return tiles;
+  }
+
+  getResourceAnchor(occupiedTiles) {
+    const anchor = occupiedTiles.reduce(
+      (total, tile) => {
+        const projected = this.tileToWorld(tile.x, tile.y);
+        const screen = this.camera.worldToScreen(projected.x, projected.y);
+        total.x += screen.x;
+        total.y += screen.y + this.tileHeight * this.camera.zoom;
+        return total;
+      },
+      { x: 0, y: 0 },
+    );
+
+    return {
+      x: anchor.x / occupiedTiles.length,
+      y: anchor.y / occupiedTiles.length,
+    };
   }
 
   // The forward isometric transform turns tile coordinates into the top vertex
