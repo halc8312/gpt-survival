@@ -217,10 +217,10 @@ export class Game {
       mouse: this.input.mouse,
       hoveredTile: hovered,
       selectedTile: selected,
-       hoveredResource,
-       selectedResource,
-       activeBuilding,
-       placement: this.selection.placement,
+      hoveredResource,
+      selectedResource,
+      activeBuilding,
+      placement: this.selection.placement,
       warningCount: warnings.length,
     });
   }
