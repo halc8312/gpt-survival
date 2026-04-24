@@ -335,23 +335,25 @@ export class Game {
     return Array.from({ length: height }, () => Array.from({ length: width }, () => null));
   }
 
-  placeInitialBuilding(buildingId, originOverride = null) {
+  placeInitialBuilding(buildingId, origin = null) {
     const building = this.registry.getBuilding(buildingId);
     if (!building) {
       return null;
     }
 
-    const origin = originOverride ?? this.getCenteredBuildingOrigin(building, this.world.center);
+    const centeredOrigin = origin ?? this.getCenteredBuildingOrigin(building, this.world.center);
     const placement = this.placementValidator.validate({
       world: this.world,
-      origin,
+      origin: centeredOrigin,
       footprint: building.footprint,
     });
     if (!placement.valid) {
-      throw new Error(`Failed to place initial building: ${buildingId} (${placement.reason ?? "unknown"})`);
+      throw new Error(
+        `Failed to place initial building at reserved centered origin: ${buildingId} (${placement.reason ?? "unknown"})`,
+      );
     }
 
-    return this.placeBuildingInstance({ building, origin, consumeInventory: false });
+    return this.placeBuildingInstance({ building, origin: centeredOrigin, consumeInventory: false });
   }
 
   getCenteredBuildingOrigin(building, center) {
