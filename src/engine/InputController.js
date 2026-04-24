@@ -418,4 +418,8 @@ export class InputController {
   requiresExplicitTouchPlacement(pointerType = this.lastClickPointerType) {
     return pointerType === "touch" || this.isCoarsePointer();
   }
+
+  requiresExplicitPlacementForCurrentInteraction() {
+    return this.requiresExplicitTouchPlacement(this.lastInteractionPointerType);
+  }
 }

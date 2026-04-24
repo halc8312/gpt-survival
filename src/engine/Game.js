@@ -232,7 +232,7 @@ export class Game {
       this.cancelBuildMode();
     }
 
-    if (this.selection.buildMode && !this.input.requiresExplicitTouchPlacement(this.input.lastInteractionPointerType)) {
+    if (this.selection.buildMode && !this.input.requiresExplicitPlacementForCurrentInteraction()) {
       this.selection.buildTargetTile = this.selection.hoveredTile;
     }
 
@@ -463,8 +463,9 @@ export class Game {
       info.recipes.findIndex((recipe) => recipe.id === info.selectedRecipeId),
     );
     const nextIndex = (currentIndex + direction + info.recipes.length) % info.recipes.length;
-    info.instance.selectedRecipeId = info.recipes[nextIndex].id;
-    this.setStatusMessage(`レシピ選択: ${this.getRecipeLabel(info.recipes[nextIndex])}`);
+    const nextRecipe = info.recipes[nextIndex];
+    info.instance.selectedRecipeId = nextRecipe.id;
+    this.setStatusMessage(`レシピ選択: ${this.getRecipeLabel(nextRecipe)}`);
     this.updateUi();
     return true;
   }
@@ -483,10 +484,10 @@ export class Game {
       return false;
     }
 
-    const startableRecipe =
+    const recipeToStart =
       info.recipes.find((recipe) => this.validateInventory(recipe.inputs).ok) ?? info.selectedRecipe;
 
-    return this.startProduction(info.instance, startableRecipe?.id ?? info.selectedRecipeId);
+    return this.startProduction(info.instance, recipeToStart?.id);
   }
 
   startProduction(instance, recipeId) {
@@ -657,12 +658,7 @@ export class Game {
     const contextual = this.selection.buildMode
       ? this.getPlacementHint()
       : this.getToolbarRecipeSummary(selectedProductionInfo);
-
-    if (this.statusMessage && contextual && this.statusMessage !== contextual) {
-      return `${contextual}\n${this.statusMessage}`;
-    }
-
-    return this.statusMessage || contextual;
+    return [...new Set([contextual, this.statusMessage].filter(Boolean))].join("\n");
   }
 
   getLabel(localizedValue, fallback = "—") {
@@ -887,7 +883,7 @@ export class Game {
     this.selection.buildMode = true;
     this.selection.selectedResource = null;
     this.selection.selectedBuilding = null;
-    this.selection.buildTargetTile = this.input.requiresExplicitTouchPlacement(this.input.lastInteractionPointerType)
+    this.selection.buildTargetTile = this.input.requiresExplicitPlacementForCurrentInteraction()
       ? this.selection.selectedTile
       : this.selection.hoveredTile;
     this.selection.placement = this.getPlacementPreview();
