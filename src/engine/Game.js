@@ -636,7 +636,7 @@ export class Game {
     }
 
     if (selectedProductionInfo.selectedRecipe) {
-      return `待機: ${this.getRecipeLabel(selectedProductionInfo.selectedRecipe)} / P or 生産で開始`;
+      return `待機: ${this.getRecipeLabel(selectedProductionInfo.selectedRecipe)} / P または 生産で開始`;
     }
 
     return "この施設にレシピはありません";
