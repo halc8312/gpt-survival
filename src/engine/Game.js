@@ -50,7 +50,9 @@ const BUILDING_HOTKEYS = new Map([
 const DEFAULT_BUILDING_ID = BUILDING_HOTKEYS.values().next().value;
 const LABEL_PRIORITY = ["ja", "en"];
 const DEFAULT_POWER_RECALCULATION_SECONDS = 0.25;
-const FLOAT_EPSILON = 1e-9;
+// Allows a tiny absolute tolerance when comparing per-tick energy budgets to avoid
+// floating-point jitter from flipping buildings between powered/unpowered states.
+const ENERGY_COMPARISON_EPSILON = 1e-9;
 const STARTER_INVENTORY = {
   scrap_metal: 120,
   stone: 80,
@@ -826,6 +828,11 @@ export class Game {
     };
   }
 
+  getPowerSimulationStepMinutes() {
+    const timeScale = this.world?.time?.timeScale || this.getTimeConfig().defaultTimeScale;
+    return timeScale * this.getPowerConfig().recalculationIntervalSeconds;
+  }
+
   getBuildingPowerConfig(buildingOrId) {
     const building = typeof buildingOrId === "string" ? this.registry.getBuilding(buildingOrId) : buildingOrId;
     return building?.power ?? {};
@@ -881,10 +888,7 @@ export class Game {
       this.world.time?.deltaMinutes ??
         (deltaSeconds * (this.world.time?.timeScale || this.getTimeConfig().defaultTimeScale)),
     );
-    const effectiveDeltaMinutes = Math.max(
-      deltaMinutes,
-      (this.world.time?.timeScale || this.getTimeConfig().defaultTimeScale) * this.getPowerConfig().recalculationIntervalSeconds,
-    );
+    const effectiveDeltaMinutes = Math.max(deltaMinutes, this.getPowerSimulationStepMinutes());
     const isDay = this.isDaytime();
     let storageCapacity = 0;
     let generation = 0;
@@ -969,7 +973,7 @@ export class Game {
 
     for (const instance of consumers) {
       const requiredEnergy = instance.powerRequired * effectiveDeltaMinutes;
-      if (requiredEnergy <= remainingEnergy + FLOAT_EPSILON) {
+      if (requiredEnergy <= remainingEnergy + ENERGY_COMPARISON_EPSILON) {
         instance.powered = true;
         instance.powerReason = instance.powerReason === "awaiting power allocation" ? "powered" : instance.powerReason;
         remainingEnergy -= requiredEnergy;

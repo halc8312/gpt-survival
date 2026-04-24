@@ -54,6 +54,7 @@ python -m http.server 8000
 - 消費電力を持つ建物の powered / unpowered 判定、優先度順の停電、デバッグ表示
 - `building_smelter_mk1` / `building_assembler_mk1` などの停電時生産停止・復電時再開
 - unpowered 建物の暗色表示と下部 UI の電力収支サマリー
+- 停電優先度カテゴリ: `core` → `survival` → `power` → `production` → `extraction` → `research` → `defense` → `sensors` → `maintenance`
 
 ## Controls
 
