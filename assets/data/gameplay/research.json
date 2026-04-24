@@ -1,0 +1,675 @@
+{
+  "version": "0.1.0",
+  "research": [
+    {
+      "id": "research_basic_survival",
+      "name": {
+        "ja": "基本サバイバル",
+        "en": "Basic Survival"
+      },
+      "category": "survival",
+      "cost": {
+        "research_data": 0
+      },
+      "prerequisites": [],
+      "unlocks": {
+        "buildings": [
+          "building_basic_shelter",
+          "building_storage_yard",
+          "building_manual_workbench"
+        ],
+        "recipes": [
+          "recipe_iron_plate_manual",
+          "recipe_iron_rod_manual",
+          "recipe_gear_manual",
+          "recipe_recovered_wire_manual",
+          "recipe_composite_panel_manual"
+        ],
+        "systems": []
+      },
+      "availability": "starter",
+      "description": {
+        "ja": "基本サバイバルを解放する研究。",
+        "en": "Basic Survival"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "survival"
+      ]
+    },
+    {
+      "id": "research_water_safety",
+      "name": {
+        "ja": "水の安全",
+        "en": "Water Safety"
+      },
+      "category": "survival",
+      "cost": {
+        "research_data": 30
+      },
+      "prerequisites": [
+        "research_basic_survival"
+      ],
+      "unlocks": {
+        "buildings": [
+          "building_water_processor_mk1"
+        ],
+        "recipes": [
+          "recipe_basic_filter_manual",
+          "recipe_stone_filter_media",
+          "recipe_purified_water_basic"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "水の安全を解放する研究。",
+        "en": "Water Safety"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "survival"
+      ]
+    },
+    {
+      "id": "research_colony_comfort",
+      "name": {
+        "ja": "基本生活",
+        "en": "Colony Comfort"
+      },
+      "category": "survival",
+      "cost": {
+        "research_data": 35
+      },
+      "prerequisites": [
+        "research_basic_survival"
+      ],
+      "unlocks": {
+        "buildings": [
+          "building_food_prep_station"
+        ],
+        "recipes": [
+          "recipe_processed_food_basic",
+          "recipe_comfort_pack_manual"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "基本生活を解放する研究。",
+        "en": "Colony Comfort"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "survival"
+      ]
+    },
+    {
+      "id": "research_spore_safety",
+      "name": {
+        "ja": "胞子安全",
+        "en": "Spore Safety"
+      },
+      "category": "survival",
+      "cost": {
+        "research_data": 45
+      },
+      "prerequisites": [
+        "research_water_safety"
+      ],
+      "unlocks": {
+        "buildings": [
+          "building_air_filter_mk1"
+        ],
+        "recipes": [
+          "recipe_oxygen_filter_manual",
+          "recipe_medicine_pack_manual",
+          "recipe_clean_air_cycle"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "胞子安全を解放する研究。",
+        "en": "Spore Safety"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "survival"
+      ]
+    },
+    {
+      "id": "research_basic_power",
+      "name": {
+        "ja": "基本電力",
+        "en": "Basic Power"
+      },
+      "category": "power",
+      "cost": {
+        "research_data": 25
+      },
+      "prerequisites": [
+        "research_basic_survival"
+      ],
+      "unlocks": {
+        "buildings": [
+          "building_small_generator",
+          "building_solar_panel_mk1"
+        ],
+        "recipes": [
+          "recipe_fuel_cell_manual",
+          "recipe_battery_cell_salvage"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "基本電力を解放する研究。",
+        "en": "Basic Power"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "power"
+      ]
+    },
+    {
+      "id": "research_power_storage",
+      "name": {
+        "ja": "電力貯蔵",
+        "en": "Power Storage"
+      },
+      "category": "power",
+      "cost": {
+        "research_data": 45
+      },
+      "prerequisites": [
+        "research_basic_power"
+      ],
+      "unlocks": {
+        "buildings": [
+          "building_battery_bank_mk1"
+        ],
+        "recipes": [
+          "recipe_power_capacitor_assembler"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "電力貯蔵を解放する研究。",
+        "en": "Power Storage"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "power"
+      ]
+    },
+    {
+      "id": "research_emergency_power",
+      "name": {
+        "ja": "非常時電力管理",
+        "en": "Emergency Power Management"
+      },
+      "category": "power",
+      "cost": {
+        "research_data": 50
+      },
+      "prerequisites": [
+        "research_power_storage"
+      ],
+      "unlocks": {
+        "buildings": [],
+        "recipes": [
+          "recipe_fuel_cell_assembler"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "非常時電力管理を解放する研究。",
+        "en": "Emergency Power Management"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "power"
+      ]
+    },
+    {
+      "id": "research_basic_industry",
+      "name": {
+        "ja": "基礎工業",
+        "en": "Basic Industry"
+      },
+      "category": "industry",
+      "cost": {
+        "research_data": 40
+      },
+      "prerequisites": [
+        "research_basic_power"
+      ],
+      "unlocks": {
+        "buildings": [
+          "building_basic_miner",
+          "building_smelter_mk1"
+        ],
+        "recipes": [
+          "recipe_iron_plate_smelter",
+          "recipe_iron_rod_smelter",
+          "recipe_scrap_to_plate_smelter"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "基礎工業を解放する研究。",
+        "en": "Basic Industry"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "industry"
+      ]
+    },
+    {
+      "id": "research_standardized_construction",
+      "name": {
+        "ja": "建材標準化",
+        "en": "Standardized Construction"
+      },
+      "category": "industry",
+      "cost": {
+        "research_data": 45
+      },
+      "prerequisites": [
+        "research_basic_industry"
+      ],
+      "unlocks": {
+        "buildings": [],
+        "recipes": [
+          "recipe_construction_parts_manual",
+          "recipe_construction_parts_assembler"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "建材標準化を解放する研究。",
+        "en": "Standardized Construction"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "industry"
+      ]
+    },
+    {
+      "id": "research_basic_automation",
+      "name": {
+        "ja": "基本自動化",
+        "en": "Basic Automation"
+      },
+      "category": "automation",
+      "cost": {
+        "research_data": 60
+      },
+      "prerequisites": [
+        "research_basic_industry",
+        "research_standardized_construction"
+      ],
+      "unlocks": {
+        "buildings": [
+          "building_assembler_mk1",
+          "building_basic_conveyor"
+        ],
+        "recipes": [
+          "recipe_gear_assembler",
+          "recipe_composite_panel_assembler",
+          "recipe_machine_parts_assembler",
+          "recipe_conveyor_parts_assembler"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "基本自動化を解放する研究。",
+        "en": "Basic Automation"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "automation"
+      ]
+    },
+    {
+      "id": "research_conveyor_routing",
+      "name": {
+        "ja": "コンベア分岐",
+        "en": "Conveyor Routing"
+      },
+      "category": "automation",
+      "cost": {
+        "research_data": 50
+      },
+      "prerequisites": [
+        "research_basic_automation"
+      ],
+      "unlocks": {
+        "buildings": [
+          "building_conveyor_splitter"
+        ],
+        "recipes": [],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "コンベア分岐を解放する研究。",
+        "en": "Conveyor Routing"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "automation"
+      ]
+    },
+    {
+      "id": "research_drone_maintenance_basics",
+      "name": {
+        "ja": "ドローン整備基礎",
+        "en": "Drone Maintenance Basics"
+      },
+      "category": "automation",
+      "cost": {
+        "research_data": 65
+      },
+      "prerequisites": [
+        "research_basic_automation",
+        "research_basic_maintenance"
+      ],
+      "unlocks": {
+        "buildings": [],
+        "recipes": [
+          "recipe_drone_parts_assembler"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "ドローン整備基礎を解放する研究。",
+        "en": "Drone Maintenance Basics"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "automation"
+      ]
+    },
+    {
+      "id": "research_basic_science",
+      "name": {
+        "ja": "基本科学",
+        "en": "Basic Science"
+      },
+      "category": "science",
+      "cost": {
+        "research_data": 40
+      },
+      "prerequisites": [
+        "research_basic_survival"
+      ],
+      "unlocks": {
+        "buildings": [
+          "building_research_station"
+        ],
+        "recipes": [
+          "recipe_basic_circuit_salvage"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "基本科学を解放する研究。",
+        "en": "Basic Science"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "science"
+      ]
+    },
+    {
+      "id": "research_data_analysis",
+      "name": {
+        "ja": "データ解析",
+        "en": "Data Analysis"
+      },
+      "category": "science",
+      "cost": {
+        "research_data": 50
+      },
+      "prerequisites": [
+        "research_basic_science"
+      ],
+      "unlocks": {
+        "buildings": [],
+        "recipes": [
+          "recipe_research_data_from_chip"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "データ解析を解放する研究。",
+        "en": "Data Analysis"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "science"
+      ]
+    },
+    {
+      "id": "research_material_testing",
+      "name": {
+        "ja": "素材試験",
+        "en": "Material Testing"
+      },
+      "category": "science",
+      "cost": {
+        "research_data": 45
+      },
+      "prerequisites": [
+        "research_basic_science",
+        "research_basic_industry"
+      ],
+      "unlocks": {
+        "buildings": [],
+        "recipes": [
+          "recipe_material_testing_data"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "素材試験を解放する研究。",
+        "en": "Material Testing"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "science"
+      ]
+    },
+    {
+      "id": "research_basic_defense",
+      "name": {
+        "ja": "基本防衛",
+        "en": "Basic Defense"
+      },
+      "category": "defense",
+      "cost": {
+        "research_data": 50
+      },
+      "prerequisites": [
+        "research_basic_industry"
+      ],
+      "unlocks": {
+        "buildings": [
+          "building_basic_wall",
+          "building_basic_turret"
+        ],
+        "recipes": [
+          "recipe_turret_parts_assembler"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "基本防衛を解放する研究。",
+        "en": "Basic Defense"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "defense"
+      ]
+    },
+    {
+      "id": "research_basic_sensors",
+      "name": {
+        "ja": "基本センサー",
+        "en": "Basic Sensors"
+      },
+      "category": "sensors",
+      "cost": {
+        "research_data": 55
+      },
+      "prerequisites": [
+        "research_data_analysis"
+      ],
+      "unlocks": {
+        "buildings": [
+          "building_sensor_pole"
+        ],
+        "recipes": [
+          "recipe_sensor_module_assembler",
+          "recipe_sensor_scan_data"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "基本センサーを解放する研究。",
+        "en": "Basic Sensors"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "sensors"
+      ]
+    },
+    {
+      "id": "research_basic_maintenance",
+      "name": {
+        "ja": "基本保守",
+        "en": "Basic Maintenance"
+      },
+      "category": "maintenance",
+      "cost": {
+        "research_data": 45
+      },
+      "prerequisites": [
+        "research_basic_industry"
+      ],
+      "unlocks": {
+        "buildings": [
+          "building_repair_station"
+        ],
+        "recipes": [
+          "recipe_repair_kit_manual",
+          "recipe_repair_kit_assembler",
+          "recipe_repair_station_kit"
+        ],
+        "systems": []
+      },
+      "availability": "normal",
+      "description": {
+        "ja": "基本保守を解放する研究。",
+        "en": "Basic Maintenance"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "maintenance"
+      ]
+    },
+    {
+      "id": "research_stable_colony_operations",
+      "name": {
+        "ja": "安定コロニー運用",
+        "en": "Stable Colony Operations"
+      },
+      "category": "milestone",
+      "cost": {
+        "research_data": 80
+      },
+      "prerequisites": [
+        "research_spore_safety",
+        "research_power_storage",
+        "research_basic_maintenance"
+      ],
+      "unlocks": {
+        "buildings": [],
+        "recipes": [],
+        "systems": []
+      },
+      "availability": "milestone",
+      "description": {
+        "ja": "安定コロニー運用を解放する研究。",
+        "en": "Stable Colony Operations"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "milestone"
+      ]
+    },
+    {
+      "id": "research_outer_zone_preparation",
+      "name": {
+        "ja": "外縁探索準備",
+        "en": "Outer Zone Preparation"
+      },
+      "category": "milestone",
+      "cost": {
+        "research_data": 90
+      },
+      "prerequisites": [
+        "research_stable_colony_operations",
+        "research_basic_sensors",
+        "research_basic_defense"
+      ],
+      "unlocks": {
+        "buildings": [],
+        "recipes": [],
+        "systems": []
+      },
+      "availability": "milestone",
+      "description": {
+        "ja": "外縁探索準備を解放する研究。",
+        "en": "Outer Zone Preparation"
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "milestone"
+      ]
+    }
+  ]
+}

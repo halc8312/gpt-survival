@@ -1,0 +1,670 @@
+{
+  "version": "0.1.0",
+  "buildings": [
+    {
+      "id": "building_crash_core",
+      "name": {
+        "ja": "墜落船コア",
+        "en": "Crash Core"
+      },
+      "description": {
+        "ja": "墜落船コア。MVP用のcore施設。",
+        "en": "Crash Core"
+      },
+      "category": "core",
+      "footprint": {
+        "width": 5,
+        "height": 5
+      },
+      "sprite": "assets/images/buildings/building_crash_core.png",
+      "buildCost": {},
+      "durability": 1200,
+      "power": {
+        "produces": 8,
+        "consumes": 0,
+        "storage": 200,
+        "radius": 10
+      },
+      "storageCapacity": 500,
+      "unlockedBy": "starting_core",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "core"
+      ]
+    },
+    {
+      "id": "building_basic_shelter",
+      "name": {
+        "ja": "簡易シェルター",
+        "en": "Basic Shelter"
+      },
+      "description": {
+        "ja": "簡易シェルター。MVP用のhousing施設。",
+        "en": "Basic Shelter"
+      },
+      "category": "housing",
+      "footprint": {
+        "width": 3,
+        "height": 3
+      },
+      "sprite": "assets/images/buildings/building_basic_shelter.png",
+      "buildCost": {
+        "scrap_metal": 12,
+        "plant_fiber": 10,
+        "composite_panel": 2
+      },
+      "durability": 280,
+      "power": {
+        "consumes": 0
+      },
+      "storageCapacity": 40,
+      "unlockedBy": "research_basic_survival",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "housing"
+      ]
+    },
+    {
+      "id": "building_storage_yard",
+      "name": {
+        "ja": "仮設資材置き場",
+        "en": "Storage Yard"
+      },
+      "description": {
+        "ja": "仮設資材置き場。MVP用のstorage施設。",
+        "en": "Storage Yard"
+      },
+      "category": "storage",
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "sprite": "assets/images/buildings/building_storage_yard.png",
+      "buildCost": {
+        "scrap_metal": 10,
+        "stone": 8
+      },
+      "durability": 220,
+      "power": {
+        "consumes": 0
+      },
+      "storageCapacity": 400,
+      "unlockedBy": "research_basic_survival",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "storage"
+      ]
+    },
+    {
+      "id": "building_small_generator",
+      "name": {
+        "ja": "小型発電機",
+        "en": "Small Generator"
+      },
+      "description": {
+        "ja": "小型発電機。MVP用のpower施設。",
+        "en": "Small Generator"
+      },
+      "category": "power",
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "sprite": "assets/images/buildings/building_small_generator.png",
+      "buildCost": {
+        "scrap_metal": 14,
+        "recovered_wire": 4,
+        "battery_cell": 1
+      },
+      "durability": 260,
+      "power": {
+        "produces": 18,
+        "fuelItem": "fuel_cell",
+        "fuelMinutesPerItem": 120,
+        "radius": 8
+      },
+      "storageCapacity": 20,
+      "unlockedBy": "research_basic_power",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "power"
+      ]
+    },
+    {
+      "id": "building_solar_panel_mk1",
+      "name": {
+        "ja": "小型太陽光パネル",
+        "en": "Solar Panel Mk1"
+      },
+      "description": {
+        "ja": "小型太陽光パネル。MVP用のpower施設。",
+        "en": "Solar Panel Mk1"
+      },
+      "category": "power",
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "sprite": "assets/images/buildings/building_solar_panel_mk1.png",
+      "buildCost": {
+        "iron_plate": 6,
+        "recovered_wire": 3,
+        "basic_circuit": 1
+      },
+      "durability": 180,
+      "power": {
+        "producesDay": 8,
+        "producesNight": 0,
+        "radius": 6
+      },
+      "storageCapacity": 0,
+      "unlockedBy": "research_basic_power",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "power"
+      ]
+    },
+    {
+      "id": "building_battery_bank_mk1",
+      "name": {
+        "ja": "小型蓄電池",
+        "en": "Battery Bank Mk1"
+      },
+      "description": {
+        "ja": "小型蓄電池。MVP用のpower施設。",
+        "en": "Battery Bank Mk1"
+      },
+      "category": "power",
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "sprite": "assets/images/buildings/building_battery_bank_mk1.png",
+      "buildCost": {
+        "iron_plate": 6,
+        "battery_cell": 4,
+        "power_capacitor": 1
+      },
+      "durability": 220,
+      "power": {
+        "storage": 100,
+        "consumes": 0,
+        "radius": 6
+      },
+      "storageCapacity": 0,
+      "unlockedBy": "research_power_storage",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "power"
+      ]
+    },
+    {
+      "id": "building_basic_miner",
+      "name": {
+        "ja": "小型採掘機",
+        "en": "Basic Miner"
+      },
+      "description": {
+        "ja": "小型採掘機。MVP用のextraction施設。",
+        "en": "Basic Miner"
+      },
+      "category": "extraction",
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "sprite": "assets/images/buildings/building_basic_miner.png",
+      "buildCost": {
+        "iron_plate": 8,
+        "gear": 4,
+        "machine_parts": 2,
+        "recovered_wire": 2
+      },
+      "durability": 300,
+      "power": {
+        "consumes": 6
+      },
+      "storageCapacity": 20,
+      "unlockedBy": "research_basic_industry",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "extraction"
+      ]
+    },
+    {
+      "id": "building_manual_workbench",
+      "name": {
+        "ja": "手作業台",
+        "en": "Manual Workbench"
+      },
+      "description": {
+        "ja": "手作業台。MVP用のproduction施設。",
+        "en": "Manual Workbench"
+      },
+      "category": "production",
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "sprite": "assets/images/buildings/building_manual_workbench.png",
+      "buildCost": {
+        "scrap_metal": 8,
+        "stone": 4
+      },
+      "durability": 180,
+      "power": {
+        "consumes": 0
+      },
+      "storageCapacity": 20,
+      "unlockedBy": "research_basic_survival",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "production"
+      ]
+    },
+    {
+      "id": "building_assembler_mk1",
+      "name": {
+        "ja": "加工機 Mk1",
+        "en": "Assembler Mk1"
+      },
+      "description": {
+        "ja": "加工機 Mk1。MVP用のproduction施設。",
+        "en": "Assembler Mk1"
+      },
+      "category": "production",
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "sprite": "assets/images/buildings/building_assembler_mk1.png",
+      "buildCost": {
+        "iron_plate": 8,
+        "gear": 4,
+        "machine_parts": 3,
+        "basic_circuit": 1
+      },
+      "durability": 280,
+      "power": {
+        "consumes": 5
+      },
+      "storageCapacity": 20,
+      "unlockedBy": "research_basic_automation",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "production"
+      ]
+    },
+    {
+      "id": "building_smelter_mk1",
+      "name": {
+        "ja": "簡易精錬炉",
+        "en": "Smelter Mk1"
+      },
+      "description": {
+        "ja": "簡易精錬炉。MVP用のproduction施設。",
+        "en": "Smelter Mk1"
+      },
+      "category": "production",
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "sprite": "assets/images/buildings/building_smelter_mk1.png",
+      "buildCost": {
+        "stone": 16,
+        "scrap_metal": 8,
+        "iron_rod": 2
+      },
+      "durability": 300,
+      "power": {
+        "consumes": 4
+      },
+      "storageCapacity": 20,
+      "unlockedBy": "research_basic_industry",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "production"
+      ]
+    },
+    {
+      "id": "building_basic_conveyor",
+      "name": {
+        "ja": "簡易コンベア",
+        "en": "Basic Conveyor"
+      },
+      "description": {
+        "ja": "簡易コンベア。MVP用のlogistics施設。",
+        "en": "Basic Conveyor"
+      },
+      "category": "logistics",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "sprite": "assets/images/buildings/building_basic_conveyor.png",
+      "buildCost": {
+        "conveyor_parts": 1
+      },
+      "durability": 90,
+      "power": {
+        "consumes": 0
+      },
+      "storageCapacity": 0,
+      "unlockedBy": "research_basic_automation",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "logistics"
+      ]
+    },
+    {
+      "id": "building_conveyor_splitter",
+      "name": {
+        "ja": "簡易分岐器",
+        "en": "Conveyor Splitter"
+      },
+      "description": {
+        "ja": "簡易分岐器。MVP用のlogistics施設。",
+        "en": "Conveyor Splitter"
+      },
+      "category": "logistics",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "sprite": "assets/images/buildings/building_conveyor_splitter.png",
+      "buildCost": {
+        "conveyor_parts": 2,
+        "gear": 1
+      },
+      "durability": 110,
+      "power": {
+        "consumes": 1
+      },
+      "storageCapacity": 0,
+      "unlockedBy": "research_conveyor_routing",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "logistics"
+      ]
+    },
+    {
+      "id": "building_research_station",
+      "name": {
+        "ja": "研究ステーション",
+        "en": "Research Station"
+      },
+      "description": {
+        "ja": "研究ステーション。MVP用のresearch施設。",
+        "en": "Research Station"
+      },
+      "category": "research",
+      "footprint": {
+        "width": 3,
+        "height": 3
+      },
+      "sprite": "assets/images/buildings/building_research_station.png",
+      "buildCost": {
+        "composite_panel": 4,
+        "basic_circuit": 3,
+        "data_chip": 1,
+        "recovered_wire": 4
+      },
+      "durability": 260,
+      "power": {
+        "consumes": 4
+      },
+      "storageCapacity": 40,
+      "unlockedBy": "research_basic_science",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "research"
+      ]
+    },
+    {
+      "id": "building_water_processor_mk1",
+      "name": {
+        "ja": "簡易水処理機",
+        "en": "Water Processor Mk1"
+      },
+      "description": {
+        "ja": "簡易水処理機。MVP用のsurvival施設。",
+        "en": "Water Processor Mk1"
+      },
+      "category": "survival",
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "sprite": "assets/images/buildings/building_water_processor_mk1.png",
+      "buildCost": {
+        "iron_plate": 4,
+        "basic_filter": 2,
+        "recovered_wire": 2
+      },
+      "durability": 240,
+      "power": {
+        "consumes": 3
+      },
+      "storageCapacity": 20,
+      "unlockedBy": "research_water_safety",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "survival"
+      ]
+    },
+    {
+      "id": "building_food_prep_station",
+      "name": {
+        "ja": "簡易調理台",
+        "en": "Food Prep Station"
+      },
+      "description": {
+        "ja": "簡易調理台。MVP用のsurvival施設。",
+        "en": "Food Prep Station"
+      },
+      "category": "survival",
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "sprite": "assets/images/buildings/building_food_prep_station.png",
+      "buildCost": {
+        "composite_panel": 2,
+        "iron_plate": 2,
+        "plant_fiber": 4
+      },
+      "durability": 180,
+      "power": {
+        "consumes": 2
+      },
+      "storageCapacity": 20,
+      "unlockedBy": "research_colony_comfort",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "survival"
+      ]
+    },
+    {
+      "id": "building_air_filter_mk1",
+      "name": {
+        "ja": "簡易空気フィルター",
+        "en": "Air Filter Mk1"
+      },
+      "description": {
+        "ja": "簡易空気フィルター。MVP用のsurvival施設。",
+        "en": "Air Filter Mk1"
+      },
+      "category": "survival",
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "sprite": "assets/images/buildings/building_air_filter_mk1.png",
+      "buildCost": {
+        "iron_plate": 4,
+        "basic_filter": 3,
+        "recovered_wire": 1
+      },
+      "durability": 220,
+      "power": {
+        "consumes": 3
+      },
+      "storageCapacity": 20,
+      "unlockedBy": "research_spore_safety",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "survival"
+      ]
+    },
+    {
+      "id": "building_basic_wall",
+      "name": {
+        "ja": "簡易防壁",
+        "en": "Basic Wall"
+      },
+      "description": {
+        "ja": "簡易防壁。MVP用のdefense施設。",
+        "en": "Basic Wall"
+      },
+      "category": "defense",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "sprite": "assets/images/buildings/building_basic_wall.png",
+      "buildCost": {
+        "stone": 6,
+        "iron_rod": 1
+      },
+      "durability": 240,
+      "power": {
+        "consumes": 0
+      },
+      "storageCapacity": 0,
+      "unlockedBy": "research_basic_defense",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "defense"
+      ]
+    },
+    {
+      "id": "building_basic_turret",
+      "name": {
+        "ja": "簡易タレット",
+        "en": "Basic Turret"
+      },
+      "description": {
+        "ja": "簡易タレット。MVP用のdefense施設。",
+        "en": "Basic Turret"
+      },
+      "category": "defense",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "sprite": "assets/images/buildings/building_basic_turret.png",
+      "buildCost": {
+        "iron_plate": 4,
+        "turret_parts": 1,
+        "basic_circuit": 1
+      },
+      "durability": 200,
+      "power": {
+        "consumes": 4
+      },
+      "storageCapacity": 10,
+      "unlockedBy": "research_basic_defense",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "defense"
+      ]
+    },
+    {
+      "id": "building_sensor_pole",
+      "name": {
+        "ja": "簡易センサーポール",
+        "en": "Sensor Pole"
+      },
+      "description": {
+        "ja": "簡易センサーポール。MVP用のsensors施設。",
+        "en": "Sensor Pole"
+      },
+      "category": "sensors",
+      "footprint": {
+        "width": 1,
+        "height": 1
+      },
+      "sprite": "assets/images/buildings/building_sensor_pole.png",
+      "buildCost": {
+        "iron_rod": 2,
+        "sensor_module": 1,
+        "recovered_wire": 2
+      },
+      "durability": 160,
+      "power": {
+        "consumes": 2,
+        "sensorRange": 12
+      },
+      "storageCapacity": 0,
+      "unlockedBy": "research_basic_sensors",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "sensors"
+      ]
+    },
+    {
+      "id": "building_repair_station",
+      "name": {
+        "ja": "修理ステーション",
+        "en": "Repair Station"
+      },
+      "description": {
+        "ja": "修理ステーション。MVP用のmaintenance施設。",
+        "en": "Repair Station"
+      },
+      "category": "maintenance",
+      "footprint": {
+        "width": 2,
+        "height": 2
+      },
+      "sprite": "assets/images/buildings/building_repair_station.png",
+      "buildCost": {
+        "iron_plate": 6,
+        "machine_parts": 2,
+        "repair_kit": 1,
+        "basic_circuit": 1
+      },
+      "durability": 240,
+      "power": {
+        "consumes": 3
+      },
+      "storageCapacity": 30,
+      "unlockedBy": "research_basic_maintenance",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "maintenance"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,284 @@
+{
+  "version": "0.1.0",
+  "resources": [
+    {
+      "id": "resource_crash_debris",
+      "name": {
+        "ja": "墜落船残骸",
+        "en": "Crash Debris"
+      },
+      "sprite": "assets/images/resources/resource_crash_debris.png",
+      "footprint": [
+        1,
+        1
+      ],
+      "amountRange": [
+        80,
+        160
+      ],
+      "harvestMethod": "manual_or_drone",
+      "primaryDrops": {
+        "scrap_metal": [
+          20,
+          40
+        ],
+        "basic_circuit": [
+          0,
+          2
+        ],
+        "battery_cell": [
+          0,
+          1
+        ]
+      },
+      "allowedBiomes": [
+        "biome_crash_plain"
+      ],
+      "tags": [
+        "salvage",
+        "starting_resource",
+        "mvp"
+      ]
+    },
+    {
+      "id": "resource_loose_stone",
+      "name": {
+        "ja": "地表石塊",
+        "en": "Loose Stone"
+      },
+      "sprite": "assets/images/resources/resource_loose_stone.png",
+      "footprint": [
+        1,
+        1
+      ],
+      "amountRange": [
+        80,
+        180
+      ],
+      "harvestMethod": "manual_or_drone",
+      "primaryDrops": {
+        "stone": [
+          20,
+          45
+        ]
+      },
+      "allowedBiomes": [
+        "biome_crash_plain",
+        "biome_rocky_field"
+      ],
+      "tags": [
+        "stone",
+        "mvp"
+      ]
+    },
+    {
+      "id": "resource_iron_vein",
+      "name": {
+        "ja": "鉄鉱脈",
+        "en": "Iron Vein"
+      },
+      "sprite": "assets/images/resources/resource_iron_vein.png",
+      "footprint": [
+        2,
+        2
+      ],
+      "amountRange": [
+        800,
+        1600
+      ],
+      "harvestMethod": "miner",
+      "primaryDrops": {
+        "iron_ore": [
+          1,
+          1
+        ]
+      },
+      "allowedBiomes": [
+        "biome_rocky_field"
+      ],
+      "tags": [
+        "ore",
+        "automation_target",
+        "mvp"
+      ]
+    },
+    {
+      "id": "resource_fiber_reed",
+      "name": {
+        "ja": "繊維リード",
+        "en": "Fiber Reed"
+      },
+      "sprite": "assets/images/resources/resource_fiber_reed.png",
+      "footprint": [
+        1,
+        1
+      ],
+      "amountRange": [
+        60,
+        140
+      ],
+      "harvestMethod": "manual_or_drone",
+      "primaryDrops": {
+        "plant_fiber": [
+          15,
+          35
+        ]
+      },
+      "regenMinutes": 2880,
+      "allowedBiomes": [
+        "biome_glow_forest",
+        "biome_shallow_marsh"
+      ],
+      "tags": [
+        "plant",
+        "renewable",
+        "mvp"
+      ]
+    },
+    {
+      "id": "resource_luma_berry_bush",
+      "name": {
+        "ja": "ルマベリー低木",
+        "en": "Luma Berry Bush"
+      },
+      "sprite": "assets/images/resources/resource_luma_berry_bush.png",
+      "footprint": [
+        1,
+        1
+      ],
+      "amountRange": [
+        40,
+        100
+      ],
+      "harvestMethod": "manual_or_drone",
+      "primaryDrops": {
+        "raw_food": [
+          8,
+          24
+        ],
+        "plant_fiber": [
+          0,
+          5
+        ]
+      },
+      "regenMinutes": 2160,
+      "allowedBiomes": [
+        "biome_crash_plain",
+        "biome_glow_forest",
+        "biome_shallow_marsh"
+      ],
+      "tags": [
+        "food",
+        "plant",
+        "renewable",
+        "mvp"
+      ]
+    },
+    {
+      "id": "resource_shallow_water",
+      "name": {
+        "ja": "浅い水場",
+        "en": "Shallow Water"
+      },
+      "sprite": "assets/images/resources/resource_shallow_water.png",
+      "footprint": [
+        2,
+        2
+      ],
+      "amountRange": [
+        9999,
+        9999
+      ],
+      "harvestMethod": "water_processor_or_manual",
+      "primaryDrops": {
+        "dirty_water": [
+          1,
+          1
+        ]
+      },
+      "allowedBiomes": [
+        "biome_shallow_marsh"
+      ],
+      "tags": [
+        "water",
+        "renewable",
+        "mvp"
+      ]
+    },
+    {
+      "id": "resource_power_wreck",
+      "name": {
+        "ja": "破損電源装置",
+        "en": "Power Wreck"
+      },
+      "sprite": "assets/images/resources/resource_power_wreck.png",
+      "footprint": [
+        1,
+        1
+      ],
+      "amountRange": [
+        40,
+        120
+      ],
+      "harvestMethod": "manual_or_drone",
+      "primaryDrops": {
+        "battery_cell": [
+          1,
+          4
+        ],
+        "recovered_wire": [
+          4,
+          12
+        ],
+        "scrap_metal": [
+          8,
+          20
+        ]
+      },
+      "allowedBiomes": [
+        "biome_crash_plain",
+        "biome_rocky_field"
+      ],
+      "tags": [
+        "salvage",
+        "power",
+        "mvp"
+      ]
+    },
+    {
+      "id": "resource_data_pod",
+      "name": {
+        "ja": "船載データポッド",
+        "en": "Ship Data Pod"
+      },
+      "sprite": "assets/images/resources/resource_data_pod.png",
+      "footprint": [
+        1,
+        1
+      ],
+      "amountRange": [
+        1,
+        3
+      ],
+      "harvestMethod": "manual",
+      "primaryDrops": {
+        "data_chip": [
+          1,
+          2
+        ],
+        "research_data": [
+          20,
+          50
+        ]
+      },
+      "allowedBiomes": [
+        "biome_crash_plain"
+      ],
+      "tags": [
+        "research",
+        "salvage",
+        "mvp"
+      ]
+    }
+  ]
+}

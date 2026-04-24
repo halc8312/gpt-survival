@@ -1,0 +1,80 @@
+{
+  "version": "0.1.0",
+  "time": {
+    "minutesPerDay": 1440,
+    "defaultTimeScale": 1,
+    "dayStartHour": 6,
+    "nightStartHour": 18
+  },
+  "startingLocation": {
+    "center": [
+      32,
+      32
+    ],
+    "guarantees": [
+      {
+        "resourceId": "resource_crash_debris",
+        "withinRadius": 10,
+        "minCount": 4
+      },
+      {
+        "resourceId": "resource_loose_stone",
+        "withinRadius": 10,
+        "minCount": 4
+      },
+      {
+        "resourceId": "resource_luma_berry_bush",
+        "withinRadius": 10,
+        "minCount": 3
+      },
+      {
+        "resourceId": "resource_fiber_reed",
+        "withinRadius": 10,
+        "minCount": 2
+      },
+      {
+        "resourceId": "resource_data_pod",
+        "withinRadius": 10,
+        "minCount": 1
+      },
+      {
+        "resourceId": "resource_iron_vein",
+        "withinRadius": 18,
+        "minCount": 2
+      },
+      {
+        "resourceId": "resource_shallow_water",
+        "withinRadius": 18,
+        "minCount": 1
+      },
+      {
+        "resourceId": "resource_power_wreck",
+        "withinRadius": 18,
+        "minCount": 1
+      }
+    ]
+  },
+  "simulation": {
+    "defaultRecipeTickSeconds": 1,
+    "defaultConstructionTickSeconds": 1,
+    "autosaveIntervalMinutes": 10,
+    "manualSaveSlots": 3,
+    "autosaveSlots": 1
+  },
+  "unitNeeds": {
+    "hungerPerDay": 24,
+    "thirstPerDay": 32,
+    "fatiguePerWorkHour": 4,
+    "fatigueRecoveryPerRestHour": 8
+  },
+  "power": {
+    "distributionMode": "range",
+    "defaultOutagePriority": [
+      "research",
+      "production",
+      "extraction",
+      "life_support",
+      "defense"
+    ]
+  }
+}

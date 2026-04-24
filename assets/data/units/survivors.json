@@ -1,0 +1,205 @@
+{
+  "version": "0.1.0",
+  "survivors": [
+    {
+      "templateId": "survivor_engineer_01",
+      "name": {
+        "ja": "エリス・カイ",
+        "en": "Eris Kai"
+      },
+      "role": "engineer",
+      "sprite": "assets/images/units/unit_survivor_engineer_idle_south.png",
+      "baseStats": {
+        "health": 100,
+        "hunger": 0,
+        "thirst": 0,
+        "morale": 70,
+        "fatigue": 20,
+        "sporeExposure": 0
+      },
+      "skills": {
+        "construction": 3,
+        "engineering": 5,
+        "labor": 2,
+        "research": 2,
+        "medical": 0,
+        "scouting": 1
+      },
+      "defaultWorkPriorities": {
+        "build": 3,
+        "haul": 1,
+        "harvest": 1,
+        "operate": 4,
+        "research": 1,
+        "repair": 4,
+        "medical": 0,
+        "scout": 0
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "engineer"
+      ]
+    },
+    {
+      "templateId": "survivor_worker_01",
+      "name": {
+        "ja": "ノア・レン",
+        "en": "Noa Ren"
+      },
+      "role": "worker",
+      "sprite": "assets/images/units/unit_survivor_worker_idle_south.png",
+      "baseStats": {
+        "health": 100,
+        "hunger": 0,
+        "thirst": 0,
+        "morale": 70,
+        "fatigue": 20,
+        "sporeExposure": 0
+      },
+      "skills": {
+        "construction": 3,
+        "engineering": 1,
+        "labor": 5,
+        "research": 0,
+        "medical": 0,
+        "scouting": 1
+      },
+      "defaultWorkPriorities": {
+        "build": 3,
+        "haul": 3,
+        "harvest": 3,
+        "operate": 2,
+        "research": 1,
+        "repair": 1,
+        "medical": 0,
+        "scout": 0
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "worker"
+      ]
+    },
+    {
+      "templateId": "survivor_researcher_01",
+      "name": {
+        "ja": "ミラ・セイン",
+        "en": "Mira Sane"
+      },
+      "role": "researcher",
+      "sprite": "assets/images/units/unit_survivor_researcher_idle_south.png",
+      "baseStats": {
+        "health": 100,
+        "hunger": 0,
+        "thirst": 0,
+        "morale": 70,
+        "fatigue": 20,
+        "sporeExposure": 0
+      },
+      "skills": {
+        "construction": 1,
+        "engineering": 2,
+        "labor": 1,
+        "research": 5,
+        "medical": 1,
+        "scouting": 2
+      },
+      "defaultWorkPriorities": {
+        "build": 1,
+        "haul": 1,
+        "harvest": 1,
+        "operate": 2,
+        "research": 4,
+        "repair": 1,
+        "medical": 0,
+        "scout": 0
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "researcher"
+      ]
+    },
+    {
+      "templateId": "survivor_medic_01",
+      "name": {
+        "ja": "サナ・リオ",
+        "en": "Sana Rio"
+      },
+      "role": "medic",
+      "sprite": "assets/images/units/unit_survivor_medic_idle_south.png",
+      "baseStats": {
+        "health": 100,
+        "hunger": 0,
+        "thirst": 0,
+        "morale": 70,
+        "fatigue": 20,
+        "sporeExposure": 0
+      },
+      "skills": {
+        "construction": 1,
+        "engineering": 1,
+        "labor": 1,
+        "research": 2,
+        "medical": 5,
+        "scouting": 1
+      },
+      "defaultWorkPriorities": {
+        "build": 1,
+        "haul": 1,
+        "harvest": 1,
+        "operate": 2,
+        "research": 1,
+        "repair": 1,
+        "medical": 4,
+        "scout": 0
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "medic"
+      ]
+    },
+    {
+      "templateId": "survivor_scout_01",
+      "name": {
+        "ja": "カイム・オルタ",
+        "en": "Kaim Orta"
+      },
+      "role": "scout",
+      "sprite": "assets/images/units/unit_survivor_scout_idle_south.png",
+      "baseStats": {
+        "health": 100,
+        "hunger": 0,
+        "thirst": 0,
+        "morale": 70,
+        "fatigue": 20,
+        "sporeExposure": 0
+      },
+      "skills": {
+        "construction": 1,
+        "engineering": 1,
+        "labor": 2,
+        "research": 1,
+        "medical": 1,
+        "scouting": 5
+      },
+      "defaultWorkPriorities": {
+        "build": 1,
+        "haul": 1,
+        "harvest": 3,
+        "operate": 2,
+        "research": 1,
+        "repair": 1,
+        "medical": 0,
+        "scout": 4
+      },
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "scout"
+      ]
+    }
+  ]
+}

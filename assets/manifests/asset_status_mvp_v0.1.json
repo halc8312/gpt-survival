@@ -1,0 +1,1446 @@
+{
+  "version": "0.1.0",
+  "project": "gpt-game",
+  "createdAt": "2026-04-24T05:44:55+00:00",
+  "statusLegend": [
+    "planned",
+    "prompt_ready",
+    "generated",
+    "needs_edit",
+    "approved",
+    "implemented",
+    "deprecated"
+  ],
+  "defaultStatus": "generated",
+  "note": "These are prototype PNGs intended for MVP implementation and visual inspection. Mark as approved after in-game review.",
+  "assets": [
+    {
+      "id": "tile_bare_rock_01",
+      "type": "tile",
+      "path": "assets/images/tiles/tile_bare_rock_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "tile_crash_scorched_01",
+      "type": "tile",
+      "path": "assets/images/tiles/tile_crash_scorched_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "tile_forest_floor_01",
+      "type": "tile",
+      "path": "assets/images/tiles/tile_forest_floor_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "tile_glow_moss_01",
+      "type": "tile",
+      "path": "assets/images/tiles/tile_glow_moss_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "tile_grass_sparse_01",
+      "type": "tile",
+      "path": "assets/images/tiles/tile_grass_sparse_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "tile_gravel_slope_01",
+      "type": "tile",
+      "path": "assets/images/tiles/tile_gravel_slope_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "tile_marsh_mud_01",
+      "type": "tile",
+      "path": "assets/images/tiles/tile_marsh_mud_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "tile_plain_soil_01",
+      "type": "tile",
+      "path": "assets/images/tiles/tile_plain_soil_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "tile_reed_bed_01",
+      "type": "tile",
+      "path": "assets/images/tiles/tile_reed_bed_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "tile_rocky_ground_01",
+      "type": "tile",
+      "path": "assets/images/tiles/tile_rocky_ground_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "tile_root_tangle_01",
+      "type": "tile",
+      "path": "assets/images/tiles/tile_root_tangle_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "tile_shallow_water_01",
+      "type": "tile",
+      "path": "assets/images/tiles/tile_shallow_water_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "resource_crash_debris",
+      "type": "resource",
+      "path": "assets/images/resources/resource_crash_debris.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "resource_data_pod",
+      "type": "resource",
+      "path": "assets/images/resources/resource_data_pod.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "resource_fiber_reed",
+      "type": "resource",
+      "path": "assets/images/resources/resource_fiber_reed.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "resource_iron_vein",
+      "type": "resource",
+      "path": "assets/images/resources/resource_iron_vein.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "resource_loose_stone",
+      "type": "resource",
+      "path": "assets/images/resources/resource_loose_stone.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "resource_luma_berry_bush",
+      "type": "resource",
+      "path": "assets/images/resources/resource_luma_berry_bush.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "resource_power_wreck",
+      "type": "resource",
+      "path": "assets/images/resources/resource_power_wreck.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "resource_shallow_water",
+      "type": "resource",
+      "path": "assets/images/resources/resource_shallow_water.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_basic_shelter",
+      "type": "building",
+      "path": "assets/images/buildings/building_basic_shelter.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_crash_core",
+      "type": "building",
+      "path": "assets/images/buildings/building_crash_core.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_manual_workbench",
+      "type": "building",
+      "path": "assets/images/buildings/building_manual_workbench.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_storage_yard",
+      "type": "building",
+      "path": "assets/images/buildings/building_storage_yard.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_assembler_mk1",
+      "type": "building",
+      "path": "assets/images/buildings/building_assembler_mk1.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_basic_miner",
+      "type": "building",
+      "path": "assets/images/buildings/building_basic_miner.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_small_generator",
+      "type": "building",
+      "path": "assets/images/buildings/building_small_generator.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_smelter_mk1",
+      "type": "building",
+      "path": "assets/images/buildings/building_smelter_mk1.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_air_filter_mk1",
+      "type": "building",
+      "path": "assets/images/buildings/building_air_filter_mk1.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_basic_turret",
+      "type": "building",
+      "path": "assets/images/buildings/building_basic_turret.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_basic_wall",
+      "type": "building",
+      "path": "assets/images/buildings/building_basic_wall.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_food_prep_station",
+      "type": "building",
+      "path": "assets/images/buildings/building_food_prep_station.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_sensor_pole",
+      "type": "building",
+      "path": "assets/images/buildings/building_sensor_pole.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_water_processor_mk1",
+      "type": "building",
+      "path": "assets/images/buildings/building_water_processor_mk1.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_basic_conveyor",
+      "type": "building",
+      "path": "assets/images/buildings/building_basic_conveyor.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_battery_bank_mk1",
+      "type": "building",
+      "path": "assets/images/buildings/building_battery_bank_mk1.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_conveyor_splitter",
+      "type": "building",
+      "path": "assets/images/buildings/building_conveyor_splitter.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_repair_station",
+      "type": "building",
+      "path": "assets/images/buildings/building_repair_station.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_research_station",
+      "type": "building",
+      "path": "assets/images/buildings/building_research_station.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "building_solar_panel_mk1",
+      "type": "building",
+      "path": "assets/images/buildings/building_solar_panel_mk1.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_basic_circuit",
+      "type": "item",
+      "path": "assets/images/items/item_basic_circuit.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_battery_cell",
+      "type": "item",
+      "path": "assets/images/items/item_battery_cell.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_dirty_water",
+      "type": "item",
+      "path": "assets/images/items/item_dirty_water.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_iron_ore",
+      "type": "item",
+      "path": "assets/images/items/item_iron_ore.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_plant_fiber",
+      "type": "item",
+      "path": "assets/images/items/item_plant_fiber.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_raw_food",
+      "type": "item",
+      "path": "assets/images/items/item_raw_food.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_scrap_metal",
+      "type": "item",
+      "path": "assets/images/items/item_scrap_metal.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_stone",
+      "type": "item",
+      "path": "assets/images/items/item_stone.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_basic_filter",
+      "type": "item",
+      "path": "assets/images/items/item_basic_filter.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_composite_panel",
+      "type": "item",
+      "path": "assets/images/items/item_composite_panel.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_construction_parts",
+      "type": "item",
+      "path": "assets/images/items/item_construction_parts.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_gear",
+      "type": "item",
+      "path": "assets/images/items/item_gear.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_iron_plate",
+      "type": "item",
+      "path": "assets/images/items/item_iron_plate.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_iron_rod",
+      "type": "item",
+      "path": "assets/images/items/item_iron_rod.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_machine_parts",
+      "type": "item",
+      "path": "assets/images/items/item_machine_parts.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_recovered_wire",
+      "type": "item",
+      "path": "assets/images/items/item_recovered_wire.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_repair_kit",
+      "type": "item",
+      "path": "assets/images/items/item_repair_kit.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_comfort_pack",
+      "type": "item",
+      "path": "assets/images/items/item_comfort_pack.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_medicine_pack",
+      "type": "item",
+      "path": "assets/images/items/item_medicine_pack.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_oxygen_filter",
+      "type": "item",
+      "path": "assets/images/items/item_oxygen_filter.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_processed_food",
+      "type": "item",
+      "path": "assets/images/items/item_processed_food.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_purified_water",
+      "type": "item",
+      "path": "assets/images/items/item_purified_water.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_conveyor_parts",
+      "type": "item",
+      "path": "assets/images/items/item_conveyor_parts.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_data_chip",
+      "type": "item",
+      "path": "assets/images/items/item_data_chip.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_drone_parts",
+      "type": "item",
+      "path": "assets/images/items/item_drone_parts.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_fuel_cell",
+      "type": "item",
+      "path": "assets/images/items/item_fuel_cell.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_power_capacitor",
+      "type": "item",
+      "path": "assets/images/items/item_power_capacitor.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_research_data",
+      "type": "item",
+      "path": "assets/images/items/item_research_data.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_sensor_module",
+      "type": "item",
+      "path": "assets/images/items/item_sensor_module.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "item_turret_parts",
+      "type": "item",
+      "path": "assets/images/items/item_turret_parts.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "drone_logistics_mk1_idle_south",
+      "type": "drone",
+      "path": "assets/images/drones/drone_logistics_mk1_idle_south.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "drone_utility_mk1_idle_south",
+      "type": "drone",
+      "path": "assets/images/drones/drone_utility_mk1_idle_south.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "unit_survivor_engineer_idle_south",
+      "type": "unit",
+      "path": "assets/images/units/unit_survivor_engineer_idle_south.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "unit_survivor_medic_idle_south",
+      "type": "unit",
+      "path": "assets/images/units/unit_survivor_medic_idle_south.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "unit_survivor_researcher_idle_south",
+      "type": "unit",
+      "path": "assets/images/units/unit_survivor_researcher_idle_south.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "unit_survivor_scout_idle_south",
+      "type": "unit",
+      "path": "assets/images/units/unit_survivor_scout_idle_south.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "unit_survivor_worker_idle_south",
+      "type": "unit",
+      "path": "assets/images/units/unit_survivor_worker_idle_south.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "creature_luma_grazer_idle_south",
+      "type": "creature",
+      "path": "assets/images/creatures/creature_luma_grazer_idle_south.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "creature_night_skitter_idle_south",
+      "type": "creature",
+      "path": "assets/images/creatures/creature_night_skitter_idle_south.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "creature_shellback_idle_south",
+      "type": "creature",
+      "path": "assets/images/creatures/creature_shellback_idle_south.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "creature_spore_tick_idle_south",
+      "type": "creature",
+      "path": "assets/images/creatures/creature_spore_tick_idle_south.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_icon_battery",
+      "type": "ui_status",
+      "path": "assets/images/ui/ui_icon_battery.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_icon_fatigue",
+      "type": "ui_status",
+      "path": "assets/images/ui/ui_icon_fatigue.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_icon_food",
+      "type": "ui_status",
+      "path": "assets/images/ui/ui_icon_food.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_icon_health",
+      "type": "ui_status",
+      "path": "assets/images/ui/ui_icon_health.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_icon_morale",
+      "type": "ui_status",
+      "path": "assets/images/ui/ui_icon_morale.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_icon_power",
+      "type": "ui_status",
+      "path": "assets/images/ui/ui_icon_power.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_icon_spore",
+      "type": "ui_status",
+      "path": "assets/images/ui/ui_icon_spore.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_icon_threat",
+      "type": "ui_status",
+      "path": "assets/images/ui/ui_icon_threat.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_icon_time",
+      "type": "ui_status",
+      "path": "assets/images/ui/ui_icon_time.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_icon_water",
+      "type": "ui_status",
+      "path": "assets/images/ui/ui_icon_water.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_event_cold_night",
+      "type": "ui_event",
+      "path": "assets/images/ui/ui_event_cold_night.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_event_creature_raid",
+      "type": "ui_event",
+      "path": "assets/images/ui/ui_event_creature_raid.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_event_data_echo",
+      "type": "ui_event",
+      "path": "assets/images/ui/ui_event_data_echo.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_event_equipment_wear",
+      "type": "ui_event",
+      "path": "assets/images/ui/ui_event_equipment_wear.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_event_food_warning",
+      "type": "ui_event",
+      "path": "assets/images/ui/ui_event_food_warning.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_event_magnetic_rain",
+      "type": "ui_event",
+      "path": "assets/images/ui/ui_event_magnetic_rain.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_event_power_warning",
+      "type": "ui_event",
+      "path": "assets/images/ui/ui_event_power_warning.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_event_resource_signal",
+      "type": "ui_event",
+      "path": "assets/images/ui/ui_event_resource_signal.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_event_spore_bloom",
+      "type": "ui_event",
+      "path": "assets/images/ui/ui_event_spore_bloom.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_event_water_warning",
+      "type": "ui_event",
+      "path": "assets/images/ui/ui_event_water_warning.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_warning_attack",
+      "type": "ui_warning",
+      "path": "assets/images/ui/ui_warning_attack.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_warning_damage",
+      "type": "ui_warning",
+      "path": "assets/images/ui/ui_warning_damage.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_warning_food",
+      "type": "ui_warning",
+      "path": "assets/images/ui/ui_warning_food.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_warning_power",
+      "type": "ui_warning",
+      "path": "assets/images/ui/ui_warning_power.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_warning_research",
+      "type": "ui_warning",
+      "path": "assets/images/ui/ui_warning_research.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_warning_spore",
+      "type": "ui_warning",
+      "path": "assets/images/ui/ui_warning_spore.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_warning_storage",
+      "type": "ui_warning",
+      "path": "assets/images/ui/ui_warning_storage.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "ui_warning_water",
+      "type": "ui_warning",
+      "path": "assets/images/ui/ui_warning_water.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "effect_cold_air_01",
+      "type": "effect",
+      "path": "assets/images/effects/effect_cold_air_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "effect_damage_spark_01",
+      "type": "effect",
+      "path": "assets/images/effects/effect_damage_spark_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "effect_hit_small_01",
+      "type": "effect",
+      "path": "assets/images/effects/effect_hit_small_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "effect_magnetic_rain_01",
+      "type": "effect",
+      "path": "assets/images/effects/effect_magnetic_rain_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "effect_power_outage_01",
+      "type": "effect",
+      "path": "assets/images/effects/effect_power_outage_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "effect_repair_spark_01",
+      "type": "effect",
+      "path": "assets/images/effects/effect_repair_spark_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "effect_sensor_ping_01",
+      "type": "effect",
+      "path": "assets/images/effects/effect_sensor_ping_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "effect_smoke_small_01",
+      "type": "effect",
+      "path": "assets/images/effects/effect_smoke_small_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "effect_spore_cloud_01",
+      "type": "effect",
+      "path": "assets/images/effects/effect_spore_cloud_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    },
+    {
+      "id": "effect_turret_shot_01",
+      "type": "effect",
+      "path": "assets/images/effects/effect_turret_shot_01.png",
+      "phase": "mvp",
+      "status": "generated",
+      "review": {
+        "needsInGameCheck": true,
+        "approved": false,
+        "notes": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "version": "0.1.0",
+  "decorations": [
+    {
+      "id": "deco_small_rock",
+      "name": {
+        "ja": "小石",
+        "en": "Small Rock"
+      },
+      "sprite": "assets/images/decorations/deco_small_rock_01.png",
+      "biomes": [
+        "biome_crash_plain",
+        "biome_rocky_field"
+      ],
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "deco_metal_shard",
+      "name": {
+        "ja": "金属片",
+        "en": "Metal Shard"
+      },
+      "sprite": "assets/images/decorations/deco_metal_shard_01.png",
+      "biomes": [
+        "biome_crash_plain"
+      ],
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "deco_burn_mark",
+      "name": {
+        "ja": "焼け跡",
+        "en": "Burn Mark"
+      },
+      "sprite": "assets/images/decorations/deco_burn_mark_01.png",
+      "biomes": [
+        "biome_crash_plain"
+      ],
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "deco_dry_grass",
+      "name": {
+        "ja": "乾いた草",
+        "en": "Dry Grass"
+      },
+      "sprite": "assets/images/decorations/deco_dry_grass_01.png",
+      "biomes": [
+        "biome_crash_plain"
+      ],
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "deco_glow_flower",
+      "name": {
+        "ja": "発光花",
+        "en": "Glow Flower"
+      },
+      "sprite": "assets/images/decorations/deco_glow_flower_01.png",
+      "biomes": [
+        "biome_glow_forest"
+      ],
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "deco_fiber_clump",
+      "name": {
+        "ja": "繊維草の群れ",
+        "en": "Fiber Clump"
+      },
+      "sprite": "assets/images/decorations/deco_fiber_clump_01.png",
+      "biomes": [
+        "biome_glow_forest",
+        "biome_shallow_marsh"
+      ],
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "deco_mushroom_luma",
+      "name": {
+        "ja": "ルマキノコ",
+        "en": "Luma Mushroom"
+      },
+      "sprite": "assets/images/decorations/deco_mushroom_luma_01.png",
+      "biomes": [
+        "biome_glow_forest"
+      ],
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "deco_reed_patch",
+      "name": {
+        "ja": "葦の群れ",
+        "en": "Reed Patch"
+      },
+      "sprite": "assets/images/decorations/deco_reed_patch_01.png",
+      "biomes": [
+        "biome_shallow_marsh"
+      ],
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "deco_mud_bubbles",
+      "name": {
+        "ja": "泥泡",
+        "en": "Mud Bubbles"
+      },
+      "sprite": "assets/images/decorations/deco_mud_bubbles_01.png",
+      "biomes": [
+        "biome_shallow_marsh"
+      ],
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "deco_crystal_pebble",
+      "name": {
+        "ja": "小結晶片",
+        "en": "Crystal Pebble"
+      },
+      "sprite": "assets/images/decorations/deco_crystal_pebble_01.png",
+      "biomes": [
+        "biome_rocky_field",
+        "biome_glow_forest"
+      ],
+      "tags": [
+        "mvp",
+        "foreshadowing"
+      ]
+    },
+    {
+      "id": "deco_old_cable",
+      "name": {
+        "ja": "古いケーブル",
+        "en": "Old Cable"
+      },
+      "sprite": "assets/images/decorations/deco_old_cable_01.png",
+      "biomes": [
+        "biome_crash_plain"
+      ],
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "deco_animal_tracks",
+      "name": {
+        "ja": "生物の足跡",
+        "en": "Animal Tracks"
+      },
+      "sprite": "assets/images/decorations/deco_animal_tracks_01.png",
+      "biomes": [
+        "biome_crash_plain",
+        "biome_rocky_field",
+        "biome_glow_forest"
+      ],
+      "tags": [
+        "mvp"
+      ]
+    }
+  ]
+}

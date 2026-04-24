@@ -1,0 +1,112 @@
+{
+  "version": "0.1.0",
+  "biomes": [
+    {
+      "id": "biome_crash_plain",
+      "name": {
+        "ja": "墜落平原",
+        "en": "Crash Plain"
+      },
+      "description": {
+        "ja": "墜落船周辺の比較的安全な平原。",
+        "en": "A relatively safe plain around the crash site."
+      },
+      "primaryTiles": [
+        "tile_plain_soil",
+        "tile_crash_scorched",
+        "tile_grass_sparse"
+      ],
+      "resourceWeights": {
+        "resource_crash_debris": 1.0,
+        "resource_loose_stone": 0.8,
+        "resource_luma_berry_bush": 0.5,
+        "resource_data_pod": 0.2
+      },
+      "baseThreat": 1,
+      "tags": [
+        "starting_area",
+        "mvp"
+      ]
+    },
+    {
+      "id": "biome_rocky_field",
+      "name": {
+        "ja": "岩石地帯",
+        "en": "Rocky Field"
+      },
+      "description": {
+        "ja": "鉄鉱脈と石材が多い工業向け地帯。",
+        "en": "A rocky area rich in stone and iron veins."
+      },
+      "primaryTiles": [
+        "tile_rocky_ground",
+        "tile_bare_rock",
+        "tile_gravel_slope"
+      ],
+      "resourceWeights": {
+        "resource_iron_vein": 1.0,
+        "resource_loose_stone": 1.0,
+        "resource_power_wreck": 0.25
+      },
+      "baseThreat": 2,
+      "tags": [
+        "mining",
+        "mvp"
+      ]
+    },
+    {
+      "id": "biome_glow_forest",
+      "name": {
+        "ja": "発光林",
+        "en": "Glow Forest"
+      },
+      "description": {
+        "ja": "有用植物と胞子リスクが共存する発光森林。",
+        "en": "A bioluminescent forest with useful plants and spore risks."
+      },
+      "primaryTiles": [
+        "tile_glow_moss",
+        "tile_forest_floor",
+        "tile_root_tangle"
+      ],
+      "resourceWeights": {
+        "resource_fiber_reed": 0.9,
+        "resource_luma_berry_bush": 0.8
+      },
+      "baseThreat": 3,
+      "sporeModifier": 1.5,
+      "tags": [
+        "plants",
+        "spores",
+        "mvp"
+      ]
+    },
+    {
+      "id": "biome_shallow_marsh",
+      "name": {
+        "ja": "浅い湿地",
+        "en": "Shallow Marsh"
+      },
+      "description": {
+        "ja": "水資源と繊維資源が得られる湿地。",
+        "en": "Wetlands that provide water and fiber resources."
+      },
+      "primaryTiles": [
+        "tile_shallow_water",
+        "tile_marsh_mud",
+        "tile_reed_bed"
+      ],
+      "resourceWeights": {
+        "resource_shallow_water": 1.0,
+        "resource_fiber_reed": 0.7,
+        "resource_luma_berry_bush": 0.25
+      },
+      "baseThreat": 2,
+      "tags": [
+        "water",
+        "plants",
+        "mvp"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "tooltips": {
+    "foodDaysRemaining": "現在の食料在庫で何日生存できるかを示します。",
+    "waterDaysRemaining": "現在の浄水在庫で何日生存できるかを示します。",
+    "powerBalance": "発電量から消費量を引いた値です。",
+    "sporeExposure": "胞子汚染の蓄積値です。高いほど危険です。"
+  }
+}

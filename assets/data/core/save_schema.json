@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "0.1.0",
+  "gameVersion": "0.1.0",
+  "requiredTopLevelKeys": [
+    "schemaVersion",
+    "gameVersion",
+    "slotId",
+    "saveName",
+    "savedAt",
+    "gameTime",
+    "world",
+    "map",
+    "colony",
+    "inventory",
+    "buildings",
+    "resourceNodes",
+    "survivors",
+    "drones",
+    "research",
+    "events",
+    "statistics"
+  ],
+  "example": {
+    "schemaVersion": "0.1.0",
+    "gameVersion": "0.1.0",
+    "slotId": "slot_001",
+    "saveName": "第七仮設拠点",
+    "savedAt": "2026-04-24T05:53:58+00:00",
+    "gameTime": {
+      "day": 1,
+      "hour": 8,
+      "minute": 0,
+      "totalMinutes": 480,
+      "paused": false
+    },
+    "world": {
+      "seed": "LUMINA-9-MVP",
+      "mapSize": [
+        64,
+        64
+      ],
+      "difficulty": "normal",
+      "threatLevel": 1
+    },
+    "map": {
+      "width": 64,
+      "height": 64,
+      "tiles": [],
+      "camera": {
+        "x": 32,
+        "y": 32,
+        "zoom": 1.0
+      }
+    },
+    "colony": {
+      "name": "第七仮設拠点",
+      "population": 5,
+      "moraleAverage": 70
+    },
+    "inventory": {
+      "global": {
+        "scrap_metal": 80,
+        "stone": 40,
+        "raw_food": 12,
+        "dirty_water": 12
+      }
+    },
+    "buildings": [],
+    "resourceNodes": [],
+    "survivors": [],
+    "drones": [],
+    "research": {
+      "completed": [
+        "research_basic_survival"
+      ],
+      "current": null
+    },
+    "events": {
+      "active": [],
+      "scheduled": [],
+      "history": []
+    },
+    "statistics": {}
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "version": "0.1.0",
+  "project": "gpt-game",
+  "workingTitle": {
+    "ja": "星屑コロニー",
+    "en": "Stardust Colony"
+  },
+  "planet": {
+    "id": "planet_lumina_9",
+    "name": {
+      "ja": "リュミナ-9",
+      "en": "Lumina-9"
+    }
+  },
+  "platform": {
+    "target": "GitHub Pages",
+    "storage": {
+      "saveData": "IndexedDB",
+      "settings": "localStorage",
+      "backup": "JSON export/import"
+    }
+  },
+  "rendering": {
+    "view": "isometric_2d",
+    "tileSize": {
+      "width": 64,
+      "height": 32
+    },
+    "defaultMapSize": {
+      "width": 64,
+      "height": 64
+    },
+    "layers": [
+      "terrain",
+      "ground_detail",
+      "floor",
+      "pipe_under",
+      "object",
+      "building",
+      "unit",
+      "effect",
+      "ui_overlay"
+    ]
+  },
+  "mvpScope": {
+    "items": 30,
+    "resourceNodes": 8,
+    "buildings": 20,
+    "recipes": 36,
+    "research": 20,
+    "survivors": 5,
+    "initialDrones": 2,
+    "events": 10,
+    "creatures": 4,
+    "biomes": 4,
+    "terrainTiles": 12,
+    "decorations": 12
+  }
+}

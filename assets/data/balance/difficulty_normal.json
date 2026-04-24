@@ -1,0 +1,11 @@
+{
+  "version": "0.1.0",
+  "difficulty": "normal",
+  "modifiers": {
+    "resourceAmountMultiplier": 1.0,
+    "eventFrequencyMultiplier": 1.0,
+    "enemyHealthMultiplier": 1.0,
+    "hungerMultiplier": 1.0,
+    "thirstMultiplier": 1.0
+  }
+}
