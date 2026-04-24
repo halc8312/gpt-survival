@@ -410,6 +410,7 @@ export class Game {
     }
 
     const occupiedTiles = this.collectOccupiedTiles(origin, building.footprint);
+    const lastOccupiedTile = occupiedTiles[occupiedTiles.length - 1] ?? origin;
     const instanceIndex = this.world.buildings.filter((entry) => entry.buildingId === building.id).length + 1;
     const instance = {
       instanceId: `${building.id}_${String(instanceIndex).padStart(3, "0")}`,
@@ -421,7 +422,7 @@ export class Game {
       powered: Boolean(building.power?.produces ?? building.power?.producesDay),
       sprite: building.sprite,
       occupiedTiles,
-      sortKey: occupiedTiles.at(-1).x + occupiedTiles.at(-1).y,
+      sortKey: lastOccupiedTile.x + lastOccupiedTile.y,
     };
 
     this.world.buildings.push(instance);

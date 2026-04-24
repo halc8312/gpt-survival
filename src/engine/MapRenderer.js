@@ -217,7 +217,9 @@ export class MapRenderer {
         return left.type.localeCompare(right.type);
       }
 
-      return left.record.instanceId.localeCompare(right.record.instanceId);
+      const leftId = left.record.instanceId ?? left.record.resourceId ?? left.record.buildingId ?? "";
+      const rightId = right.record.instanceId ?? right.record.resourceId ?? right.record.buildingId ?? "";
+      return leftId.localeCompare(rightId);
     });
   }
 
