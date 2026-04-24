@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>星屑コロニー / Stardust Colony</title>
+    <link rel="stylesheet" href="./styles/main.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <canvas id="game-canvas" aria-label="Stardust Colony game canvas"></canvas>
+      <pre id="debug-overlay" class="debug-overlay" aria-live="polite"></pre>
+      <section id="error-panel" class="error-panel hidden" role="alert" aria-live="assertive">
+        <h1>Initialization failed</h1>
+        <pre id="error-message"></pre>
+      </section>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
