@@ -348,7 +348,7 @@ export class Game {
       footprint: building.footprint,
     });
     if (!placement.valid) {
-      throw new Error(`Failed to place initial building: ${buildingId}`);
+      throw new Error(`Failed to place initial building: ${buildingId} (${placement.reason ?? "unknown"})`);
     }
 
     return this.placeBuildingInstance({ building, origin, consumeInventory: false });
