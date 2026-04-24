@@ -536,7 +536,7 @@ export class Game {
       const powerBlocked = instance.productionState === "paused_unpowered";
       this.setStatusMessage(
         powerBlocked
-          ? `${this.getBuildingInstanceLabel(instance)} は停電中です (${instance.powerReason ?? "power shortage"})`
+          ? this.getPowerBlockedMessage(instance)
           : `${this.getBuildingInstanceLabel(instance)} は稼働中です`,
       );
       this.updateUi();
@@ -558,7 +558,7 @@ export class Game {
     }
 
     if (this.getBuildingPowerDemandRate(instance) > 0 && !instance.powered) {
-      this.setStatusMessage(`${this.getBuildingInstanceLabel(instance)} は停電中です (${instance.powerReason ?? "power shortage"})`);
+      this.setStatusMessage(this.getPowerBlockedMessage(instance));
       this.updateUi();
       return false;
     }
@@ -739,6 +739,10 @@ export class Game {
       ? this.getPlacementHint()
       : this.getToolbarRecipeSummary(selectedProductionInfo);
     return [...new Set([contextual, this.statusMessage].filter(Boolean))].join("\n");
+  }
+
+  getPowerBlockedMessage(instance) {
+    return `${this.getBuildingInstanceLabel(instance)} は停電中です (${instance.powerReason ?? "power shortage"})`;
   }
 
   createInitialTimeState() {
@@ -973,6 +977,8 @@ export class Game {
 
     for (const instance of consumers) {
       const requiredEnergy = instance.powerRequired * effectiveDeltaMinutes;
+      // Allow a tiny positive tolerance on the remaining pool so per-tick rounding
+      // does not incorrectly flicker a building between powered and unpowered.
       if (requiredEnergy <= remainingEnergy + ENERGY_COMPARISON_EPSILON) {
         instance.powered = true;
         instance.powerReason = instance.powerReason === "awaiting power allocation" ? "powered" : instance.powerReason;

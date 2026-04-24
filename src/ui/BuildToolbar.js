@@ -1,5 +1,5 @@
 const LABEL_PRIORITY = ["ja", "en"];
-const PASSIVE_EVENT_NAMES = new Set(["wheel"]);
+const PASSIVE_LISTENER_EVENTS = new Set(["wheel"]);
 const SWIPE_THRESHOLD_PX = 12;
 const SWIPE_CLICK_SUPPRESSION_MS = 250;
 
@@ -179,7 +179,7 @@ export class BuildToolbar {
         (event) => {
           event.stopPropagation();
         },
-        { passive: PASSIVE_EVENT_NAMES.has(eventName) },
+        { passive: PASSIVE_LISTENER_EVENTS.has(eventName) },
       );
     }
   }
@@ -191,7 +191,7 @@ export class BuildToolbar {
         (event) => {
           event.stopPropagation();
         },
-        { passive: PASSIVE_EVENT_NAMES.has(eventName) },
+        { passive: PASSIVE_LISTENER_EVENTS.has(eventName) },
       );
     }
 
