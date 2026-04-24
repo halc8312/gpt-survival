@@ -69,12 +69,17 @@
   },
   "power": {
     "distributionMode": "range",
+    "recalculationIntervalSeconds": 0.25,
     "defaultOutagePriority": [
-      "research",
+      "core",
+      "survival",
+      "power",
       "production",
       "extraction",
-      "life_support",
-      "defense"
+      "research",
+      "defense",
+      "sensors",
+      "maintenance"
     ]
   }
 }

@@ -63,7 +63,7 @@ export class InputController {
         return;
       }
 
-      if (/^[1-8]$/.test(event.key)) {
+      if (/^[0-9]$/.test(event.key)) {
         event.preventDefault();
         this.pendingBuildingShortcut = event.key;
         return;

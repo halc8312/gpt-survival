@@ -76,6 +76,12 @@ export class DataRegistry {
 
     for (const building of this.getAll("buildings")) {
       this.ensureItemReferences(`Building ${building.id} buildCost`, building.buildCost, itemIds, errors);
+      this.ensureItemReferences(
+        `Building ${building.id} power fuel`,
+        building.power?.fuelItem ? { [building.power.fuelItem]: 1 } : {},
+        itemIds,
+        errors,
+      );
 
       if (
         building.unlockedBy &&
