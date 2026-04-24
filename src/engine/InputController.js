@@ -19,6 +19,7 @@ export class InputController {
   constructor({ canvas, camera }) {
     this.canvas = canvas;
     this.camera = camera;
+    this.coarsePointerQuery = window.matchMedia("(pointer: coarse), (any-pointer: coarse)");
     this.keys = new Set();
     this.mouse = { x: 0, y: 0 };
     this.pointers = new Map();
@@ -41,11 +42,15 @@ export class InputController {
     };
     this.tapCandidatePointerId = null;
     this.tapCancelled = false;
-    this.pendingClick = false;
+    this.pendingClick = null;
     this.pendingBuildingShortcut = null;
     this.pendingCancelBuild = false;
     this.pendingPlacementConfirm = false;
     this.pendingHarvest = false;
+    this.pendingProductionStart = false;
+    this.pendingRecipeCycle = 0;
+    this.lastInteractionPointerType = "mouse";
+    this.lastClickPointerType = "mouse";
 
     this.bindEvents();
   }
@@ -79,6 +84,24 @@ export class InputController {
       if (event.key === "Enter") {
         event.preventDefault();
         this.pendingPlacementConfirm = true;
+        return;
+      }
+
+      if (event.key === "p" || event.key === "P") {
+        event.preventDefault();
+        this.pendingProductionStart = true;
+        return;
+      }
+
+      if (event.key === "[" || event.key === "{") {
+        event.preventDefault();
+        this.pendingRecipeCycle = -1;
+        return;
+      }
+
+      if (event.key === "]" || event.key === "}") {
+        event.preventDefault();
+        this.pendingRecipeCycle = 1;
       }
     });
 
@@ -108,6 +131,7 @@ export class InputController {
 
   handlePointerDown(event) {
     this.updateMousePosition(event.clientX, event.clientY);
+    this.lastInteractionPointerType = event.pointerType || "mouse";
 
     if (event.button === 2) {
       event.preventDefault();
@@ -215,7 +239,11 @@ export class InputController {
       this.tapCandidatePointerId === event.pointerId &&
       event.button !== 2
     ) {
-      this.pendingClick = true;
+      this.lastClickPointerType = pointer.pointerType || "mouse";
+      this.pendingClick = {
+        pointerType: this.lastClickPointerType,
+        coarse: this.isCoarsePointer(),
+      };
     }
 
     this.canvas.releasePointerCapture?.(event.pointerId);
@@ -343,7 +371,7 @@ export class InputController {
 
   consumeClick() {
     const clicked = this.pendingClick;
-    this.pendingClick = false;
+    this.pendingClick = null;
     return clicked;
   }
 
@@ -369,5 +397,25 @@ export class InputController {
     const harvesting = this.pendingHarvest;
     this.pendingHarvest = false;
     return harvesting;
+  }
+
+  consumeProductionStart() {
+    const starting = this.pendingProductionStart;
+    this.pendingProductionStart = false;
+    return starting;
+  }
+
+  consumeRecipeCycle() {
+    const direction = this.pendingRecipeCycle;
+    this.pendingRecipeCycle = 0;
+    return direction;
+  }
+
+  isCoarsePointer() {
+    return this.coarsePointerQuery.matches;
+  }
+
+  requiresExplicitTouchPlacement(pointerType = this.lastClickPointerType) {
+    return pointerType === "touch" || this.isCoarsePointer();
   }
 }
