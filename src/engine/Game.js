@@ -627,9 +627,10 @@ export class Game {
 
     const instance = selectedProductionInfo.instance;
     if (instance.productionState === "running") {
-      const ratio = instance.productionDuration > 0
-        ? Math.round((instance.productionProgress / instance.productionDuration) * 100)
-        : 0;
+      let ratio = 0;
+      if (instance.productionDuration > 0) {
+        ratio = Math.round((instance.productionProgress / instance.productionDuration) * 100);
+      }
       return `稼働中: ${this.getRecipeLabel(this.registry.getRecipe(instance.activeRecipeId))} ${ratio}%`;
     }
 
