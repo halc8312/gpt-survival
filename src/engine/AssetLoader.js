@@ -6,10 +6,17 @@ export class AssetLoader {
   }
 
   async loadTileImages(tiles) {
-    const spritePaths = [...new Set(tiles.flatMap((tile) => tile.sprites ?? []))];
-    const loadedEntries = await Promise.all(
-      spritePaths.map(async (path) => [path, await this.loadImage(path)]),
-    );
+    await this.loadImages(tiles.flatMap((tile) => tile.sprites ?? []));
+  }
+
+  async loadResourceImages(resources) {
+    await this.loadImages(resources.map((resource) => resource.sprite).filter(Boolean));
+  }
+
+  async loadImages(paths) {
+    const spritePaths = [...new Set(paths)];
+    const missingPaths = spritePaths.filter((path) => !this.images.has(path));
+    const loadedEntries = await Promise.all(missingPaths.map(async (path) => [path, await this.loadImage(path)]));
 
     for (const [path, image] of loadedEntries) {
       this.images.set(path, image);

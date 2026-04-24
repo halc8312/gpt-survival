@@ -3,6 +3,7 @@ import { DataRegistry } from "./DataRegistry.js";
 import { InputController } from "./InputController.js";
 import { IsometricCamera } from "./IsometricCamera.js";
 import { MapRenderer } from "./MapRenderer.js";
+import { PlacementValidator } from "./PlacementValidator.js";
 import { WorldGenerator } from "./WorldGenerator.js";
 import { DebugOverlay } from "../ui/DebugOverlay.js";
 
@@ -33,6 +34,13 @@ const DATA_FILES = [
   { key: "dataValidation", path: "assets/manifests/data_validation_report_v0.1.json", optional: true },
 ];
 
+const BUILDING_HOTKEYS = new Map([
+  ["1", "building_basic_shelter"],
+  ["2", "building_storage_yard"],
+  ["3", "building_manual_workbench"],
+  ["4", "building_small_generator"],
+]);
+
 export class Game {
   constructor({ canvas, debugElement, errorPanel }) {
     this.canvas = canvas;
@@ -46,13 +54,23 @@ export class Game {
     this.input = new InputController({ canvas, camera: this.camera });
     this.world = null;
     this.mapRenderer = null;
+    this.placementValidator = new PlacementValidator({
+      occupancyProviders: [PlacementValidator.createResourceNodeBlocker()],
+    });
     this.frameCount = 0;
     this.accumulator = 0;
     this.fps = 0;
     this.lastFrameAt = 0;
     this.started = false;
     this.viewport = { width: 1, height: 1, dpr: 1 };
-    this.selection = { hoveredTile: null, selectedTile: null };
+    this.selection = {
+      hoveredTile: null,
+      selectedTile: null,
+      hoveredResource: null,
+      selectedResource: null,
+      activeBuildingId: BUILDING_HOTKEYS.get("1"),
+      placement: null,
+    };
 
     window.addEventListener("resize", () => this.resize());
   }
@@ -66,7 +84,10 @@ export class Game {
       throw new Error(`Validation failed:\n- ${validation.errors.join("\n- ")}`);
     }
 
-    await this.assetLoader.loadTileImages(this.registry.getAll("tiles"));
+    await Promise.all([
+      this.assetLoader.loadTileImages(this.registry.getAll("tiles")),
+      this.assetLoader.loadResourceImages(this.registry.getAll("resources")),
+    ]);
 
     const gameConfig = this.registry.getMeta("gameConfig");
     const mapGeneration = this.registry.getMeta("mapGeneration")?.mvp;
@@ -135,9 +156,24 @@ export class Game {
 
     this.input.update(deltaSeconds);
     this.selection.hoveredTile = this.mapRenderer.screenToTile(this.input.mouse.x, this.input.mouse.y, this.world);
+    this.selection.hoveredResource = this.selection.hoveredTile
+      ? this.world.resourceNodeGrid[this.selection.hoveredTile.y][this.selection.hoveredTile.x]
+      : null;
 
-    if (this.input.consumeClick() && this.selection.hoveredTile) {
-      this.selection.selectedTile = this.selection.hoveredTile;
+    const buildingShortcut = this.input.consumeBuildingShortcut();
+    if (buildingShortcut && BUILDING_HOTKEYS.has(buildingShortcut)) {
+      this.selection.activeBuildingId = BUILDING_HOTKEYS.get(buildingShortcut);
+    }
+
+    this.selection.placement = this.getPlacementPreview();
+
+    if (this.input.consumeClick()) {
+      if (this.selection.hoveredResource) {
+        this.selection.selectedResource = this.selection.hoveredResource;
+      } else if (this.selection.hoveredTile) {
+        this.selection.selectedTile = this.selection.hoveredTile;
+        this.selection.selectedResource = null;
+      }
     }
 
     this.updateDebugOverlay();
@@ -167,6 +203,9 @@ export class Game {
   updateDebugOverlay() {
     const hovered = this.selection.hoveredTile;
     const selected = this.selection.selectedTile;
+    const hoveredResource = this.selection.hoveredResource;
+    const selectedResource = this.selection.selectedResource;
+    const activeBuilding = this.registry.getBuilding(this.selection.activeBuildingId);
     const warnings = [...this.registry.validation.warnings, ...this.assetLoader.warnings];
 
     this.debugOverlay.render({
@@ -178,8 +217,33 @@ export class Game {
       mouse: this.input.mouse,
       hoveredTile: hovered,
       selectedTile: selected,
+       hoveredResource,
+       selectedResource,
+       activeBuilding,
+       placement: this.selection.placement,
       warningCount: warnings.length,
     });
+  }
+
+  getPlacementPreview() {
+    const building = this.registry.getBuilding(this.selection.activeBuildingId);
+    if (!building) {
+      return null;
+    }
+
+    const origin = this.selection.hoveredTile
+      ? { x: this.selection.hoveredTile.x, y: this.selection.hoveredTile.y }
+      : null;
+    return {
+      buildingId: building.id,
+      footprint: building.footprint,
+      origin,
+      ...this.placementValidator.validate({
+        world: this.world,
+        origin,
+        footprint: building.footprint,
+      }),
+    };
   }
 
   hashSeed(input) {
