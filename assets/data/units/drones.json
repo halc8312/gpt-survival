@@ -1,0 +1,57 @@
+{
+  "version": "0.1.0",
+  "drones": [
+    {
+      "id": "drone_logistics_mk1",
+      "name": {
+        "ja": "運搬ドローン Mk1",
+        "en": "Logistics Drone Mk1"
+      },
+      "sprite": "assets/images/drones/drone_logistics_mk1_idle_south.png",
+      "role": "logistics",
+      "batteryMax": 100,
+      "durability": 80,
+      "cargoCapacity": 10,
+      "speed": 1.1,
+      "tasks": [
+        "haul",
+        "deliver"
+      ],
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "drone",
+        "logistics"
+      ]
+    },
+    {
+      "id": "drone_utility_mk1",
+      "name": {
+        "ja": "作業補助ドローン Mk1",
+        "en": "Utility Drone Mk1"
+      },
+      "sprite": "assets/images/drones/drone_utility_mk1_idle_south.png",
+      "role": "utility",
+      "batteryMax": 100,
+      "durability": 70,
+      "cargoCapacity": 4,
+      "speed": 1.0,
+      "tasks": [
+        "repair",
+        "build_assist"
+      ],
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "drone",
+        "utility"
+      ]
+    }
+  ],
+  "initialInstances": [
+    {
+      "droneId": "drone_logistics_mk1",
+      "count": 2
+    }
+  ]
+}

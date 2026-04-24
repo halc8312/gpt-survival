@@ -1,0 +1,25 @@
+{
+  "version": "0.1.0",
+  "steps": [
+    {
+      "id": "tutorial_001",
+      "trigger": "game_start",
+      "text": "墜落船コアの周辺から残骸を回収しましょう。"
+    },
+    {
+      "id": "tutorial_002",
+      "trigger": "first_storage_built",
+      "text": "資材置き場があれば、より多くの素材を保管できます。"
+    },
+    {
+      "id": "tutorial_003",
+      "trigger": "first_power_built",
+      "text": "発電機を建てると、採掘機や研究設備を動かせます。"
+    },
+    {
+      "id": "tutorial_004",
+      "trigger": "first_research_station_built",
+      "text": "研究データを使って新しい設備を解放しましょう。"
+    }
+  ]
+}

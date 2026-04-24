@@ -1,0 +1,239 @@
+{
+  "version": "0.1.0",
+  "events": [
+    {
+      "id": "event_cold_night",
+      "name": {
+        "ja": "寒冷夜",
+        "en": "Cold Night"
+      },
+      "category": "weather",
+      "severity": 1,
+      "effects": {
+        "moraleDelta": -3,
+        "fatigueGainMultiplier": 1.2
+      },
+      "counterplay": {
+        "ja": "シェルターと電力に余裕が必要。",
+        "en": "シェルターと電力に余裕が必要。"
+      },
+      "icon": "assets/images/ui/ui_event_cold_night.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "weather"
+      ]
+    },
+    {
+      "id": "event_magnetic_rain",
+      "name": {
+        "ja": "磁気雨",
+        "en": "Magnetic Rain"
+      },
+      "category": "weather",
+      "severity": 2,
+      "effects": {
+        "solarOutputMultiplier": 0.25,
+        "droneSpeedMultiplier": 0.7
+      },
+      "counterplay": {
+        "ja": "太陽光発電とドローン効率が低下。",
+        "en": "太陽光発電とドローン効率が低下。"
+      },
+      "icon": "assets/images/ui/ui_event_magnetic_rain.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "weather"
+      ]
+    },
+    {
+      "id": "event_minor_spore_bloom",
+      "name": {
+        "ja": "小規模胞子発生",
+        "en": "Minor Spore Bloom"
+      },
+      "category": "hazard",
+      "severity": 2,
+      "effects": {
+        "sporeLevelDelta": 20
+      },
+      "counterplay": {
+        "ja": "空気フィルターで被害軽減。",
+        "en": "空気フィルターで被害軽減。"
+      },
+      "icon": "assets/images/ui/ui_event_spore_bloom.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "hazard"
+      ]
+    },
+    {
+      "id": "event_night_skitter_raid",
+      "name": {
+        "ja": "夜間スキッター襲来",
+        "en": "Night Skitter Raid"
+      },
+      "category": "attack",
+      "severity": 2,
+      "effects": {
+        "spawnCreature": "creature_night_skitter",
+        "countRange": [
+          2,
+          5
+        ]
+      },
+      "counterplay": {
+        "ja": "防壁とタレットの最初のテスト。",
+        "en": "防壁とタレットの最初のテスト。"
+      },
+      "icon": "assets/images/ui/ui_event_creature_raid.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "attack"
+      ]
+    },
+    {
+      "id": "event_equipment_wear",
+      "name": {
+        "ja": "設備劣化",
+        "en": "Equipment Wear"
+      },
+      "category": "maintenance",
+      "severity": 1,
+      "effects": {
+        "buildingDurabilityLossRange": [
+          5,
+          18
+        ]
+      },
+      "counterplay": {
+        "ja": "修理キットと保守が必要。",
+        "en": "修理キットと保守が必要。"
+      },
+      "icon": "assets/images/ui/ui_event_equipment_wear.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "maintenance"
+      ]
+    },
+    {
+      "id": "event_power_instability",
+      "name": {
+        "ja": "電力不安定",
+        "en": "Power Instability"
+      },
+      "category": "power",
+      "severity": 1,
+      "effects": {
+        "powerDemandSpike": 6
+      },
+      "counterplay": {
+        "ja": "蓄電池と非常用発電で対処。",
+        "en": "蓄電池と非常用発電で対処。"
+      },
+      "icon": "assets/images/ui/ui_event_power_warning.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "power"
+      ]
+    },
+    {
+      "id": "event_food_shortage_warning",
+      "name": {
+        "ja": "食料不足警告",
+        "en": "Food Shortage Warning"
+      },
+      "category": "warning",
+      "severity": 1,
+      "effects": {
+        "triggerMetric": "foodDaysRemaining",
+        "threshold": 1.0
+      },
+      "counterplay": {
+        "ja": "食料の残日数が少ない。",
+        "en": "食料の残日数が少ない。"
+      },
+      "icon": "assets/images/ui/ui_event_food_warning.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "warning"
+      ]
+    },
+    {
+      "id": "event_water_shortage_warning",
+      "name": {
+        "ja": "水不足警告",
+        "en": "Water Shortage Warning"
+      },
+      "category": "warning",
+      "severity": 1,
+      "effects": {
+        "triggerMetric": "waterDaysRemaining",
+        "threshold": 1.0
+      },
+      "counterplay": {
+        "ja": "浄水の残日数が少ない。",
+        "en": "浄水の残日数が少ない。"
+      },
+      "icon": "assets/images/ui/ui_event_water_warning.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "warning"
+      ]
+    },
+    {
+      "id": "event_resource_signal",
+      "name": {
+        "ja": "資源反応検知",
+        "en": "Resource Signal"
+      },
+      "category": "info",
+      "severity": 1,
+      "effects": {
+        "revealsNearbyResource": true
+      },
+      "counterplay": {
+        "ja": "センサーや探索で資源候補を検知。",
+        "en": "センサーや探索で資源候補を検知。"
+      },
+      "icon": "assets/images/ui/ui_event_resource_signal.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "info"
+      ]
+    },
+    {
+      "id": "event_data_echo",
+      "name": {
+        "ja": "データエコー",
+        "en": "Data Echo"
+      },
+      "category": "info",
+      "severity": 1,
+      "effects": {
+        "grantsResearchDataRange": [
+          10,
+          30
+        ]
+      },
+      "counterplay": {
+        "ja": "船載AI断片から断続的にデータを得る。",
+        "en": "船載AI断片から断続的にデータを得る。"
+      },
+      "icon": "assets/images/ui/ui_event_data_echo.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "info"
+      ]
+    }
+  ]
+}

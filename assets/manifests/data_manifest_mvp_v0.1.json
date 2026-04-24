@@ -1,0 +1,202 @@
+{
+  "version": "0.1.0",
+  "project": "gpt-game",
+  "workingTitle": "星屑コロニー / Stardust Colony",
+  "createdAt": "2026-04-24T05:53:58+00:00",
+  "description": "MVP JSON data pack for Codex implementation. Designed to pair with gpt-game_mvp_asset_pack_v0.1.zip.",
+  "files": [
+    {
+      "path": "assets/data/balance/difficulty_normal.json",
+      "file": "difficulty_normal.json",
+      "category": "balance",
+      "version": "0.1.0",
+      "sha256": "4f4b567f289a6d4773c1bbb49dabc22fa8bd4865ff9bc3f747c2b55a7d7cdb1c"
+    },
+    {
+      "path": "assets/data/balance/progression_mvp.json",
+      "file": "progression_mvp.json",
+      "category": "balance",
+      "version": "0.1.0",
+      "sha256": "b364fbaaadce05bd837d7f2c415b17ad44598d4b196e5fa5680db0196edd51b5"
+    },
+    {
+      "path": "assets/data/core/constants.json",
+      "file": "constants.json",
+      "category": "core",
+      "version": "0.1.0",
+      "sha256": "b3d28298b8b6184b6871dc53841eb2920c3544491072d9cfe1fc9fb74bbba5e8"
+    },
+    {
+      "path": "assets/data/core/game_config.json",
+      "file": "game_config.json",
+      "category": "core",
+      "version": "0.1.0",
+      "sha256": "672d65f4e533e8f8859481404b28e1bec90952ea9e5035adcfb188d65adef0f0"
+    },
+    {
+      "path": "assets/data/core/save_schema.json",
+      "file": "save_schema.json",
+      "category": "core",
+      "version": "0.1.0",
+      "sha256": "8c14dd8bc90f91cfa463012fba2d671140ea861cb0aafa8f070d6e514340fe48"
+    },
+    {
+      "path": "assets/data/gameplay/buildings.json",
+      "file": "buildings.json",
+      "category": "gameplay",
+      "version": "0.1.0",
+      "sha256": "ba2a3d4684a75f78f2d9593b8e52ded789397cc9f9981becfef89ccb26cd11d3"
+    },
+    {
+      "path": "assets/data/gameplay/events.json",
+      "file": "events.json",
+      "category": "gameplay",
+      "version": "0.1.0",
+      "sha256": "239eab433f875187bb9af74b8a7a35f8ddbd3d8ed6923f82bfa90f7ad9cc4db1"
+    },
+    {
+      "path": "assets/data/gameplay/items.json",
+      "file": "items.json",
+      "category": "gameplay",
+      "version": "0.1.0",
+      "sha256": "6a7fe0065f0a8c1a5cdd9b475523690f10553c45708b1d0e33868d583d91afce"
+    },
+    {
+      "path": "assets/data/gameplay/recipes.json",
+      "file": "recipes.json",
+      "category": "gameplay",
+      "version": "0.1.0",
+      "sha256": "ad850439663fb5c32a19a367bac5b9121b01c0b59108a413eb0b28492140ba55"
+    },
+    {
+      "path": "assets/data/gameplay/research.json",
+      "file": "research.json",
+      "category": "gameplay",
+      "version": "0.1.0",
+      "sha256": "e8ac4c7a0f2f163639b1c7c6c346c5b3db2013ae21739a7752b586ae5674a16c"
+    },
+    {
+      "path": "assets/data/ui/tooltips.json",
+      "file": "tooltips.json",
+      "category": "ui",
+      "version": "0.1.0",
+      "sha256": "335462d304c38f21bc9bbceb1767968c2c2998a7e258d61273fa1e0bea00eb11"
+    },
+    {
+      "path": "assets/data/ui/tutorials.json",
+      "file": "tutorials.json",
+      "category": "ui",
+      "version": "0.1.0",
+      "sha256": "132c34496d1216053622ea0daac2dc909c2b1c8c9a1a92a42551c95c0cc20fa7"
+    },
+    {
+      "path": "assets/data/ui/ui_text.json",
+      "file": "ui_text.json",
+      "category": "ui",
+      "version": "0.1.0",
+      "sha256": "f8e39768ee2b73945ce881cb035eb72356ec548246090d9b12d15cb3243a8daf"
+    },
+    {
+      "path": "assets/data/units/creatures.json",
+      "file": "creatures.json",
+      "category": "units",
+      "version": "0.1.0",
+      "sha256": "aa01e0e712f1c6a75c1daeff9636b2d067da9556d2f9d3203ae9674406482b5a"
+    },
+    {
+      "path": "assets/data/units/drones.json",
+      "file": "drones.json",
+      "category": "units",
+      "version": "0.1.0",
+      "sha256": "a01e68e1cef4203a0de4f19b0968aab15600167d08e88dee82a18b6ffa53fc22"
+    },
+    {
+      "path": "assets/data/units/survivors.json",
+      "file": "survivors.json",
+      "category": "units",
+      "version": "0.1.0",
+      "sha256": "b5a6ce3442a235483a9d6909b674d2c4ff1f51594ba4640f8ea597c5ce52e52a"
+    },
+    {
+      "path": "assets/data/world/biomes.json",
+      "file": "biomes.json",
+      "category": "world",
+      "version": "0.1.0",
+      "sha256": "48279b6cdf38ebbf993de1e8016c5e1c033bd6dcaad1039605269b60fbcaba87"
+    },
+    {
+      "path": "assets/data/world/decorations.json",
+      "file": "decorations.json",
+      "category": "world",
+      "version": "0.1.0",
+      "sha256": "770afde8bd1273cbce1992275c2205df26087df981fe8ee598e34cb13b4223b9"
+    },
+    {
+      "path": "assets/data/world/map_generation.json",
+      "file": "map_generation.json",
+      "category": "world",
+      "version": "0.1.0",
+      "sha256": "012b391e3d5d9ddcbd05c2bac0611cf6b88a7a7ebc1ffa538ef5e29303747d1d"
+    },
+    {
+      "path": "assets/data/world/resources.json",
+      "file": "resources.json",
+      "category": "world",
+      "version": "0.1.0",
+      "sha256": "8ad7993d9d2350628acf87af64b60ef9e655350656d6e6bedde3f37b97793101"
+    },
+    {
+      "path": "assets/data/world/tiles.json",
+      "file": "tiles.json",
+      "category": "world",
+      "version": "0.1.0",
+      "sha256": "dc67c8594974c789ae03b6a8e5dd348a9620147543a11971cd9e3c31df2d03b0"
+    }
+  ],
+  "counts": {
+    "items": 30,
+    "resources": 8,
+    "buildings": 20,
+    "recipes": 36,
+    "research": 20,
+    "events": 10,
+    "survivors": 5,
+    "drones": 2,
+    "creatures": 4,
+    "tiles": 12,
+    "decorations": 12
+  },
+  "validation": {
+    "version": "0.1.0",
+    "createdAt": "2026-04-24T05:53:58+00:00",
+    "expectedCounts": {
+      "items": 30,
+      "resources": 8,
+      "buildings": 20,
+      "recipes": 36,
+      "research": 20,
+      "events": 10,
+      "survivors": 5,
+      "drones": 2,
+      "creatures": 4,
+      "tiles": 12,
+      "decorations": 12
+    },
+    "actualCounts": {
+      "items": 30,
+      "resources": 8,
+      "buildings": 20,
+      "recipes": 36,
+      "research": 20,
+      "events": 10,
+      "survivors": 5,
+      "drones": 2,
+      "creatures": 4,
+      "tiles": 12,
+      "decorations": 12
+    },
+    "errors": [],
+    "warnings": [],
+    "valid": true
+  }
+}

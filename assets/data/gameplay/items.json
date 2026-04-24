@@ -1,0 +1,635 @@
+{
+  "version": "0.1.0",
+  "items": [
+    {
+      "id": "scrap_metal",
+      "name": {
+        "ja": "スクラップ金属",
+        "en": "Scrap Metal"
+      },
+      "description": {
+        "ja": "墜落船や残骸から得られる汎用金属素材。",
+        "en": "Scrap Metal"
+      },
+      "category": "initial",
+      "tier": 1,
+      "stackSize": 100,
+      "mass": 0.8,
+      "icon": "assets/images/items/item_scrap_metal.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "initial"
+      ]
+    },
+    {
+      "id": "stone",
+      "name": {
+        "ja": "石材",
+        "en": "Stone"
+      },
+      "description": {
+        "ja": "防壁、炉、フィルターに使う基本素材。",
+        "en": "Stone"
+      },
+      "category": "initial",
+      "tier": 1,
+      "stackSize": 100,
+      "mass": 1.0,
+      "icon": "assets/images/items/item_stone.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "initial"
+      ]
+    },
+    {
+      "id": "iron_ore",
+      "name": {
+        "ja": "鉄鉱石",
+        "en": "Iron Ore"
+      },
+      "description": {
+        "ja": "精錬して鉄板にする鉱石。",
+        "en": "Iron Ore"
+      },
+      "category": "initial",
+      "tier": 1,
+      "stackSize": 100,
+      "mass": 1.3,
+      "icon": "assets/images/items/item_iron_ore.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "initial"
+      ]
+    },
+    {
+      "id": "plant_fiber",
+      "name": {
+        "ja": "植物繊維",
+        "en": "Plant Fiber"
+      },
+      "description": {
+        "ja": "シェルター、フィルター、生活用品に使う異星植物繊維。",
+        "en": "Plant Fiber"
+      },
+      "category": "initial",
+      "tier": 1,
+      "stackSize": 100,
+      "mass": 0.3,
+      "icon": "assets/images/items/item_plant_fiber.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "initial"
+      ]
+    },
+    {
+      "id": "raw_food",
+      "name": {
+        "ja": "生食材",
+        "en": "Raw Food"
+      },
+      "description": {
+        "ja": "そのまま食べられるが保存性の低い食材。",
+        "en": "Raw Food"
+      },
+      "category": "initial",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 0.4,
+      "icon": "assets/images/items/item_raw_food.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "initial"
+      ]
+    },
+    {
+      "id": "dirty_water",
+      "name": {
+        "ja": "未処理水",
+        "en": "Dirty Water"
+      },
+      "description": {
+        "ja": "処理前の水。飲用には危険。",
+        "en": "Dirty Water"
+      },
+      "category": "initial",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 1.0,
+      "icon": "assets/images/items/item_dirty_water.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "initial"
+      ]
+    },
+    {
+      "id": "basic_circuit",
+      "name": {
+        "ja": "簡易回路",
+        "en": "Basic Circuit"
+      },
+      "description": {
+        "ja": "墜落船から回収した基本電子部品。",
+        "en": "Basic Circuit"
+      },
+      "category": "initial",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 0.2,
+      "icon": "assets/images/items/item_basic_circuit.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "initial"
+      ]
+    },
+    {
+      "id": "battery_cell",
+      "name": {
+        "ja": "バッテリーセル",
+        "en": "Battery Cell"
+      },
+      "description": {
+        "ja": "初期電力設備やドローン部品に使うセル。",
+        "en": "Battery Cell"
+      },
+      "category": "initial",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 0.4,
+      "icon": "assets/images/items/item_battery_cell.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "initial"
+      ]
+    },
+    {
+      "id": "iron_plate",
+      "name": {
+        "ja": "鉄板",
+        "en": "Iron Plate"
+      },
+      "description": {
+        "ja": "建物と機械に使う標準金属板。",
+        "en": "Iron Plate"
+      },
+      "category": "processed",
+      "tier": 1,
+      "stackSize": 100,
+      "mass": 0.9,
+      "icon": "assets/images/items/item_iron_plate.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "processed"
+      ]
+    },
+    {
+      "id": "iron_rod",
+      "name": {
+        "ja": "鉄棒",
+        "en": "Iron Rod"
+      },
+      "description": {
+        "ja": "構造材や支柱に使う金属棒。",
+        "en": "Iron Rod"
+      },
+      "category": "processed",
+      "tier": 1,
+      "stackSize": 100,
+      "mass": 0.7,
+      "icon": "assets/images/items/item_iron_rod.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "processed"
+      ]
+    },
+    {
+      "id": "gear",
+      "name": {
+        "ja": "歯車",
+        "en": "Gear"
+      },
+      "description": {
+        "ja": "初期機械の駆動部品。",
+        "en": "Gear"
+      },
+      "category": "processed",
+      "tier": 1,
+      "stackSize": 100,
+      "mass": 0.4,
+      "icon": "assets/images/items/item_gear.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "processed"
+      ]
+    },
+    {
+      "id": "recovered_wire",
+      "name": {
+        "ja": "回収ワイヤー",
+        "en": "Recovered Wire"
+      },
+      "description": {
+        "ja": "電力設備と回路修理に使うワイヤー。",
+        "en": "Recovered Wire"
+      },
+      "category": "processed",
+      "tier": 1,
+      "stackSize": 100,
+      "mass": 0.2,
+      "icon": "assets/images/items/item_recovered_wire.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "processed"
+      ]
+    },
+    {
+      "id": "composite_panel",
+      "name": {
+        "ja": "複合パネル",
+        "en": "Composite Panel"
+      },
+      "description": {
+        "ja": "金属と繊維を組み合わせた軽量建材。",
+        "en": "Composite Panel"
+      },
+      "category": "processed",
+      "tier": 1,
+      "stackSize": 100,
+      "mass": 0.6,
+      "icon": "assets/images/items/item_composite_panel.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "processed"
+      ]
+    },
+    {
+      "id": "basic_filter",
+      "name": {
+        "ja": "簡易フィルター",
+        "en": "Basic Filter"
+      },
+      "description": {
+        "ja": "水と空気の基本ろ過に使うフィルター。",
+        "en": "Basic Filter"
+      },
+      "category": "processed",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 0.3,
+      "icon": "assets/images/items/item_basic_filter.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "processed"
+      ]
+    },
+    {
+      "id": "construction_parts",
+      "name": {
+        "ja": "建築部品",
+        "en": "Construction Parts"
+      },
+      "description": {
+        "ja": "建物建設用に標準化された部品セット。",
+        "en": "Construction Parts"
+      },
+      "category": "processed",
+      "tier": 1,
+      "stackSize": 100,
+      "mass": 0.8,
+      "icon": "assets/images/items/item_construction_parts.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "processed"
+      ]
+    },
+    {
+      "id": "machine_parts",
+      "name": {
+        "ja": "機械部品",
+        "en": "Machine Parts"
+      },
+      "description": {
+        "ja": "採掘機、加工機、修理設備に使う機械部品。",
+        "en": "Machine Parts"
+      },
+      "category": "processed",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 0.8,
+      "icon": "assets/images/items/item_machine_parts.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "processed"
+      ]
+    },
+    {
+      "id": "repair_kit",
+      "name": {
+        "ja": "修理キット",
+        "en": "Repair Kit"
+      },
+      "description": {
+        "ja": "建物や機械の修理に使うキット。",
+        "en": "Repair Kit"
+      },
+      "category": "processed",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 0.5,
+      "icon": "assets/images/items/item_repair_kit.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "processed"
+      ]
+    },
+    {
+      "id": "purified_water",
+      "name": {
+        "ja": "浄水",
+        "en": "Purified Water"
+      },
+      "description": {
+        "ja": "飲用可能な安全な水。",
+        "en": "Purified Water"
+      },
+      "category": "life",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 1.0,
+      "icon": "assets/images/items/item_purified_water.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "life"
+      ]
+    },
+    {
+      "id": "processed_food",
+      "name": {
+        "ja": "加工食料",
+        "en": "Processed Food"
+      },
+      "description": {
+        "ja": "保存しやすい加工済み食料。",
+        "en": "Processed Food"
+      },
+      "category": "life",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 0.5,
+      "icon": "assets/images/items/item_processed_food.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "life"
+      ]
+    },
+    {
+      "id": "oxygen_filter",
+      "name": {
+        "ja": "酸素フィルター",
+        "en": "Oxygen Filter"
+      },
+      "description": {
+        "ja": "胞子や有害粒子から住民を守るフィルター。",
+        "en": "Oxygen Filter"
+      },
+      "category": "life",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 0.4,
+      "icon": "assets/images/items/item_oxygen_filter.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "life"
+      ]
+    },
+    {
+      "id": "medicine_pack",
+      "name": {
+        "ja": "応急医療パック",
+        "en": "Medicine Pack"
+      },
+      "description": {
+        "ja": "負傷や胞子汚染の初期治療に使う医療品。",
+        "en": "Medicine Pack"
+      },
+      "category": "life",
+      "tier": 1,
+      "stackSize": 25,
+      "mass": 0.4,
+      "icon": "assets/images/items/item_medicine_pack.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "life"
+      ]
+    },
+    {
+      "id": "comfort_pack",
+      "name": {
+        "ja": "生活用品パック",
+        "en": "Comfort Pack"
+      },
+      "description": {
+        "ja": "士気維持に役立つ生活用品。",
+        "en": "Comfort Pack"
+      },
+      "category": "life",
+      "tier": 1,
+      "stackSize": 25,
+      "mass": 0.5,
+      "icon": "assets/images/items/item_comfort_pack.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "life"
+      ]
+    },
+    {
+      "id": "fuel_cell",
+      "name": {
+        "ja": "燃料セル",
+        "en": "Fuel Cell"
+      },
+      "description": {
+        "ja": "小型発電機で消費する燃料。",
+        "en": "Fuel Cell"
+      },
+      "category": "power",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 0.7,
+      "icon": "assets/images/items/item_fuel_cell.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "power"
+      ]
+    },
+    {
+      "id": "power_capacitor",
+      "name": {
+        "ja": "蓄電コンデンサ",
+        "en": "Power Capacitor"
+      },
+      "description": {
+        "ja": "蓄電池や電力安定化に使う部品。",
+        "en": "Power Capacitor"
+      },
+      "category": "power",
+      "tier": 1,
+      "stackSize": 25,
+      "mass": 0.5,
+      "icon": "assets/images/items/item_power_capacitor.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "power"
+      ]
+    },
+    {
+      "id": "research_data",
+      "name": {
+        "ja": "研究データ",
+        "en": "Research Data"
+      },
+      "description": {
+        "ja": "研究を進めるためのデータ資源。",
+        "en": "Research Data"
+      },
+      "category": "research",
+      "tier": 1,
+      "stackSize": 999,
+      "mass": 0.0,
+      "icon": "assets/images/items/item_research_data.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "research"
+      ]
+    },
+    {
+      "id": "data_chip",
+      "name": {
+        "ja": "データチップ",
+        "en": "Data Chip"
+      },
+      "description": {
+        "ja": "船載データや調査記録が入ったチップ。",
+        "en": "Data Chip"
+      },
+      "category": "research",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 0.1,
+      "icon": "assets/images/items/item_data_chip.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "research"
+      ]
+    },
+    {
+      "id": "conveyor_parts",
+      "name": {
+        "ja": "コンベア部品",
+        "en": "Conveyor Parts"
+      },
+      "description": {
+        "ja": "コンベア建設に使う部品。",
+        "en": "Conveyor Parts"
+      },
+      "category": "automation",
+      "tier": 1,
+      "stackSize": 100,
+      "mass": 0.4,
+      "icon": "assets/images/items/item_conveyor_parts.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "automation"
+      ]
+    },
+    {
+      "id": "turret_parts",
+      "name": {
+        "ja": "タレット部品",
+        "en": "Turret Parts"
+      },
+      "description": {
+        "ja": "簡易タレット建設に使う部品。",
+        "en": "Turret Parts"
+      },
+      "category": "defense",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 0.6,
+      "icon": "assets/images/items/item_turret_parts.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "defense"
+      ]
+    },
+    {
+      "id": "drone_parts",
+      "name": {
+        "ja": "ドローン部品",
+        "en": "Drone Parts"
+      },
+      "description": {
+        "ja": "ドローン修理や将来の製造に使う精密部品。",
+        "en": "Drone Parts"
+      },
+      "category": "automation",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 0.4,
+      "icon": "assets/images/items/item_drone_parts.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "automation"
+      ]
+    },
+    {
+      "id": "sensor_module",
+      "name": {
+        "ja": "センサーモジュール",
+        "en": "Sensor Module"
+      },
+      "description": {
+        "ja": "センサー設備に使う高機能検知部品。",
+        "en": "Sensor Module"
+      },
+      "category": "automation",
+      "tier": 1,
+      "stackSize": 50,
+      "mass": 0.3,
+      "icon": "assets/images/items/item_sensor_module.png",
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "automation"
+      ]
+    }
+  ]
+}

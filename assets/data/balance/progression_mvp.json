@@ -1,0 +1,40 @@
+{
+  "version": "0.1.0",
+  "milestones": [
+    {
+      "id": "milestone_survive_day_1",
+      "name": "Day 1 生存",
+      "conditions": {
+        "dayReached": 2
+      }
+    },
+    {
+      "id": "milestone_first_power",
+      "name": "初回発電",
+      "conditions": {
+        "buildingBuilt": "building_small_generator"
+      }
+    },
+    {
+      "id": "milestone_first_iron",
+      "name": "初回鉄板生産",
+      "conditions": {
+        "itemProduced": "iron_plate"
+      }
+    },
+    {
+      "id": "milestone_basic_automation",
+      "name": "基本自動化",
+      "conditions": {
+        "researchCompleted": "research_basic_automation"
+      }
+    },
+    {
+      "id": "milestone_stable_colony",
+      "name": "安定コロニー",
+      "conditions": {
+        "researchCompleted": "research_stable_colony_operations"
+      }
+    }
+  ]
+}

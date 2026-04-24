@@ -1,0 +1,92 @@
+{
+  "version": "0.1.0",
+  "creatures": [
+    {
+      "id": "creature_luma_grazer",
+      "name": {
+        "ja": "ルマグレイザー",
+        "en": "Luma Grazer"
+      },
+      "behavior": "passive",
+      "sprite": "assets/images/creatures/creature_luma_grazer_idle_south.png",
+      "health": 60,
+      "attackDamage": 0,
+      "drops": {
+        "raw_food": [
+          1,
+          2
+        ]
+      },
+      "spawnBiomes": [
+        "biome_glow_forest"
+      ],
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "passive"
+      ]
+    },
+    {
+      "id": "creature_night_skitter",
+      "name": {
+        "ja": "ナイトスキッター",
+        "en": "Night Skitter"
+      },
+      "behavior": "hostile",
+      "sprite": "assets/images/creatures/creature_night_skitter_idle_south.png",
+      "health": 35,
+      "attackDamage": 6,
+      "drops": {},
+      "spawnBiomes": [
+        "biome_rocky_field",
+        "biome_crash_plain"
+      ],
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "hostile"
+      ]
+    },
+    {
+      "id": "creature_spore_tick",
+      "name": {
+        "ja": "スポアダニ",
+        "en": "Spore Tick"
+      },
+      "behavior": "hazard",
+      "sprite": "assets/images/creatures/creature_spore_tick_idle_south.png",
+      "health": 20,
+      "attackDamage": 2,
+      "drops": {},
+      "spawnBiomes": [
+        "biome_glow_forest"
+      ],
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "hazard"
+      ]
+    },
+    {
+      "id": "creature_shellback",
+      "name": {
+        "ja": "シェルバック",
+        "en": "Shellback"
+      },
+      "behavior": "hostile",
+      "sprite": "assets/images/creatures/creature_shellback_idle_south.png",
+      "health": 120,
+      "attackDamage": 10,
+      "drops": {},
+      "spawnBiomes": [
+        "biome_rocky_field",
+        "biome_crash_plain"
+      ],
+      "phase": "mvp",
+      "tags": [
+        "mvp",
+        "hostile"
+      ]
+    }
+  ]
+}

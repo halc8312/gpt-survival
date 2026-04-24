@@ -1,0 +1,762 @@
+{
+  "version": "0.1.0",
+  "recipes": [
+    {
+      "id": "recipe_iron_plate_manual",
+      "name": {
+        "ja": "手作業の鉄板",
+        "en": "Manual Iron Plate"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "scrap_metal": 3
+      },
+      "outputs": {
+        "iron_plate": 1
+      },
+      "durationSeconds": 45,
+      "unlockedBy": "research_basic_survival",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_iron_rod_manual",
+      "name": {
+        "ja": "手作業の鉄棒",
+        "en": "Manual Iron Rod"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "iron_plate": 1
+      },
+      "outputs": {
+        "iron_rod": 2
+      },
+      "durationSeconds": 30,
+      "unlockedBy": "research_basic_survival",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_gear_manual",
+      "name": {
+        "ja": "手作業の歯車",
+        "en": "Manual Gear"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "iron_plate": 2
+      },
+      "outputs": {
+        "gear": 1
+      },
+      "durationSeconds": 45,
+      "unlockedBy": "research_basic_survival",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_recovered_wire_manual",
+      "name": {
+        "ja": "ワイヤー回収",
+        "en": "Recovered Wire"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "scrap_metal": 2
+      },
+      "outputs": {
+        "recovered_wire": 2
+      },
+      "durationSeconds": 35,
+      "unlockedBy": "research_basic_survival",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_composite_panel_manual",
+      "name": {
+        "ja": "複合パネル",
+        "en": "Composite Panel"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "scrap_metal": 1,
+        "plant_fiber": 2
+      },
+      "outputs": {
+        "composite_panel": 1
+      },
+      "durationSeconds": 40,
+      "unlockedBy": "research_basic_survival",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_basic_filter_manual",
+      "name": {
+        "ja": "簡易フィルター",
+        "en": "Basic Filter"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "plant_fiber": 3,
+        "stone": 1
+      },
+      "outputs": {
+        "basic_filter": 1
+      },
+      "durationSeconds": 35,
+      "unlockedBy": "research_water_safety",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_construction_parts_manual",
+      "name": {
+        "ja": "建築部品",
+        "en": "Construction Parts"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "iron_plate": 2,
+        "iron_rod": 2,
+        "composite_panel": 1
+      },
+      "outputs": {
+        "construction_parts": 1
+      },
+      "durationSeconds": 60,
+      "unlockedBy": "research_standardized_construction",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_repair_kit_manual",
+      "name": {
+        "ja": "修理キット",
+        "en": "Repair Kit"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "scrap_metal": 2,
+        "plant_fiber": 1,
+        "recovered_wire": 1
+      },
+      "outputs": {
+        "repair_kit": 1
+      },
+      "durationSeconds": 45,
+      "unlockedBy": "research_basic_maintenance",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_fuel_cell_manual",
+      "name": {
+        "ja": "簡易燃料セル",
+        "en": "Fuel Cell"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "plant_fiber": 3,
+        "scrap_metal": 1
+      },
+      "outputs": {
+        "fuel_cell": 1
+      },
+      "durationSeconds": 50,
+      "unlockedBy": "research_basic_power",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_battery_cell_salvage",
+      "name": {
+        "ja": "バッテリーセル再生",
+        "en": "Battery Cell Salvage"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "scrap_metal": 2,
+        "recovered_wire": 2
+      },
+      "outputs": {
+        "battery_cell": 1
+      },
+      "durationSeconds": 70,
+      "unlockedBy": "research_basic_power",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_basic_circuit_salvage",
+      "name": {
+        "ja": "簡易回路再生",
+        "en": "Basic Circuit Salvage"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "scrap_metal": 3,
+        "recovered_wire": 1
+      },
+      "outputs": {
+        "basic_circuit": 1
+      },
+      "durationSeconds": 80,
+      "unlockedBy": "research_basic_science",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_oxygen_filter_manual",
+      "name": {
+        "ja": "酸素フィルター",
+        "en": "Oxygen Filter"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "basic_filter": 1,
+        "plant_fiber": 2
+      },
+      "outputs": {
+        "oxygen_filter": 1
+      },
+      "durationSeconds": 50,
+      "unlockedBy": "research_spore_safety",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_medicine_pack_manual",
+      "name": {
+        "ja": "応急医療パック",
+        "en": "Medicine Pack"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "raw_food": 1,
+        "plant_fiber": 2,
+        "purified_water": 1
+      },
+      "outputs": {
+        "medicine_pack": 1
+      },
+      "durationSeconds": 70,
+      "unlockedBy": "research_spore_safety",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_comfort_pack_manual",
+      "name": {
+        "ja": "生活用品パック",
+        "en": "Comfort Pack"
+      },
+      "buildingId": "building_manual_workbench",
+      "inputs": {
+        "plant_fiber": 3,
+        "composite_panel": 1
+      },
+      "outputs": {
+        "comfort_pack": 1
+      },
+      "durationSeconds": 60,
+      "unlockedBy": "research_colony_comfort",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_iron_plate_smelter",
+      "name": {
+        "ja": "精錬鉄板",
+        "en": "Smelt Iron Plate"
+      },
+      "buildingId": "building_smelter_mk1",
+      "inputs": {
+        "iron_ore": 2
+      },
+      "outputs": {
+        "iron_plate": 2
+      },
+      "durationSeconds": 30,
+      "unlockedBy": "research_basic_industry",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_iron_rod_smelter",
+      "name": {
+        "ja": "精錬鉄棒",
+        "en": "Smelt Iron Rod"
+      },
+      "buildingId": "building_smelter_mk1",
+      "inputs": {
+        "iron_plate": 1
+      },
+      "outputs": {
+        "iron_rod": 2
+      },
+      "durationSeconds": 25,
+      "unlockedBy": "research_basic_industry",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_scrap_to_plate_smelter",
+      "name": {
+        "ja": "スクラップ精錬",
+        "en": "Scrap to Plate"
+      },
+      "buildingId": "building_smelter_mk1",
+      "inputs": {
+        "scrap_metal": 3
+      },
+      "outputs": {
+        "iron_plate": 2
+      },
+      "durationSeconds": 45,
+      "unlockedBy": "research_basic_industry",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_stone_filter_media",
+      "name": {
+        "ja": "ろ過用石材加工",
+        "en": "Stone Filter Media"
+      },
+      "buildingId": "building_smelter_mk1",
+      "inputs": {
+        "stone": 2,
+        "plant_fiber": 1
+      },
+      "outputs": {
+        "basic_filter": 1
+      },
+      "durationSeconds": 45,
+      "unlockedBy": "research_water_safety",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_gear_assembler",
+      "name": {
+        "ja": "自動歯車加工",
+        "en": "Assembler Gear"
+      },
+      "buildingId": "building_assembler_mk1",
+      "inputs": {
+        "iron_plate": 2
+      },
+      "outputs": {
+        "gear": 2
+      },
+      "durationSeconds": 30,
+      "unlockedBy": "research_basic_automation",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_composite_panel_assembler",
+      "name": {
+        "ja": "自動複合パネル",
+        "en": "Assembler Composite Panel"
+      },
+      "buildingId": "building_assembler_mk1",
+      "inputs": {
+        "iron_plate": 1,
+        "plant_fiber": 2
+      },
+      "outputs": {
+        "composite_panel": 2
+      },
+      "durationSeconds": 35,
+      "unlockedBy": "research_basic_automation",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_construction_parts_assembler",
+      "name": {
+        "ja": "自動建築部品",
+        "en": "Assembler Construction Parts"
+      },
+      "buildingId": "building_assembler_mk1",
+      "inputs": {
+        "iron_plate": 2,
+        "iron_rod": 2,
+        "composite_panel": 1
+      },
+      "outputs": {
+        "construction_parts": 2
+      },
+      "durationSeconds": 45,
+      "unlockedBy": "research_standardized_construction",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_machine_parts_assembler",
+      "name": {
+        "ja": "機械部品",
+        "en": "Machine Parts"
+      },
+      "buildingId": "building_assembler_mk1",
+      "inputs": {
+        "gear": 2,
+        "iron_plate": 2,
+        "recovered_wire": 1
+      },
+      "outputs": {
+        "machine_parts": 1
+      },
+      "durationSeconds": 60,
+      "unlockedBy": "research_basic_automation",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_conveyor_parts_assembler",
+      "name": {
+        "ja": "コンベア部品",
+        "en": "Conveyor Parts"
+      },
+      "buildingId": "building_assembler_mk1",
+      "inputs": {
+        "iron_plate": 1,
+        "gear": 1,
+        "recovered_wire": 1
+      },
+      "outputs": {
+        "conveyor_parts": 2
+      },
+      "durationSeconds": 45,
+      "unlockedBy": "research_basic_automation",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_turret_parts_assembler",
+      "name": {
+        "ja": "タレット部品",
+        "en": "Turret Parts"
+      },
+      "buildingId": "building_assembler_mk1",
+      "inputs": {
+        "iron_plate": 2,
+        "gear": 1,
+        "basic_circuit": 1
+      },
+      "outputs": {
+        "turret_parts": 1
+      },
+      "durationSeconds": 70,
+      "unlockedBy": "research_basic_defense",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_drone_parts_assembler",
+      "name": {
+        "ja": "ドローン部品",
+        "en": "Drone Parts"
+      },
+      "buildingId": "building_assembler_mk1",
+      "inputs": {
+        "machine_parts": 1,
+        "basic_circuit": 1,
+        "battery_cell": 1
+      },
+      "outputs": {
+        "drone_parts": 1
+      },
+      "durationSeconds": 80,
+      "unlockedBy": "research_drone_maintenance_basics",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_sensor_module_assembler",
+      "name": {
+        "ja": "センサーモジュール",
+        "en": "Sensor Module"
+      },
+      "buildingId": "building_assembler_mk1",
+      "inputs": {
+        "basic_circuit": 1,
+        "data_chip": 1,
+        "recovered_wire": 1
+      },
+      "outputs": {
+        "sensor_module": 1
+      },
+      "durationSeconds": 75,
+      "unlockedBy": "research_basic_sensors",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_power_capacitor_assembler",
+      "name": {
+        "ja": "蓄電コンデンサ",
+        "en": "Power Capacitor"
+      },
+      "buildingId": "building_assembler_mk1",
+      "inputs": {
+        "battery_cell": 2,
+        "recovered_wire": 2,
+        "iron_plate": 1
+      },
+      "outputs": {
+        "power_capacitor": 1
+      },
+      "durationSeconds": 75,
+      "unlockedBy": "research_power_storage",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_repair_kit_assembler",
+      "name": {
+        "ja": "自動修理キット",
+        "en": "Assembler Repair Kit"
+      },
+      "buildingId": "building_assembler_mk1",
+      "inputs": {
+        "machine_parts": 1,
+        "composite_panel": 1,
+        "recovered_wire": 1
+      },
+      "outputs": {
+        "repair_kit": 2
+      },
+      "durationSeconds": 60,
+      "unlockedBy": "research_basic_maintenance",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_fuel_cell_assembler",
+      "name": {
+        "ja": "標準燃料セル",
+        "en": "Assembler Fuel Cell"
+      },
+      "buildingId": "building_assembler_mk1",
+      "inputs": {
+        "plant_fiber": 2,
+        "scrap_metal": 1,
+        "basic_filter": 1
+      },
+      "outputs": {
+        "fuel_cell": 2
+      },
+      "durationSeconds": 50,
+      "unlockedBy": "research_emergency_power",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_purified_water_basic",
+      "name": {
+        "ja": "浄水",
+        "en": "Purified Water"
+      },
+      "buildingId": "building_water_processor_mk1",
+      "inputs": {
+        "dirty_water": 2,
+        "basic_filter": 1
+      },
+      "outputs": {
+        "purified_water": 3
+      },
+      "durationSeconds": 60,
+      "unlockedBy": "research_water_safety",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_processed_food_basic",
+      "name": {
+        "ja": "加工食料",
+        "en": "Processed Food"
+      },
+      "buildingId": "building_food_prep_station",
+      "inputs": {
+        "raw_food": 2,
+        "purified_water": 1
+      },
+      "outputs": {
+        "processed_food": 2
+      },
+      "durationSeconds": 60,
+      "unlockedBy": "research_colony_comfort",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_clean_air_cycle",
+      "name": {
+        "ja": "空気清浄サイクル",
+        "en": "Clean Air Cycle"
+      },
+      "buildingId": "building_air_filter_mk1",
+      "inputs": {
+        "oxygen_filter": 1
+      },
+      "outputs": {
+        "research_data": 2
+      },
+      "durationSeconds": 90,
+      "unlockedBy": "research_spore_safety",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_repair_station_kit",
+      "name": {
+        "ja": "修理ステーション補修",
+        "en": "Repair Station Kit"
+      },
+      "buildingId": "building_repair_station",
+      "inputs": {
+        "repair_kit": 1,
+        "scrap_metal": 1
+      },
+      "outputs": {
+        "machine_parts": 1
+      },
+      "durationSeconds": 90,
+      "unlockedBy": "research_basic_maintenance",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_research_data_from_chip",
+      "name": {
+        "ja": "データチップ解析",
+        "en": "Research Data from Chip"
+      },
+      "buildingId": "building_research_station",
+      "inputs": {
+        "data_chip": 1
+      },
+      "outputs": {
+        "research_data": 35
+      },
+      "durationSeconds": 120,
+      "unlockedBy": "research_data_analysis",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_material_testing_data",
+      "name": {
+        "ja": "素材試験データ",
+        "en": "Material Testing Data"
+      },
+      "buildingId": "building_research_station",
+      "inputs": {
+        "stone": 5,
+        "iron_plate": 2
+      },
+      "outputs": {
+        "research_data": 15
+      },
+      "durationSeconds": 90,
+      "unlockedBy": "research_material_testing",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    },
+    {
+      "id": "recipe_sensor_scan_data",
+      "name": {
+        "ja": "センサースキャン解析",
+        "en": "Sensor Scan Data"
+      },
+      "buildingId": "building_research_station",
+      "inputs": {
+        "sensor_module": 1
+      },
+      "outputs": {
+        "research_data": 25
+      },
+      "durationSeconds": 120,
+      "unlockedBy": "research_basic_sensors",
+      "phase": "mvp",
+      "tags": [
+        "mvp"
+      ]
+    }
+  ]
+}

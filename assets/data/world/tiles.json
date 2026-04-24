@@ -1,0 +1,245 @@
+{
+  "version": "0.1.0",
+  "tiles": [
+    {
+      "id": "tile_plain_soil",
+      "name": {
+        "ja": "平原土",
+        "en": "Plain Soil"
+      },
+      "defaultBiome": "biome_crash_plain",
+      "buildable": true,
+      "movementCost": 1.0,
+      "height": 0,
+      "sporeBase": 0,
+      "waterSource": false,
+      "sprites": [
+        "assets/images/tiles/tile_plain_soil_01.png"
+      ],
+      "tags": [
+        "mvp",
+        "terrain"
+      ]
+    },
+    {
+      "id": "tile_crash_scorched",
+      "name": {
+        "ja": "焦げた墜落跡",
+        "en": "Scorched Crash Ground"
+      },
+      "defaultBiome": "biome_crash_plain",
+      "buildable": true,
+      "movementCost": 1.0,
+      "height": 0,
+      "sporeBase": 0,
+      "waterSource": false,
+      "sprites": [
+        "assets/images/tiles/tile_crash_scorched_01.png"
+      ],
+      "tags": [
+        "mvp",
+        "terrain"
+      ]
+    },
+    {
+      "id": "tile_grass_sparse",
+      "name": {
+        "ja": "まばらな草地",
+        "en": "Sparse Grass"
+      },
+      "defaultBiome": "biome_crash_plain",
+      "buildable": true,
+      "movementCost": 1.0,
+      "height": 0,
+      "sporeBase": 0,
+      "waterSource": false,
+      "sprites": [
+        "assets/images/tiles/tile_grass_sparse_01.png"
+      ],
+      "tags": [
+        "mvp",
+        "terrain"
+      ]
+    },
+    {
+      "id": "tile_rocky_ground",
+      "name": {
+        "ja": "岩混じり地面",
+        "en": "Rocky Ground"
+      },
+      "defaultBiome": "biome_rocky_field",
+      "buildable": true,
+      "movementCost": 1.1,
+      "height": 0,
+      "sporeBase": 0,
+      "waterSource": false,
+      "sprites": [
+        "assets/images/tiles/tile_rocky_ground_01.png"
+      ],
+      "tags": [
+        "mvp",
+        "terrain"
+      ]
+    },
+    {
+      "id": "tile_bare_rock",
+      "name": {
+        "ja": "露出岩盤",
+        "en": "Bare Rock"
+      },
+      "defaultBiome": "biome_rocky_field",
+      "buildable": false,
+      "movementCost": 1.2,
+      "height": 0,
+      "sporeBase": 0,
+      "waterSource": false,
+      "sprites": [
+        "assets/images/tiles/tile_bare_rock_01.png"
+      ],
+      "tags": [
+        "mvp",
+        "terrain"
+      ]
+    },
+    {
+      "id": "tile_gravel_slope",
+      "name": {
+        "ja": "砂利斜面",
+        "en": "Gravel Slope"
+      },
+      "defaultBiome": "biome_rocky_field",
+      "buildable": false,
+      "movementCost": 1.6,
+      "height": 0,
+      "sporeBase": 0,
+      "waterSource": false,
+      "sprites": [
+        "assets/images/tiles/tile_gravel_slope_01.png"
+      ],
+      "tags": [
+        "mvp",
+        "terrain"
+      ]
+    },
+    {
+      "id": "tile_glow_moss",
+      "name": {
+        "ja": "発光苔地",
+        "en": "Glow Moss"
+      },
+      "defaultBiome": "biome_glow_forest",
+      "buildable": true,
+      "movementCost": 1.1,
+      "height": 0,
+      "sporeBase": 8,
+      "waterSource": false,
+      "sprites": [
+        "assets/images/tiles/tile_glow_moss_01.png"
+      ],
+      "tags": [
+        "mvp",
+        "terrain"
+      ]
+    },
+    {
+      "id": "tile_forest_floor",
+      "name": {
+        "ja": "発光林の土",
+        "en": "Luminous Forest Floor"
+      },
+      "defaultBiome": "biome_glow_forest",
+      "buildable": true,
+      "movementCost": 1.2,
+      "height": 0,
+      "sporeBase": 8,
+      "waterSource": false,
+      "sprites": [
+        "assets/images/tiles/tile_forest_floor_01.png"
+      ],
+      "tags": [
+        "mvp",
+        "terrain"
+      ]
+    },
+    {
+      "id": "tile_root_tangle",
+      "name": {
+        "ja": "根絡み地面",
+        "en": "Root Tangle"
+      },
+      "defaultBiome": "biome_glow_forest",
+      "buildable": false,
+      "movementCost": 1.8,
+      "height": 0,
+      "sporeBase": 8,
+      "waterSource": false,
+      "sprites": [
+        "assets/images/tiles/tile_root_tangle_01.png"
+      ],
+      "tags": [
+        "mvp",
+        "terrain"
+      ]
+    },
+    {
+      "id": "tile_shallow_water",
+      "name": {
+        "ja": "浅い水面",
+        "en": "Shallow Water"
+      },
+      "defaultBiome": "biome_shallow_marsh",
+      "buildable": false,
+      "movementCost": 2.0,
+      "height": 0,
+      "sporeBase": 0,
+      "waterSource": true,
+      "sprites": [
+        "assets/images/tiles/tile_shallow_water_01.png"
+      ],
+      "tags": [
+        "mvp",
+        "terrain"
+      ]
+    },
+    {
+      "id": "tile_marsh_mud",
+      "name": {
+        "ja": "湿地泥",
+        "en": "Marsh Mud"
+      },
+      "defaultBiome": "biome_shallow_marsh",
+      "buildable": false,
+      "movementCost": 1.6,
+      "height": 0,
+      "sporeBase": 0,
+      "waterSource": false,
+      "sprites": [
+        "assets/images/tiles/tile_marsh_mud_01.png"
+      ],
+      "tags": [
+        "mvp",
+        "terrain"
+      ]
+    },
+    {
+      "id": "tile_reed_bed",
+      "name": {
+        "ja": "葦原",
+        "en": "Reed Bed"
+      },
+      "defaultBiome": "biome_shallow_marsh",
+      "buildable": false,
+      "movementCost": 1.7,
+      "height": 0,
+      "sporeBase": 8,
+      "waterSource": false,
+      "sprites": [
+        "assets/images/tiles/tile_reed_bed_01.png"
+      ],
+      "tags": [
+        "mvp",
+        "terrain"
+      ]
+    }
+  ]
+}

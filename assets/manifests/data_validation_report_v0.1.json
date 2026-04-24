@@ -1,0 +1,33 @@
+{
+  "version": "0.1.0",
+  "createdAt": "2026-04-24T05:53:58+00:00",
+  "expectedCounts": {
+    "items": 30,
+    "resources": 8,
+    "buildings": 20,
+    "recipes": 36,
+    "research": 20,
+    "events": 10,
+    "survivors": 5,
+    "drones": 2,
+    "creatures": 4,
+    "tiles": 12,
+    "decorations": 12
+  },
+  "actualCounts": {
+    "items": 30,
+    "resources": 8,
+    "buildings": 20,
+    "recipes": 36,
+    "research": 20,
+    "events": 10,
+    "survivors": 5,
+    "drones": 2,
+    "creatures": 4,
+    "tiles": 12,
+    "decorations": 12
+  },
+  "errors": [],
+  "warnings": [],
+  "valid": true
+}

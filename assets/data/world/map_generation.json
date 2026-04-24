@@ -1,0 +1,103 @@
+{
+  "version": "0.1.0",
+  "defaultSeedPrefix": "LUMINA-9",
+  "mapSizes": {
+    "prototype": [
+      32,
+      32
+    ],
+    "mvp": [
+      64,
+      64
+    ],
+    "normal": [
+      128,
+      128
+    ],
+    "large": [
+      256,
+      256
+    ]
+  },
+  "mvp": {
+    "width": 64,
+    "height": 64,
+    "startingCenter": [
+      32,
+      32
+    ],
+    "startingBiome": "biome_crash_plain",
+    "biomeRings": [
+      {
+        "biomeId": "biome_crash_plain",
+        "radius": [
+          0,
+          18
+        ]
+      },
+      {
+        "biomeId": "biome_rocky_field",
+        "radius": [
+          12,
+          30
+        ]
+      },
+      {
+        "biomeId": "biome_glow_forest",
+        "radius": [
+          18,
+          40
+        ]
+      },
+      {
+        "biomeId": "biome_shallow_marsh",
+        "radius": [
+          18,
+          40
+        ]
+      }
+    ],
+    "resourceGuarantees": [
+      {
+        "resourceId": "resource_crash_debris",
+        "withinRadius": 10,
+        "minCount": 4
+      },
+      {
+        "resourceId": "resource_loose_stone",
+        "withinRadius": 10,
+        "minCount": 4
+      },
+      {
+        "resourceId": "resource_luma_berry_bush",
+        "withinRadius": 10,
+        "minCount": 3
+      },
+      {
+        "resourceId": "resource_fiber_reed",
+        "withinRadius": 10,
+        "minCount": 2
+      },
+      {
+        "resourceId": "resource_data_pod",
+        "withinRadius": 10,
+        "minCount": 1
+      },
+      {
+        "resourceId": "resource_iron_vein",
+        "withinRadius": 18,
+        "minCount": 2
+      },
+      {
+        "resourceId": "resource_shallow_water",
+        "withinRadius": 18,
+        "minCount": 1
+      },
+      {
+        "resourceId": "resource_power_wreck",
+        "withinRadius": 18,
+        "minCount": 1
+      }
+    ]
+  }
+}

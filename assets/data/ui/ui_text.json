@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0",
+  "language": "ja",
+  "menus": {
+    "build": "建設",
+    "production": "生産",
+    "research": "研究",
+    "population": "住民",
+    "power": "電力",
+    "logistics": "物流",
+    "defense": "防衛",
+    "map": "マップ",
+    "save": "セーブ"
+  },
+  "status": {
+    "food": "食料",
+    "water": "水",
+    "power": "電力",
+    "battery": "蓄電",
+    "morale": "士気",
+    "health": "体力",
+    "fatigue": "疲労",
+    "spore": "胞子",
+    "threat": "脅威",
+    "time": "時刻"
+  }
+}
