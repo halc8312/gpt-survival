@@ -1,0 +1,2349 @@
+{
+  "version": "0.1.0",
+  "project": "gpt-game",
+  "workingTitle": "星屑コロニー / Stardust Colony",
+  "phase": "mvp",
+  "createdAt": "2026-04-24T05:44:55+00:00",
+  "description": "MVP prototype image asset pack. Transparent PNG trial assets for implementation and visual inspection.",
+  "assetRoot": "assets/images",
+  "counts": {
+    "building": 20,
+    "creature": 4,
+    "drone": 2,
+    "effect": 10,
+    "item": 30,
+    "resource": 8,
+    "tile": 12,
+    "ui_event": 10,
+    "ui_status": 10,
+    "ui_warning": 8,
+    "unit": 5
+  },
+  "assets": [
+    {
+      "id": "tile_bare_rock_01",
+      "filename": "tile_bare_rock_01.png",
+      "path": "assets/images/tiles/tile_bare_rock_01.png",
+      "type": "tile",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 384,
+      "height": 192,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "38bde59d72354739d50020d6163fd510c55ce2907b54c31460f3a977ccf16711"
+    },
+    {
+      "id": "tile_crash_scorched_01",
+      "filename": "tile_crash_scorched_01.png",
+      "path": "assets/images/tiles/tile_crash_scorched_01.png",
+      "type": "tile",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 384,
+      "height": 192,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "9941b98eccc754ddcbe866c5f92d7e05cf50ab0890260f9ba0b292723429ec13"
+    },
+    {
+      "id": "tile_forest_floor_01",
+      "filename": "tile_forest_floor_01.png",
+      "path": "assets/images/tiles/tile_forest_floor_01.png",
+      "type": "tile",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 384,
+      "height": 192,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "d8115cfab2f478a3364e7f62619f75770783548b9b44956cce08f44ae494b547"
+    },
+    {
+      "id": "tile_glow_moss_01",
+      "filename": "tile_glow_moss_01.png",
+      "path": "assets/images/tiles/tile_glow_moss_01.png",
+      "type": "tile",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 384,
+      "height": 192,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "eeaf0349428f0f9f73b9952aa779b9583892c085cb4eca4662e55d3371657d12"
+    },
+    {
+      "id": "tile_grass_sparse_01",
+      "filename": "tile_grass_sparse_01.png",
+      "path": "assets/images/tiles/tile_grass_sparse_01.png",
+      "type": "tile",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 384,
+      "height": 192,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "9d868841b0c840af9b4c92304abcced81faf2924f5e8c4fc353c216d71478f48"
+    },
+    {
+      "id": "tile_gravel_slope_01",
+      "filename": "tile_gravel_slope_01.png",
+      "path": "assets/images/tiles/tile_gravel_slope_01.png",
+      "type": "tile",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 384,
+      "height": 192,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "526f0d48ffb3cdc93d38f9818309a5269f8300c98df2e259c1795f2666207723"
+    },
+    {
+      "id": "tile_marsh_mud_01",
+      "filename": "tile_marsh_mud_01.png",
+      "path": "assets/images/tiles/tile_marsh_mud_01.png",
+      "type": "tile",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 384,
+      "height": 192,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "1f0d8eb687d0a51a2252d0b1ee8a5ed05493e62aa39ccabf5bd67f6e25be40a5"
+    },
+    {
+      "id": "tile_plain_soil_01",
+      "filename": "tile_plain_soil_01.png",
+      "path": "assets/images/tiles/tile_plain_soil_01.png",
+      "type": "tile",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 384,
+      "height": 192,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "ddcba734b0c0bfa5d9467bd386b872127ab178fd5be8af007fb95ffd9755ae87"
+    },
+    {
+      "id": "tile_reed_bed_01",
+      "filename": "tile_reed_bed_01.png",
+      "path": "assets/images/tiles/tile_reed_bed_01.png",
+      "type": "tile",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 384,
+      "height": 192,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "51b90a790095bcae267cba4f6ea33f51146b57c67faec7411ff7261b25b79286"
+    },
+    {
+      "id": "tile_rocky_ground_01",
+      "filename": "tile_rocky_ground_01.png",
+      "path": "assets/images/tiles/tile_rocky_ground_01.png",
+      "type": "tile",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 384,
+      "height": 192,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "1cacd728f5dff4b738f823812d8236d272779c627f6f63deb3586be92e9601a1"
+    },
+    {
+      "id": "tile_root_tangle_01",
+      "filename": "tile_root_tangle_01.png",
+      "path": "assets/images/tiles/tile_root_tangle_01.png",
+      "type": "tile",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 384,
+      "height": 192,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "7d8791d70cf6adc30f5834e65d0cdaa478487fc7b2cd51e8c9dc19d4832935aa"
+    },
+    {
+      "id": "tile_shallow_water_01",
+      "filename": "tile_shallow_water_01.png",
+      "path": "assets/images/tiles/tile_shallow_water_01.png",
+      "type": "tile",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 384,
+      "height": 192,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "153e0ad92ce3e33fe0aaa25df032e12a889aaaa637cbe468fb52f5ac8559544c"
+    },
+    {
+      "id": "resource_crash_debris",
+      "filename": "resource_crash_debris.png",
+      "path": "assets/images/resources/resource_crash_debris.png",
+      "type": "resource",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "f14c2866b32e163c0062207d5753a0ce07726af60f34d75ae1d6a7cd509c7d32"
+    },
+    {
+      "id": "resource_data_pod",
+      "filename": "resource_data_pod.png",
+      "path": "assets/images/resources/resource_data_pod.png",
+      "type": "resource",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "815952cd8bbb9cca11bfb7eb0d332a862542bce51f9cda6a947e611045bbe619"
+    },
+    {
+      "id": "resource_fiber_reed",
+      "filename": "resource_fiber_reed.png",
+      "path": "assets/images/resources/resource_fiber_reed.png",
+      "type": "resource",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "48208e63064c174e0fe7a7886d68da07f8f6d088dda2a338679846b945d9ee64"
+    },
+    {
+      "id": "resource_iron_vein",
+      "filename": "resource_iron_vein.png",
+      "path": "assets/images/resources/resource_iron_vein.png",
+      "type": "resource",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "9ac3b077286edbcbd1cdfb02738194f21f7a38ef17bdb6636e9647cb6ea7c8b1"
+    },
+    {
+      "id": "resource_loose_stone",
+      "filename": "resource_loose_stone.png",
+      "path": "assets/images/resources/resource_loose_stone.png",
+      "type": "resource",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "0e1abe8b76c5447604c80a0f71a77b5b337e1dbcf839accda3e3b11dc076f0c3"
+    },
+    {
+      "id": "resource_luma_berry_bush",
+      "filename": "resource_luma_berry_bush.png",
+      "path": "assets/images/resources/resource_luma_berry_bush.png",
+      "type": "resource",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "a4de0cd0760abc39012bcfda275d3096d35f5d497e46d16590702d21f66ae35c"
+    },
+    {
+      "id": "resource_power_wreck",
+      "filename": "resource_power_wreck.png",
+      "path": "assets/images/resources/resource_power_wreck.png",
+      "type": "resource",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "92bc128deee41f78458bb6498d35d910c4dd8c3e8895f13385b11644edc9dbf4"
+    },
+    {
+      "id": "resource_shallow_water",
+      "filename": "resource_shallow_water.png",
+      "path": "assets/images/resources/resource_shallow_water.png",
+      "type": "resource",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "64df6debc64c42d416d67d0b4fbc8a797ec194110f7ecb2059efcf1f486252e3"
+    },
+    {
+      "id": "building_basic_shelter",
+      "filename": "building_basic_shelter.png",
+      "path": "assets/images/buildings/building_basic_shelter.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 224,
+      "height": 224,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "3db3d582078b85c7ceeaca3e4ca556b5ce640c7ce3c0f03a1d29c2d3709d5474"
+    },
+    {
+      "id": "building_crash_core",
+      "filename": "building_crash_core.png",
+      "path": "assets/images/buildings/building_crash_core.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 384,
+      "height": 320,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "c8882ad310d179ddc2bd2caa51ca531419c0d6b505241af2db7f54eb37ccd7f9"
+    },
+    {
+      "id": "building_manual_workbench",
+      "filename": "building_manual_workbench.png",
+      "path": "assets/images/buildings/building_manual_workbench.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "a208f7a60de9d49966ff17abe697a387ec358d92ecfc799e8f8ba888ed861b86"
+    },
+    {
+      "id": "building_storage_yard",
+      "filename": "building_storage_yard.png",
+      "path": "assets/images/buildings/building_storage_yard.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "648b7e64337eaa73284b56a921310c251aefd9acb5b01aaf2ebedcff80fdb020"
+    },
+    {
+      "id": "building_assembler_mk1",
+      "filename": "building_assembler_mk1.png",
+      "path": "assets/images/buildings/building_assembler_mk1.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "27aef470d10f95204c257c5ae3d0c1ddb2a56b27d98f889adbc3bf915b187cbb"
+    },
+    {
+      "id": "building_basic_miner",
+      "filename": "building_basic_miner.png",
+      "path": "assets/images/buildings/building_basic_miner.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "b2001fef13ac054b174aa37be85ec7e42054c8242c84b8d1d80cffb12c2865ef"
+    },
+    {
+      "id": "building_small_generator",
+      "filename": "building_small_generator.png",
+      "path": "assets/images/buildings/building_small_generator.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "482dbdae5722a31793f3c5f5f60a023f2063a1b11da1615e46d4fa4aff5edcd5"
+    },
+    {
+      "id": "building_smelter_mk1",
+      "filename": "building_smelter_mk1.png",
+      "path": "assets/images/buildings/building_smelter_mk1.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "e696c62b25656d0bd58e7e3ac9792ec4ca3e13db7d86d944724836b616079ae7"
+    },
+    {
+      "id": "building_air_filter_mk1",
+      "filename": "building_air_filter_mk1.png",
+      "path": "assets/images/buildings/building_air_filter_mk1.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "d3775d195f2b80afcefe4c1a6724056a96866136cf3183b110a578c50d7707dc"
+    },
+    {
+      "id": "building_basic_turret",
+      "filename": "building_basic_turret.png",
+      "path": "assets/images/buildings/building_basic_turret.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "02b821b844ee15cf5043be52e12e4850b0e35294e2dcca5012c653ca36af9f90"
+    },
+    {
+      "id": "building_basic_wall",
+      "filename": "building_basic_wall.png",
+      "path": "assets/images/buildings/building_basic_wall.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "110aaa494403a1e1b3878e41cfbe0de737065adcb7027d07230875e9146b9b64"
+    },
+    {
+      "id": "building_food_prep_station",
+      "filename": "building_food_prep_station.png",
+      "path": "assets/images/buildings/building_food_prep_station.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "242c872bf232c0d15dd9303d89e44f0b3e8d158d41c22c4a93f691c98cd2a827"
+    },
+    {
+      "id": "building_sensor_pole",
+      "filename": "building_sensor_pole.png",
+      "path": "assets/images/buildings/building_sensor_pole.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "151a8d2bf5e03121461562294ea3bdac930e3712668db38c2486f141795850ed"
+    },
+    {
+      "id": "building_water_processor_mk1",
+      "filename": "building_water_processor_mk1.png",
+      "path": "assets/images/buildings/building_water_processor_mk1.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "aff95ce95cb5ca2017101e366dec0809fae6ed5cd211f2476fbd6a1e9683f2d1"
+    },
+    {
+      "id": "building_basic_conveyor",
+      "filename": "building_basic_conveyor.png",
+      "path": "assets/images/buildings/building_basic_conveyor.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "795d0086dfb85315192357b27c47dfa498685eb1b49d3cd4747cf877aff118ef"
+    },
+    {
+      "id": "building_battery_bank_mk1",
+      "filename": "building_battery_bank_mk1.png",
+      "path": "assets/images/buildings/building_battery_bank_mk1.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "48b06358196a252b2f152592680d6a9a74ab6dbb5e293d85619001c50e975f19"
+    },
+    {
+      "id": "building_conveyor_splitter",
+      "filename": "building_conveyor_splitter.png",
+      "path": "assets/images/buildings/building_conveyor_splitter.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "6c2f0af6db23338d5ae348a804b3f27e78af12b0e1a767bf222fa297eefe6f2a"
+    },
+    {
+      "id": "building_repair_station",
+      "filename": "building_repair_station.png",
+      "path": "assets/images/buildings/building_repair_station.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "504f6ee4ccb4137e9ae687916d46bde6596706a0d7e9a3eafaa25d577c4f54fd"
+    },
+    {
+      "id": "building_research_station",
+      "filename": "building_research_station.png",
+      "path": "assets/images/buildings/building_research_station.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 224,
+      "height": 224,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "c56e930327ced1cceec5f6f2e5cb84f79537bcc91b0b66307e978f8f5df1f3da"
+    },
+    {
+      "id": "building_solar_panel_mk1",
+      "filename": "building_solar_panel_mk1.png",
+      "path": "assets/images/buildings/building_solar_panel_mk1.png",
+      "type": "building",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA",
+      "tags": [
+        "building",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "26dc2fd7a8bc7ccacee77f9b022e7538079dcca253d6ac4a3687283054f8a3ff"
+    },
+    {
+      "id": "item_basic_circuit",
+      "filename": "item_basic_circuit.png",
+      "path": "assets/images/items/item_basic_circuit.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "5b6082e048480723d14c96460683100daa2ecaa37b45cf2898d68a31049e925d"
+    },
+    {
+      "id": "item_battery_cell",
+      "filename": "item_battery_cell.png",
+      "path": "assets/images/items/item_battery_cell.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "6b821db540036b1748ba81f89aae07f07c9bf9cb77ef2982fd0caffd74c7f691"
+    },
+    {
+      "id": "item_dirty_water",
+      "filename": "item_dirty_water.png",
+      "path": "assets/images/items/item_dirty_water.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "d1ad8d00b3a021a5ac017ecb4caa251b24631c6798f3d3c0aa6ee38f1b38767f"
+    },
+    {
+      "id": "item_iron_ore",
+      "filename": "item_iron_ore.png",
+      "path": "assets/images/items/item_iron_ore.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "deb19727b39124395b52d4975541c33f9f79d50207a6d97ca86ec7ecbcf7002c"
+    },
+    {
+      "id": "item_plant_fiber",
+      "filename": "item_plant_fiber.png",
+      "path": "assets/images/items/item_plant_fiber.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "98f3cc297e684066a769f20c7b37685e24bceb51c3cd863b587e4a8bc9360517"
+    },
+    {
+      "id": "item_raw_food",
+      "filename": "item_raw_food.png",
+      "path": "assets/images/items/item_raw_food.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "3129f74c3f59a6471dff5b43908d6a171b2eecb7233e120155f4183457affa38"
+    },
+    {
+      "id": "item_scrap_metal",
+      "filename": "item_scrap_metal.png",
+      "path": "assets/images/items/item_scrap_metal.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "eadef161774975e39396d5a45ee4f005d4b1d181fc93c768f3412296649efa8d"
+    },
+    {
+      "id": "item_stone",
+      "filename": "item_stone.png",
+      "path": "assets/images/items/item_stone.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "a52f87ec1bcfab9f8030220227cdf574e767b44aa183524934e653db07fe03e6"
+    },
+    {
+      "id": "item_basic_filter",
+      "filename": "item_basic_filter.png",
+      "path": "assets/images/items/item_basic_filter.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "9c098b5ff34a76c3090cf90f8f29bd78a036368df7b3b9347a252dcd5cc6e28d"
+    },
+    {
+      "id": "item_composite_panel",
+      "filename": "item_composite_panel.png",
+      "path": "assets/images/items/item_composite_panel.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "39ec93ad5aa495447f93323012f622aed40dfbc3f8ad5e33111d4e8fe028791a"
+    },
+    {
+      "id": "item_construction_parts",
+      "filename": "item_construction_parts.png",
+      "path": "assets/images/items/item_construction_parts.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "1e630d70e2ca1e67c989a2aaab50428425c72a08713e73743f813a6df393bde0"
+    },
+    {
+      "id": "item_gear",
+      "filename": "item_gear.png",
+      "path": "assets/images/items/item_gear.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "e3039497689439072fc107fc5967202720a1f06bec8015037303431f64c4e86d"
+    },
+    {
+      "id": "item_iron_plate",
+      "filename": "item_iron_plate.png",
+      "path": "assets/images/items/item_iron_plate.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "f4a3253c2b763b299a395f5f28c2b106e782526ab29ae6a38c66dd5ae1bd34bc"
+    },
+    {
+      "id": "item_iron_rod",
+      "filename": "item_iron_rod.png",
+      "path": "assets/images/items/item_iron_rod.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "c6e85211b39e5ffe6255d0ff9bf5f38dfd4a696570856a2764df88fb487ef26a"
+    },
+    {
+      "id": "item_machine_parts",
+      "filename": "item_machine_parts.png",
+      "path": "assets/images/items/item_machine_parts.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "64fe69297cb770c87fc7ca98c882645b6b3dcd313cbbd6120254a3c002363dbe"
+    },
+    {
+      "id": "item_recovered_wire",
+      "filename": "item_recovered_wire.png",
+      "path": "assets/images/items/item_recovered_wire.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "dc489b2b57dd0553523d6fdeaedb725301fac975a886574113534c79c1515c39"
+    },
+    {
+      "id": "item_repair_kit",
+      "filename": "item_repair_kit.png",
+      "path": "assets/images/items/item_repair_kit.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "844cc45c48c33d9a8b59ab7fb3977a5b2ef8af6dfb68751a4e62720f2dac2b8d"
+    },
+    {
+      "id": "item_comfort_pack",
+      "filename": "item_comfort_pack.png",
+      "path": "assets/images/items/item_comfort_pack.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "205a40d876cbc01d1ad526cbfbeb84fbcfb29f54687c5e85ee788b81ef7c41de"
+    },
+    {
+      "id": "item_medicine_pack",
+      "filename": "item_medicine_pack.png",
+      "path": "assets/images/items/item_medicine_pack.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "aad4e51edf2112daa761dd806db66726d3c0c25924436719a1aebe22d3b53eff"
+    },
+    {
+      "id": "item_oxygen_filter",
+      "filename": "item_oxygen_filter.png",
+      "path": "assets/images/items/item_oxygen_filter.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "0a7274063da41ad01707d7c2e9a22c20ce8018ad578610e0e1fe8ddebc6b48a0"
+    },
+    {
+      "id": "item_processed_food",
+      "filename": "item_processed_food.png",
+      "path": "assets/images/items/item_processed_food.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "1fcae7444773f2549e9db31c6941a6a1dccd11b9d54bb3993def6506a4ee950b"
+    },
+    {
+      "id": "item_purified_water",
+      "filename": "item_purified_water.png",
+      "path": "assets/images/items/item_purified_water.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "c0ebff714fefde456fdebf2f448a490784ecfb85d96e1878e05d9f26b3fd140f"
+    },
+    {
+      "id": "item_conveyor_parts",
+      "filename": "item_conveyor_parts.png",
+      "path": "assets/images/items/item_conveyor_parts.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "05121e66bcaabf7344fa57bf321276fd4ee8794a8770d62424cc7fa43ff6ef8b"
+    },
+    {
+      "id": "item_data_chip",
+      "filename": "item_data_chip.png",
+      "path": "assets/images/items/item_data_chip.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "0314ca47c587b19b2a6429998aaeeafcb4b285607ddcdf10f1f4c53e5e8d5b2f"
+    },
+    {
+      "id": "item_drone_parts",
+      "filename": "item_drone_parts.png",
+      "path": "assets/images/items/item_drone_parts.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "e639c440af12880c15d5adbf2a15cfe0e2083b5b198abd17ab507a91f0ae4eba"
+    },
+    {
+      "id": "item_fuel_cell",
+      "filename": "item_fuel_cell.png",
+      "path": "assets/images/items/item_fuel_cell.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "d610cd4f1cbbcfe597148da70c291d7d3fdd41810e4e8e99b13857cfe4032097"
+    },
+    {
+      "id": "item_power_capacitor",
+      "filename": "item_power_capacitor.png",
+      "path": "assets/images/items/item_power_capacitor.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "395f4d5a2e176981be9448c3fca17a8c4941181319b2f13e09e6f6aa516c7587"
+    },
+    {
+      "id": "item_research_data",
+      "filename": "item_research_data.png",
+      "path": "assets/images/items/item_research_data.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "b9eb0f0b0521ae40a39c1a8de76453ad51275b29c8f25f4b6da9d84bec3db699"
+    },
+    {
+      "id": "item_sensor_module",
+      "filename": "item_sensor_module.png",
+      "path": "assets/images/items/item_sensor_module.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "6310c0ce413fbcfbbf800ee4bb3b37c782927e68ea71cd35b0c13ed25c17f3f3"
+    },
+    {
+      "id": "item_turret_parts",
+      "filename": "item_turret_parts.png",
+      "path": "assets/images/items/item_turret_parts.png",
+      "type": "item",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "8299242f87f8c086d7863e2d449f2f540ceb1f176c13a1de30cf3c97b41fdeb3"
+    },
+    {
+      "id": "drone_logistics_mk1_idle_south",
+      "filename": "drone_logistics_mk1_idle_south.png",
+      "path": "assets/images/drones/drone_logistics_mk1_idle_south.png",
+      "type": "drone",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "idle",
+        "mvp",
+        "prototype",
+        "south",
+        "transparent_png"
+      ],
+      "sha256": "eb486a7df5a8cc30ada0033e822130200deb51ed948f82848ec587ca770d4ef5"
+    },
+    {
+      "id": "drone_utility_mk1_idle_south",
+      "filename": "drone_utility_mk1_idle_south.png",
+      "path": "assets/images/drones/drone_utility_mk1_idle_south.png",
+      "type": "drone",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "idle",
+        "mvp",
+        "prototype",
+        "south",
+        "transparent_png"
+      ],
+      "sha256": "6874d9e80f4308f02c19d4db72cb03be1af05eb2d75f0a12b91553e4a74103de"
+    },
+    {
+      "id": "unit_survivor_engineer_idle_south",
+      "filename": "unit_survivor_engineer_idle_south.png",
+      "path": "assets/images/units/unit_survivor_engineer_idle_south.png",
+      "type": "unit",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "idle",
+        "mvp",
+        "prototype",
+        "south",
+        "transparent_png"
+      ],
+      "sha256": "3349a9764d3706a065c7c32df1ef49d74f9cce827f3bd46ae67423c424412e03"
+    },
+    {
+      "id": "unit_survivor_medic_idle_south",
+      "filename": "unit_survivor_medic_idle_south.png",
+      "path": "assets/images/units/unit_survivor_medic_idle_south.png",
+      "type": "unit",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "idle",
+        "mvp",
+        "prototype",
+        "south",
+        "transparent_png"
+      ],
+      "sha256": "fa3e95dc135a0a56085413f0c2db228648b91cd6465a8b540cf439504dbd0bb8"
+    },
+    {
+      "id": "unit_survivor_researcher_idle_south",
+      "filename": "unit_survivor_researcher_idle_south.png",
+      "path": "assets/images/units/unit_survivor_researcher_idle_south.png",
+      "type": "unit",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "idle",
+        "mvp",
+        "prototype",
+        "south",
+        "transparent_png"
+      ],
+      "sha256": "aeeb0e89c055f7f5d6b646495ca2c744cca01c3292f1da3d171f8f42cb7bc16d"
+    },
+    {
+      "id": "unit_survivor_scout_idle_south",
+      "filename": "unit_survivor_scout_idle_south.png",
+      "path": "assets/images/units/unit_survivor_scout_idle_south.png",
+      "type": "unit",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "idle",
+        "mvp",
+        "prototype",
+        "south",
+        "transparent_png"
+      ],
+      "sha256": "d819c95021960d6421569c7f15eeecd563040b268660d47d535bcb71b434d06e"
+    },
+    {
+      "id": "unit_survivor_worker_idle_south",
+      "filename": "unit_survivor_worker_idle_south.png",
+      "path": "assets/images/units/unit_survivor_worker_idle_south.png",
+      "type": "unit",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "idle",
+        "mvp",
+        "prototype",
+        "south",
+        "transparent_png"
+      ],
+      "sha256": "cce4f4bafacb093d306b3940f1dc8576b54102b69b28d892a0b51e27c2eb83b5"
+    },
+    {
+      "id": "creature_luma_grazer_idle_south",
+      "filename": "creature_luma_grazer_idle_south.png",
+      "path": "assets/images/creatures/creature_luma_grazer_idle_south.png",
+      "type": "creature",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "idle",
+        "mvp",
+        "prototype",
+        "south",
+        "transparent_png"
+      ],
+      "sha256": "539260f7cdb73569e22dbc2ef0e6c938d71efce2aaa9073dfc7ed9976522b9b9"
+    },
+    {
+      "id": "creature_night_skitter_idle_south",
+      "filename": "creature_night_skitter_idle_south.png",
+      "path": "assets/images/creatures/creature_night_skitter_idle_south.png",
+      "type": "creature",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "idle",
+        "mvp",
+        "prototype",
+        "south",
+        "transparent_png"
+      ],
+      "sha256": "d1998cfb3685825e5f5f95ec8b0aefc292af6b8b58084f82e34d4572ff6dae57"
+    },
+    {
+      "id": "creature_shellback_idle_south",
+      "filename": "creature_shellback_idle_south.png",
+      "path": "assets/images/creatures/creature_shellback_idle_south.png",
+      "type": "creature",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "idle",
+        "mvp",
+        "prototype",
+        "south",
+        "transparent_png"
+      ],
+      "sha256": "b55fdd1d3cd6bff389da22f27cd924263f94c333ca3ed15c0d73c3e0084b01b6"
+    },
+    {
+      "id": "creature_spore_tick_idle_south",
+      "filename": "creature_spore_tick_idle_south.png",
+      "path": "assets/images/creatures/creature_spore_tick_idle_south.png",
+      "type": "creature",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA",
+      "tags": [
+        "idle",
+        "mvp",
+        "prototype",
+        "south",
+        "transparent_png"
+      ],
+      "sha256": "0364afb864371cb8396dad460983e4842f408536ee6df0c58c3f3a9ef3af42ec"
+    },
+    {
+      "id": "ui_icon_battery",
+      "filename": "ui_icon_battery.png",
+      "path": "assets/images/ui/ui_icon_battery.png",
+      "type": "ui_status",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "39a7ccdab742352d8f5d7ffa9a4aee38c70898cc66f6482facae922f2efd119f"
+    },
+    {
+      "id": "ui_icon_fatigue",
+      "filename": "ui_icon_fatigue.png",
+      "path": "assets/images/ui/ui_icon_fatigue.png",
+      "type": "ui_status",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "0fbbe21b5414563b21453f435120da409024465ac3428ffe6f5d43ff30e922cb"
+    },
+    {
+      "id": "ui_icon_food",
+      "filename": "ui_icon_food.png",
+      "path": "assets/images/ui/ui_icon_food.png",
+      "type": "ui_status",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "fdb6e628ea27da60c33b98777f856252fdd4e4791efbe497a228d61be6c1106c"
+    },
+    {
+      "id": "ui_icon_health",
+      "filename": "ui_icon_health.png",
+      "path": "assets/images/ui/ui_icon_health.png",
+      "type": "ui_status",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "ea0eedf21970ccc403dcc3e5d860d0022fc371b7a0967990004c37d57e3f385b"
+    },
+    {
+      "id": "ui_icon_morale",
+      "filename": "ui_icon_morale.png",
+      "path": "assets/images/ui/ui_icon_morale.png",
+      "type": "ui_status",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "b1c2939326c03b198f56a4af8a70ed51ab18ac788079d5eded71981cb5f140ab"
+    },
+    {
+      "id": "ui_icon_power",
+      "filename": "ui_icon_power.png",
+      "path": "assets/images/ui/ui_icon_power.png",
+      "type": "ui_status",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "512b2b204b913ec5552b7ee3c5332a1e5cde89b25ea160ad08718c621a07c0ec"
+    },
+    {
+      "id": "ui_icon_spore",
+      "filename": "ui_icon_spore.png",
+      "path": "assets/images/ui/ui_icon_spore.png",
+      "type": "ui_status",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "5e55c36c3a3da696338ec783c2fcee85e87d15292ecbb948c78bc59c9c6fbb5f"
+    },
+    {
+      "id": "ui_icon_threat",
+      "filename": "ui_icon_threat.png",
+      "path": "assets/images/ui/ui_icon_threat.png",
+      "type": "ui_status",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "c894050de6cc0f6b0197ffea263310636b6e3fc63390b1a8c5352eaa06e4ae8e"
+    },
+    {
+      "id": "ui_icon_time",
+      "filename": "ui_icon_time.png",
+      "path": "assets/images/ui/ui_icon_time.png",
+      "type": "ui_status",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "782a8e96022452ed38ce8cb0f7d41a6270b7e1becec8e386dc37fd7c90c86271"
+    },
+    {
+      "id": "ui_icon_water",
+      "filename": "ui_icon_water.png",
+      "path": "assets/images/ui/ui_icon_water.png",
+      "type": "ui_status",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "d4113751174a19ccc6312fdd476f3ad263321ec578a67e9f21db6a4635299e6f"
+    },
+    {
+      "id": "ui_event_cold_night",
+      "filename": "ui_event_cold_night.png",
+      "path": "assets/images/ui/ui_event_cold_night.png",
+      "type": "ui_event",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "event",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "55b9cd7042d8d30f76c9099d38f0fc32af6bf3acef7ae81949e33d9fd3675159"
+    },
+    {
+      "id": "ui_event_creature_raid",
+      "filename": "ui_event_creature_raid.png",
+      "path": "assets/images/ui/ui_event_creature_raid.png",
+      "type": "ui_event",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "event",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "f35ec0e70069badce300c34e45e86daf7bbe4cfe42307b13fbbf87dd12c89c41"
+    },
+    {
+      "id": "ui_event_data_echo",
+      "filename": "ui_event_data_echo.png",
+      "path": "assets/images/ui/ui_event_data_echo.png",
+      "type": "ui_event",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "event",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "8c9d14df80e0e62ca75381a8c8700c18d0def5c3e115356569c0202daa9b7a16"
+    },
+    {
+      "id": "ui_event_equipment_wear",
+      "filename": "ui_event_equipment_wear.png",
+      "path": "assets/images/ui/ui_event_equipment_wear.png",
+      "type": "ui_event",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "event",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "36d479731432fa39724662884294b5d6e0a476a3786cc62419230119ab22c2f1"
+    },
+    {
+      "id": "ui_event_food_warning",
+      "filename": "ui_event_food_warning.png",
+      "path": "assets/images/ui/ui_event_food_warning.png",
+      "type": "ui_event",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "event",
+        "mvp",
+        "prototype",
+        "transparent_png",
+        "warning"
+      ],
+      "sha256": "9171624503a3abfba114aee17911c3ed45d3823386ebbdc18b80d6fa2d30227c"
+    },
+    {
+      "id": "ui_event_magnetic_rain",
+      "filename": "ui_event_magnetic_rain.png",
+      "path": "assets/images/ui/ui_event_magnetic_rain.png",
+      "type": "ui_event",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "event",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "b3148202ef12a5a8599288a2130eedcd8f87c28a03d75b67b6bd4209936e53db"
+    },
+    {
+      "id": "ui_event_power_warning",
+      "filename": "ui_event_power_warning.png",
+      "path": "assets/images/ui/ui_event_power_warning.png",
+      "type": "ui_event",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "event",
+        "mvp",
+        "prototype",
+        "transparent_png",
+        "warning"
+      ],
+      "sha256": "7080302380f2fd30ef8eae38f1032b799bdba2b32bbf594d619b6ff117df99cb"
+    },
+    {
+      "id": "ui_event_resource_signal",
+      "filename": "ui_event_resource_signal.png",
+      "path": "assets/images/ui/ui_event_resource_signal.png",
+      "type": "ui_event",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "event",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "31850d69fb4c1a6f1911739a84b61a0281062380dfdb8e8e6f602397a18974eb"
+    },
+    {
+      "id": "ui_event_spore_bloom",
+      "filename": "ui_event_spore_bloom.png",
+      "path": "assets/images/ui/ui_event_spore_bloom.png",
+      "type": "ui_event",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "event",
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "520e682d57741a9d462fec88e559a15a2412c8b9664e4ae1030bc41bb2a159a8"
+    },
+    {
+      "id": "ui_event_water_warning",
+      "filename": "ui_event_water_warning.png",
+      "path": "assets/images/ui/ui_event_water_warning.png",
+      "type": "ui_event",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "event",
+        "mvp",
+        "prototype",
+        "transparent_png",
+        "warning"
+      ],
+      "sha256": "9dd2005242c825d544f2992f570c7c4a5406e6981932f81f939cedfb5aa4c530"
+    },
+    {
+      "id": "ui_warning_attack",
+      "filename": "ui_warning_attack.png",
+      "path": "assets/images/ui/ui_warning_attack.png",
+      "type": "ui_warning",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png",
+        "warning"
+      ],
+      "sha256": "bee6b684735a473fc699122a5d22cfbb2e61d81e0624d1b572843316e170efcf"
+    },
+    {
+      "id": "ui_warning_damage",
+      "filename": "ui_warning_damage.png",
+      "path": "assets/images/ui/ui_warning_damage.png",
+      "type": "ui_warning",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png",
+        "warning"
+      ],
+      "sha256": "bc5a9bdd2054acd824bd1f9de5835c57e1c74937353722969e30a161aaf8fd84"
+    },
+    {
+      "id": "ui_warning_food",
+      "filename": "ui_warning_food.png",
+      "path": "assets/images/ui/ui_warning_food.png",
+      "type": "ui_warning",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png",
+        "warning"
+      ],
+      "sha256": "3bb28578b9101080f5ca825322993df91147490c1f001d337cef48e3cabb8015"
+    },
+    {
+      "id": "ui_warning_power",
+      "filename": "ui_warning_power.png",
+      "path": "assets/images/ui/ui_warning_power.png",
+      "type": "ui_warning",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png",
+        "warning"
+      ],
+      "sha256": "c56cfe1b5ca12e63830336102168b6272d4b215c4ea9fb66406a5c449ec35642"
+    },
+    {
+      "id": "ui_warning_research",
+      "filename": "ui_warning_research.png",
+      "path": "assets/images/ui/ui_warning_research.png",
+      "type": "ui_warning",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png",
+        "warning"
+      ],
+      "sha256": "6303ab88b1c5ffe2b03512c3a41ab38b7b4d4d0f2a48dcd5f7d6a4bb7897b473"
+    },
+    {
+      "id": "ui_warning_spore",
+      "filename": "ui_warning_spore.png",
+      "path": "assets/images/ui/ui_warning_spore.png",
+      "type": "ui_warning",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png",
+        "warning"
+      ],
+      "sha256": "5a793c212234c4d78a383f00c3d0d99da257f0342068cfceee1b62ec192e8a9a"
+    },
+    {
+      "id": "ui_warning_storage",
+      "filename": "ui_warning_storage.png",
+      "path": "assets/images/ui/ui_warning_storage.png",
+      "type": "ui_warning",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png",
+        "warning"
+      ],
+      "sha256": "107460b6d0c61b37e02b2430f48efd789a55fda0f0fee7d4a6d3b359aff9a27b"
+    },
+    {
+      "id": "ui_warning_water",
+      "filename": "ui_warning_water.png",
+      "path": "assets/images/ui/ui_warning_water.png",
+      "type": "ui_warning",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 64,
+      "height": 64,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png",
+        "warning"
+      ],
+      "sha256": "1d5bc0c9ce6296e7f3857bb1e69c5531b7f16da9d74daecaaca1a85b196383c0"
+    },
+    {
+      "id": "effect_cold_air_01",
+      "filename": "effect_cold_air_01.png",
+      "path": "assets/images/effects/effect_cold_air_01.png",
+      "type": "effect",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "2746a72651318d524c34e9643bfefb2b4f38b0650d35d22b9bd115d2939db383"
+    },
+    {
+      "id": "effect_damage_spark_01",
+      "filename": "effect_damage_spark_01.png",
+      "path": "assets/images/effects/effect_damage_spark_01.png",
+      "type": "effect",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "94b00eed657173933a9e02e4f4b10da3b00fb64d5152c692e136b96a4686bc9c"
+    },
+    {
+      "id": "effect_hit_small_01",
+      "filename": "effect_hit_small_01.png",
+      "path": "assets/images/effects/effect_hit_small_01.png",
+      "type": "effect",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "4294c881ae8ec6814aeb84f1323e4fc171d4852cf688370cb616a973a571e08f"
+    },
+    {
+      "id": "effect_magnetic_rain_01",
+      "filename": "effect_magnetic_rain_01.png",
+      "path": "assets/images/effects/effect_magnetic_rain_01.png",
+      "type": "effect",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "08c904bd47161d92e982a1bd5aa2187e8e69c4d362d403fc2098c73dde94cbe9"
+    },
+    {
+      "id": "effect_power_outage_01",
+      "filename": "effect_power_outage_01.png",
+      "path": "assets/images/effects/effect_power_outage_01.png",
+      "type": "effect",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "1cd23fde157ff8bc1b43fce115b474fb3cce7e5690d3a0aa0d0622f42434f4de"
+    },
+    {
+      "id": "effect_repair_spark_01",
+      "filename": "effect_repair_spark_01.png",
+      "path": "assets/images/effects/effect_repair_spark_01.png",
+      "type": "effect",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "8d2cabc2bd3339620247ebb68fcdedb422a882416d3c32d9a91c8d13ed8a9296"
+    },
+    {
+      "id": "effect_sensor_ping_01",
+      "filename": "effect_sensor_ping_01.png",
+      "path": "assets/images/effects/effect_sensor_ping_01.png",
+      "type": "effect",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "2c2647e06b8ee4ff08bef6e7993c24b683efd6ad043491afd66a8376f516a1e0"
+    },
+    {
+      "id": "effect_smoke_small_01",
+      "filename": "effect_smoke_small_01.png",
+      "path": "assets/images/effects/effect_smoke_small_01.png",
+      "type": "effect",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "0c5bc3e28f0a0ba3575c13bea08f5736adf145ad4d0a7310f263adcbff625452"
+    },
+    {
+      "id": "effect_spore_cloud_01",
+      "filename": "effect_spore_cloud_01.png",
+      "path": "assets/images/effects/effect_spore_cloud_01.png",
+      "type": "effect",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "1d39e9647fb9a1d40a63cc6bc39853c81b7c2d6fac47c022286f878c2b76b5d6"
+    },
+    {
+      "id": "effect_turret_shot_01",
+      "filename": "effect_turret_shot_01.png",
+      "path": "assets/images/effects/effect_turret_shot_01.png",
+      "type": "effect",
+      "phase": "mvp",
+      "status": "prototype",
+      "format": "png",
+      "transparentBackground": true,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA",
+      "tags": [
+        "mvp",
+        "prototype",
+        "transparent_png"
+      ],
+      "sha256": "1244ecdd3ca7066e84dce60df9c5cb590875a988b9aeb1fbc212fefc69f58888"
+    }
+  ],
+  "totalAssets": 119
+}
