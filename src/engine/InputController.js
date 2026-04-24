@@ -9,20 +9,38 @@ const KEY_BINDINGS = new Map([
   ["d", [1, 0]],
 ]);
 
+const POINTER_MOVE_THRESHOLD = {
+  mouse: 4,
+  pen: 6,
+  touch: 10,
+};
+
 export class InputController {
   constructor({ canvas, camera }) {
     this.canvas = canvas;
     this.camera = camera;
     this.keys = new Set();
     this.mouse = { x: 0, y: 0 };
+    this.pointers = new Map();
     this.drag = {
       active: false,
       moved: false,
       lastX: 0,
       lastY: 0,
+      pointerId: null,
+      pointerType: "mouse",
       button: 0,
       distance: 0,
     };
+    this.pinch = {
+      active: false,
+      pointerIds: [],
+      lastDistance: 0,
+      centerX: 0,
+      centerY: 0,
+    };
+    this.tapCandidatePointerId = null;
+    this.tapCancelled = false;
     this.pendingClick = false;
     this.pendingBuildingShortcut = null;
     this.pendingCancelBuild = false;
@@ -61,69 +79,10 @@ export class InputController {
       this.keys.delete(event.key);
     });
 
-    this.canvas.addEventListener("mousedown", (event) => {
-      if (event.button === 2) {
-        event.preventDefault();
-        const rect = this.canvas.getBoundingClientRect();
-        this.mouse.x = event.clientX - rect.left;
-        this.mouse.y = event.clientY - rect.top;
-        this.pendingCancelBuild = true;
-        return;
-      }
-
-      if (event.button !== 0 && event.button !== 1) {
-        return;
-      }
-
-      const rect = this.canvas.getBoundingClientRect();
-      this.mouse.x = event.clientX - rect.left;
-      this.mouse.y = event.clientY - rect.top;
-      this.drag.active = true;
-      this.drag.moved = false;
-      this.drag.lastX = event.clientX;
-      this.drag.lastY = event.clientY;
-      this.drag.button = event.button;
-      this.drag.distance = 0;
-      this.canvas.classList.add("dragging");
-    });
-
-    window.addEventListener("mousemove", (event) => {
-      const rect = this.canvas.getBoundingClientRect();
-      this.mouse.x = event.clientX - rect.left;
-      this.mouse.y = event.clientY - rect.top;
-
-      if (!this.drag.active) {
-        return;
-      }
-
-      const dx = event.clientX - this.drag.lastX;
-      const dy = event.clientY - this.drag.lastY;
-      this.drag.distance += Math.hypot(dx, dy);
-
-      if (Math.abs(dx) > 0 || Math.abs(dy) > 0) {
-        this.drag.moved = this.drag.moved || this.drag.distance > 3;
-        if (this.drag.moved) {
-          this.camera.panByScreen(dx, dy);
-        }
-      }
-
-      this.drag.lastX = event.clientX;
-      this.drag.lastY = event.clientY;
-    });
-
-    window.addEventListener("mouseup", (event) => {
-      if (!this.drag.active) {
-        return;
-      }
-
-      if (event.button === this.drag.button && !this.drag.moved) {
-        this.pendingClick = true;
-      }
-
-      this.drag.active = false;
-      this.drag.moved = false;
-      this.canvas.classList.remove("dragging");
-    });
+    this.canvas.addEventListener("pointerdown", (event) => this.handlePointerDown(event));
+    this.canvas.addEventListener("pointermove", (event) => this.handlePointerMove(event));
+    this.canvas.addEventListener("pointerup", (event) => this.handlePointerEnd(event));
+    this.canvas.addEventListener("pointercancel", (event) => this.handlePointerEnd(event));
 
     this.canvas.addEventListener(
       "wheel",
@@ -138,6 +97,222 @@ export class InputController {
     this.canvas.addEventListener("contextmenu", (event) => {
       event.preventDefault();
     });
+  }
+
+  handlePointerDown(event) {
+    this.updateMousePosition(event.clientX, event.clientY);
+
+    if (event.button === 2) {
+      event.preventDefault();
+      this.pendingCancelBuild = true;
+      return;
+    }
+
+    if (event.pointerType === "mouse" && event.button !== 0 && event.button !== 1) {
+      return;
+    }
+
+    event.preventDefault();
+    this.canvas.setPointerCapture?.(event.pointerId);
+
+    this.pointers.set(event.pointerId, {
+      pointerId: event.pointerId,
+      pointerType: event.pointerType || "mouse",
+      button: event.button,
+      startX: event.clientX,
+      startY: event.clientY,
+      x: event.clientX,
+      y: event.clientY,
+      lastX: event.clientX,
+      lastY: event.clientY,
+    });
+
+    if (this.pointers.size >= 2) {
+      this.startPinch();
+      return;
+    }
+
+    this.drag.active = true;
+    this.drag.moved = false;
+    this.drag.pointerId = event.pointerId;
+    this.drag.pointerType = event.pointerType || "mouse";
+    this.drag.lastX = event.clientX;
+    this.drag.lastY = event.clientY;
+    this.drag.button = event.button;
+    this.drag.distance = 0;
+    this.tapCandidatePointerId = event.pointerId;
+    this.tapCancelled = false;
+    this.canvas.classList.add("dragging");
+  }
+
+  handlePointerMove(event) {
+    const pointer = this.pointers.get(event.pointerId);
+    this.updateMousePosition(event.clientX, event.clientY);
+
+    if (!pointer) {
+      return;
+    }
+
+    pointer.x = event.clientX;
+    pointer.y = event.clientY;
+
+    if (this.pointers.size >= 2 && this.pinch.active) {
+      event.preventDefault();
+      this.updatePinchGesture();
+      pointer.lastX = event.clientX;
+      pointer.lastY = event.clientY;
+      return;
+    }
+
+    if (!this.drag.active || this.drag.pointerId !== event.pointerId) {
+      pointer.lastX = event.clientX;
+      pointer.lastY = event.clientY;
+      return;
+    }
+
+    event.preventDefault();
+    const dx = event.clientX - pointer.lastX;
+    const dy = event.clientY - pointer.lastY;
+    pointer.lastX = event.clientX;
+    pointer.lastY = event.clientY;
+    this.drag.lastX = event.clientX;
+    this.drag.lastY = event.clientY;
+    this.drag.distance = Math.hypot(event.clientX - pointer.startX, event.clientY - pointer.startY);
+
+    if (this.drag.distance > this.getMoveThreshold(pointer.pointerType)) {
+      this.drag.moved = true;
+      this.tapCancelled = true;
+    }
+
+    if (this.drag.moved && (dx !== 0 || dy !== 0)) {
+      this.camera.panByScreen(dx, dy);
+    }
+  }
+
+  handlePointerEnd(event) {
+    const pointer = this.pointers.get(event.pointerId);
+    this.updateMousePosition(event.clientX, event.clientY);
+
+    if (!pointer) {
+      return;
+    }
+
+    pointer.x = event.clientX;
+    pointer.y = event.clientY;
+
+    if (
+      !this.pinch.active &&
+      this.drag.pointerId === event.pointerId &&
+      !this.drag.moved &&
+      !this.tapCancelled &&
+      this.tapCandidatePointerId === event.pointerId &&
+      event.button !== 2
+    ) {
+      this.pendingClick = true;
+    }
+
+    this.canvas.releasePointerCapture?.(event.pointerId);
+    this.pointers.delete(event.pointerId);
+
+    if (this.pointers.size >= 2) {
+      this.startPinch();
+      return;
+    }
+
+    if (this.pointers.size === 1) {
+      const [remainingPointer] = this.pointers.values();
+      this.pinch.active = false;
+      this.tapCandidatePointerId = null;
+      this.tapCancelled = true;
+      this.drag.active = true;
+      this.drag.moved = false;
+      this.drag.pointerId = remainingPointer.pointerId;
+      this.drag.pointerType = remainingPointer.pointerType;
+      this.drag.lastX = remainingPointer.x;
+      this.drag.lastY = remainingPointer.y;
+      this.drag.button = remainingPointer.button;
+      this.drag.distance = 0;
+      remainingPointer.startX = remainingPointer.x;
+      remainingPointer.startY = remainingPointer.y;
+      remainingPointer.lastX = remainingPointer.x;
+      remainingPointer.lastY = remainingPointer.y;
+      this.canvas.classList.add("dragging");
+      return;
+    }
+
+    this.resetPointerGestureState();
+  }
+
+  startPinch() {
+    const pointers = Array.from(this.pointers.values()).slice(0, 2);
+    if (pointers.length < 2) {
+      return;
+    }
+
+    const centerX = (pointers[0].x + pointers[1].x) / 2;
+    const centerY = (pointers[0].y + pointers[1].y) / 2;
+    this.pinch.active = true;
+    this.pinch.pointerIds = [pointers[0].pointerId, pointers[1].pointerId];
+    this.pinch.lastDistance = Math.hypot(pointers[0].x - pointers[1].x, pointers[0].y - pointers[1].y);
+    this.pinch.centerX = centerX;
+    this.pinch.centerY = centerY;
+    this.drag.active = false;
+    this.drag.moved = true;
+    this.tapCandidatePointerId = null;
+    this.tapCancelled = true;
+    this.mouse.x = centerX - this.canvas.getBoundingClientRect().left;
+    this.mouse.y = centerY - this.canvas.getBoundingClientRect().top;
+    this.canvas.classList.add("dragging");
+  }
+
+  updatePinchGesture() {
+    const pointers = this.pinch.pointerIds.map((pointerId) => this.pointers.get(pointerId)).filter(Boolean);
+    if (pointers.length < 2) {
+      return;
+    }
+
+    const centerX = (pointers[0].x + pointers[1].x) / 2;
+    const centerY = (pointers[0].y + pointers[1].y) / 2;
+    const distance = Math.hypot(pointers[0].x - pointers[1].x, pointers[0].y - pointers[1].y);
+    const moveX = centerX - this.pinch.centerX;
+    const moveY = centerY - this.pinch.centerY;
+
+    if (moveX !== 0 || moveY !== 0) {
+      this.camera.panByScreen(moveX, moveY);
+    }
+
+    if (this.pinch.lastDistance > 0 && distance > 0) {
+      this.camera.zoomAt(centerX - this.canvas.getBoundingClientRect().left, centerY - this.canvas.getBoundingClientRect().top, distance / this.pinch.lastDistance);
+    }
+
+    this.pinch.lastDistance = distance;
+    this.pinch.centerX = centerX;
+    this.pinch.centerY = centerY;
+    this.mouse.x = centerX - this.canvas.getBoundingClientRect().left;
+    this.mouse.y = centerY - this.canvas.getBoundingClientRect().top;
+  }
+
+  resetPointerGestureState() {
+    this.drag.active = false;
+    this.drag.moved = false;
+    this.drag.pointerId = null;
+    this.drag.distance = 0;
+    this.pinch.active = false;
+    this.pinch.pointerIds = [];
+    this.pinch.lastDistance = 0;
+    this.tapCandidatePointerId = null;
+    this.tapCancelled = false;
+    this.canvas.classList.remove("dragging");
+  }
+
+  updateMousePosition(clientX, clientY) {
+    const rect = this.canvas.getBoundingClientRect();
+    this.mouse.x = clientX - rect.left;
+    this.mouse.y = clientY - rect.top;
+  }
+
+  getMoveThreshold(pointerType) {
+    return POINTER_MOVE_THRESHOLD[pointerType] ?? POINTER_MOVE_THRESHOLD.mouse;
   }
 
   update(deltaSeconds) {
