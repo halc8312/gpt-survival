@@ -71,6 +71,15 @@ const RESOURCE_TERRAIN_PREFERENCES = {
   ]),
 };
 
+const RESOURCE_PLACEMENT_WEIGHTS = {
+  biome: 100,
+  terrain: 10,
+  ring: 1,
+  noise: 0.01,
+};
+
+const DEFAULT_INNER_TARGET_RADIUS = 8;
+
 export class WorldGenerator {
   generate({ registry, seed, width, height, center }) {
     const tiles = Array.from({ length: height }, (_, y) =>
@@ -201,7 +210,8 @@ export class WorldGenerator {
 
   collectResourceCandidates({ seed, guaranteeIndex, resource, tiles, center, footprint, minRadius, maxRadius }) {
     const candidates = [];
-    const targetRadius = minRadius > 0 ? (minRadius + maxRadius) / 2 : Math.min(maxRadius * 0.5, 8);
+    const targetRadius =
+      minRadius > 0 ? (minRadius + maxRadius) / 2 : Math.min(maxRadius * 0.5, DEFAULT_INNER_TARGET_RADIUS);
 
     for (let y = 0; y <= tiles.length - footprint.height; y += 1) {
       for (let x = 0; x <= tiles[0].length - footprint.width; x += 1) {
@@ -218,7 +228,11 @@ export class WorldGenerator {
         const terrainScore = this.scoreTerrainFit(resource, footprintTiles);
         const ringScore = 1 - Math.min(1, Math.abs(distance - targetRadius) / Math.max(1, maxRadius - minRadius || maxRadius));
         const noise = this.sample(seed * 31 + guaranteeIndex * 97, x * 5 + footprint.width, y * 5 + footprint.height);
-        const score = biomeScore * 100 + terrainScore * 10 + ringScore + noise * 0.01;
+        const score =
+          biomeScore * RESOURCE_PLACEMENT_WEIGHTS.biome +
+          terrainScore * RESOURCE_PLACEMENT_WEIGHTS.terrain +
+          ringScore * RESOURCE_PLACEMENT_WEIGHTS.ring +
+          noise * RESOURCE_PLACEMENT_WEIGHTS.noise;
 
         candidates.push({ x, y, tiles: footprintTiles, score });
       }
@@ -278,7 +292,7 @@ export class WorldGenerator {
   rollAmount(amountRange, seed, x, y, salt) {
     const [min = 1, max = min] = amountRange ?? [1, 1];
     const noise = this.sample(seed * 17 + salt * 101, x * 7, y * 7);
-    return min + Math.floor(noise * (max - min + 1));
+    return Math.min(max, min + Math.floor(noise * (max - min + 1)));
   }
 
   sample(seed, x, y) {

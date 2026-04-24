@@ -40,6 +40,7 @@ const BUILDING_HOTKEYS = new Map([
   ["3", "building_manual_workbench"],
   ["4", "building_small_generator"],
 ]);
+const DEFAULT_BUILDING_ID = BUILDING_HOTKEYS.values().next().value;
 
 export class Game {
   constructor({ canvas, debugElement, errorPanel }) {
@@ -68,7 +69,7 @@ export class Game {
       selectedTile: null,
       hoveredResource: null,
       selectedResource: null,
-      activeBuildingId: BUILDING_HOTKEYS.get("1"),
+      activeBuildingId: DEFAULT_BUILDING_ID,
       placement: null,
     };
 
